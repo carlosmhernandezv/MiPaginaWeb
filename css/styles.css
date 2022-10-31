@@ -61,6 +61,7 @@ header{
 
 #hero .informacion-contendor #photo img{
     border-radius: 100%;
+    width:100%;
 }
 
 #hero .informacion-contendor .info{
