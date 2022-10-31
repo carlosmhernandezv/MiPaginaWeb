@@ -40,7 +40,7 @@ header{
 }
 
 #hero #background-profile{
-    display: inline-block;
+    display: block;
     width: 100%;
 }
 
@@ -79,6 +79,7 @@ header{
 
 main{
     padding: 100px;
+    background: #1f1f1f;
 }
 
 main .social-icons{
@@ -90,6 +91,12 @@ main .social-icons{
 
 main .social-icons li{
     margin-left: 8px;
+}
+main p{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    text-align:center;
 }
 
 main .social-icons .social-icon{
