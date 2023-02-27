@@ -31,6 +31,7 @@ header{
 }
 
 #logo img{
+    display: flex;
     border: 2px solid #1f1f1f;
 }
 
@@ -128,6 +129,10 @@ main .social-icons #Platzi{
 }
 
 @media (max-width: 420px){
+    body{
+        display: flex;
+        flex-direction: column;
+    }
     .informacion-contendor{
         flex-direction: column;
         align-items: center;
@@ -143,10 +148,35 @@ main .social-icons #Platzi{
     .image-container{
         display: flex;
     }
+    #logo img{
+        justify-content:center;
+        align-items: center;
+    }
     #hero .informacion-contendor .info h1{
         text-align: center;
     }
     #hero .informacion-contendor .info span{
         text-align: center;
+    }
+    #hero .informacion-contendor .info p{
+        text-align:center;
+    }
+    #hero .informacion-contendor{
+        position:sticky;
+        top: 100%;
+        left: 0;
+        display: flex;
+        width: 100%;
+        color: #fff;
+        padding: 0 50px;
+    }
+    #hero #background-profile{
+        width: 100%;
+    }
+    #hero #background-profile{
+        visibility: hidden;
+    }
+    .section #hero{
+
     }
 }
