@@ -32,7 +32,6 @@ header{
 
 #logo img{
     display: flex;
-    border: 2px solid #1f1f1f;
 }
 
 /*Estilos de hero*/
@@ -132,6 +131,17 @@ main .social-icons #Platzi{
     body{
         display: flex;
         flex-direction: column;
+        background-repeat: repeat;
+    }
+    header{
+        background: #1f1f1f00;
+        justify-content: center;
+    }
+    main{
+        background-repeat: repeat;
+        background-color:none;
+        padding: 15px;
+        position:relative;
     }
     .informacion-contendor{
         flex-direction: column;
@@ -162,18 +172,24 @@ main .social-icons #Platzi{
         text-align:center;
     }
     #hero .informacion-contendor{
-        position:sticky;
-        top: 100%;
-        left: 0;
+        position:relative;
+        top: 5%;
+        bottom: 0px;
+        left: 0px;
         display: flex;
         width: 100%;
         color: #fff;
-        padding: 0 50px;
+        padding: 5px;
     }
     #hero #background-profile{
         width: 100%;
     }
     #hero #background-profile{
         visibility: hidden;
+    }
+    #hero .informacion-contendor .info span {
+        display: inline-block;
+        color: #b5b5bb;
+        margin-bottom: 25px;
     }
 }
