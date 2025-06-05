@@ -24,6 +24,32 @@ header{
     background: #1f1f1f;
     padding: 10px 50px;
     display: flex;
+    justify-content: center;
+    height: 20%;
+}
+
+#main-nav{
+    list-style-type: none;
+}
+
+#main-nav a {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#main-nav li {
+    display: inline-block;
+}
+
+#main-nav .nav-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    list-style: none;
+}
+
+#main-nav .nav-icon img{
+    height: 60px;
 }
 
 #logo{
@@ -136,6 +162,9 @@ main .social-icons #Platzi{
     header{
         background: #1f1f1f00;
         justify-content: center;
+    }
+    #main-nav .nav-icon img{
+        height: 15%;
     }
     main{
         background-repeat: repeat;
