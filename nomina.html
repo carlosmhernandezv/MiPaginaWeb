@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidación de Nómina - Sushi Franchise</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="img/favicon16x16.png">
+
+    <!-- jsPDF para exportación PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+    <style>
+        /* Estilos específicos para la calculadora de nómina */
+        .nomina-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #1f1f1f;
+            min-height: 100vh;
+        }
+
+        .nomina-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .nomina-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .nomina-header p {
+            color: #b5b5bb;
+            font-size: 1.1rem;
+        }
+
+        /* Gestión de Empleados */
+        .empleados-section {
+            background: #2a2a2a;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .empleados-section label {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .empleados-section select {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #444;
+            border-radius: 5px;
+            background: #1f1f1f;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+        }
+
+        .btn-secondary {
+            background: #2196F3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #0b7dda;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
+        }
+
+        .config-section {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .config-section h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .input-group input[type="number"],
+        .input-group input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border: 2px solid #444;
+            border-radius: 5px;
+            background: #1f1f1f;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .input-group input[type="number"]:focus,
+        .input-group input[type="text"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .turnos-section {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .turnos-section h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .turnos-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .turnos-table th {
+            background: #333;
+            color: #4CAF50;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #444;
+        }
+
+        .turnos-table td {
+            padding: 10px;
+            border: 1px solid #444;
+            background: #1f1f1f;
+        }
+
+        .turnos-table input[type="date"],
+        .turnos-table input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #444;
+            border-radius: 3px;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .turnos-table input[type="date"].festivo {
+            background: #1b5e20;
+            border-color: #4CAF50;
+        }
+
+        .turnos-table input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .turnos-table .horas-calculadas {
+            color: #4CAF50;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .resultado-section {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .resultado-section h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .resultado-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .desprendible {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .columna-devengados,
+        .columna-deducciones {
+            background: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #444;
+        }
+
+        .columna-devengados h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        .columna-deducciones h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+
+        .linea-concepto {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: #fff;
+            border-bottom: 1px solid #333;
+        }
+
+        .linea-concepto:last-child {
+            border-bottom: none;
+        }
+
+        .linea-concepto .concepto {
+            color: #b5b5bb;
+        }
+
+        .linea-concepto .valor {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .total-neto {
+            background: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .total-neto h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .total-neto .monto {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .btn-calcular {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: background 0.3s;
+        }
+
+        .btn-calcular:hover {
+            background: #45a049;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.3s;
+        }
+
+        .modal-content h3 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .modal-content .input-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-content .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Panel Lateral (Histórico) */
+        .panel-lateral {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: #2a2a2a;
+            box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s;
+            z-index: 999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .panel-lateral.active {
+            right: 0;
+        }
+
+        .panel-lateral h3 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background: #2a2a2a;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        .panel-lateral .close-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f44336;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .historial-item {
+            background: #1f1f1f;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+        }
+
+        .historial-item h4 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .historial-item p {
+            color: #b5b5bb;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .historial-item .total {
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .historial-item .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .historial-item button {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desprendible {
+                grid-template-columns: 1fr;
+            }
+
+            .nomina-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .config-section,
+            .turnos-section,
+            .resultado-section {
+                padding: 20px;
+            }
+
+            .panel-lateral {
+                width: 100%;
+                right: -100%;
+            }
+
+            .empleados-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .empleados-section select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul id="main-nav" class="nav-icons">
+                <li><a href="index.html" class="nav-icon">
+                        <img src="./img/favicon16x16.png" alt="Home">
+                    </a></li>
+                <li><a href="index.html#profile" class="nav-icon">
+                        <img src="./img/rocket_launch_16pxx16pxhome.png" alt="Profile">
+                    </a></li>
+                <li><a href="nomina.html" class="nav-icon">
+                        <img src="./img/paid_256dp_FFFFFF_16x16.png" alt="Nómina">
+                    </a></li>
+                <li><a href="#" class="nav-icon">
+                        <img src="./img/receipt_long_256dp_FFFFFF_16x16.png" alt="Recibos">
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="nomina-container">
+        <div class="nomina-header">
+            <h1>Liquidación de Nómina - Sushi Franchise</h1>
+            <p>Calculadora de Nómina Quincenal | Colombia 2026</p>
+        </div>
+
+        <!-- Gestión de Empleados -->
+        <div class="empleados-section">
+            <label for="empleadoSelect">👤 Empleado:</label>
+            <select id="empleadoSelect" onchange="cambiarEmpleado()">
+                <option value="">Seleccionar empleado...</option>
+            </select>
+            <button class="btn-primary" onclick="abrirModalEmpleado()">+ Nuevo Empleado</button>
+            <button class="btn-secondary" onclick="editarEmpleado()" id="btnEditar" style="display:none;">✏️
+                Editar</button>
+            <button class="btn-danger" onclick="eliminarEmpleado()" id="btnEliminar" style="display:none;">🗑️
+                Eliminar</button>
+            <button class="btn-danger" onclick="limpiarTodosDatos()" style="margin-left: auto;">🗑️ Limpiar
+                Todo</button>
+        </div>
+
+        <!-- Sección de Configuración -->
+        <div class="config-section" id="configSection" style="display:none;">
+            <h2>📋 Configuración del Empleado</h2>
+            <div class="input-group">
+                <label for="salarioBase">Salario Base Mensual (COP):</label>
+                <input type="number" id="salarioBase" value="1750905" min="0" step="1000" onchange="guardarDatos()">
+            </div>
+            <div class="input-group checkbox-group">
+                <input type="checkbox" id="auxilioTransporte" checked onchange="guardarDatos()">
+                <label for="auxilioTransporte">¿Tiene Auxilio de Transporte? ($249,095 si salario < 2 SMMLV)</label>
+            </div>
+        </div>
+
+        <!-- Grid de Turnos -->
+        <div class="turnos-section" id="turnosSection" style="display:none;">
+            <h2>📅 Registro de Turnos (15 días)</h2>
+            <table class="turnos-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>¿Domingo/Festivo?</th>
+                        <th>Horas Totales</th>
+                    </tr>
+                </thead>
+                <tbody id="turnosBody">
+                    <!-- Las 15 filas se generarán con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <button class="btn-calcular" id="btnCalcular" onclick="calcularNomina()" style="display:none;">💰 Calcular
+            Liquidación</button>
+
+        <!-- Resultado -->
+        <div class="resultado-section" id="resultadoSection" style="display: none;">
+            <h2>📄 Desprendible de Pago</h2>
+
+            <div class="resultado-actions">
+                <button class="btn-primary" onclick="exportarPDF()">📄 Descargar PDF</button>
+                <button class="btn-secondary" onclick="toggleHistorial()">📊 Ver Histórico</button>
+            </div>
+
+            <div class="desprendible">
+                <div class="columna-devengados">
+                    <h3>✅ DEVENGADOS</h3>
+                    <div id="devengadosContent"></div>
+                </div>
+                <div class="columna-deducciones">
+                    <h3>❌ DEDUCCIONES</h3>
+                    <div id="deduccionesContent"></div>
+                </div>
+            </div>
+            <div class="total-neto">
+                <h3>TOTAL NETO A PAGAR</h3>
+                <div class="monto" id="totalNeto">$0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Empleado -->
+    <div id="modalEmpleado" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Nuevo Empleado</h3>
+            <div class="input-group">
+                <label for="nombreEmpleado">Nombre Completo:</label>
+                <input type="text" id="nombreEmpleado" placeholder="Ej: Juan Pérez">
+            </div>
+            <div class="input-group">
+                <label for="salarioEmpleado">Salario Base Mensual:</label>
+                <input type="number" id="salarioEmpleado" value="1750905" min="0" step="1000">
+            </div>
+            <div class="input-group checkbox-group">
+                <input type="checkbox" id="auxilioEmpleado" checked>
+                <label for="auxilioEmpleado">Tiene Auxilio de Transporte</label>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-danger" onclick="cerrarModal()">Cancelar</button>
+                <button class="btn-primary" onclick="guardarEmpleado()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Histórico -->
+    <div id="historialPanel" class="panel-lateral">
+        <button class="close-panel" onclick="toggleHistorial()">✕</button>
+        <h3>📊 Histórico de Cálculos</h3>
+        <div id="historialLista">
+            <!-- Se llenará dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONSTANTES ====================
+        const SMMLV = 1750905;
+        const AUXILIO_TRANSPORTE = 249095;
+        const RECARGO_NOCTURNO = 0.35;
+        const RECARGO_DOMINICAL = 0.75;
+        const DEDUCCION_SALUD = 0.04;
+        const DEDUCCION_PENSION = 0.04;
+
+        // Festivos Colombia 2026
+        const FESTIVOS_2026 = [
+            { fecha: "2026-01-01", nombre: "Año Nuevo" },
+            { fecha: "2026-01-12", nombre: "Reyes Magos" },
+            { fecha: "2026-03-23", nombre: "San José" },
+            { fecha: "2026-04-02", nombre: "Jueves Santo" },
+            { fecha: "2026-04-03", nombre: "Viernes Santo" },
+            { fecha: "2026-05-01", nombre: "Día del Trabajo" },
+            { fecha: "2026-05-18", nombre: "Ascensión del Señor" },
+            { fecha: "2026-06-08", nombre: "Corpus Christi" },
+            { fecha: "2026-06-15", nombre: "Sagrado Corazón" },
+            { fecha: "2026-06-29", nombre: "San Pedro y San Pablo" },
+            { fecha: "2026-07-20", nombre: "Independencia" },
+            { fecha: "2026-08-07", nombre: "Batalla de Boyacá" },
+            { fecha: "2026-08-17", nombre: "Asunción de la Virgen" },
+            { fecha: "2026-10-12", nombre: "Día de la Raza" },
+            { fecha: "2026-11-02", nombre: "Todos los Santos" },
+            { fecha: "2026-11-16", nombre: "Independencia de Cartagena" },
+            { fecha: "2026-12-08", nombre: "Inmaculada Concepción" },
+            { fecha: "2026-12-25", nombre: "Navidad" }
+        ];
+
+        // ==================== VARIABLES GLOBALES ====================
+        let empleadoActual = null;
+        let empleadoEditando = null;
+        let ultimoResultado = null;
+
+        // ==================== FUNCIONES DE LOCALSTORAGE ====================
+        function obtenerDatos() {
+            const datos = localStorage.getItem('nominaData');
+            return datos ? JSON.parse(datos) : { empleados: [], turnos: {}, historial: [] };
+        }
+
+        function guardarDatos() {
+            const datos = obtenerDatos();
+
+            if (empleadoActual) {
+                // Guardar configuración del empleado actual
+                const empleado = datos.empleados.find(e => e.id === empleadoActual);
+                if (empleado) {
+                    empleado.salarioBase = parseFloat(document.getElementById('salarioBase').value) || SMMLV;
+                    empleado.tieneAuxilio = document.getElementById('auxilioTransporte').checked;
+                }
+
+                // Guardar turnos
+                const turnos = [];
+                for (let i = 1; i <= 15; i++) {
+                    const fecha = document.getElementById(`fecha${i}`).value;
+                    const entrada = document.getElementById(`entrada${i}`).value;
+                    const salida = document.getElementById(`salida${i}`).value;
+                    const esFestivo = document.getElementById(`festivo${i}`).checked;
+
+                    if (fecha) {
+                        turnos.push({ fecha, entrada, salida, esFestivo });
+                    }
+                }
+                datos.turnos[empleadoActual] = turnos;
+            }
+
+            localStorage.setItem('nominaData', JSON.stringify(datos));
+        }
+
+        function cargarDatos() {
+            const datos = obtenerDatos();
+
+            // Cargar lista de empleados
+            const select = document.getElementById('empleadoSelect');
+            select.innerHTML = '<option value="">Seleccionar empleado...</option>';
+
+            datos.empleados.forEach(emp => {
+                const option = document.createElement('option');
+                option.value = emp.id;
+                option.textContent = emp.nombre;
+                select.appendChild(option);
+            });
+
+            // Si hay empleados, seleccionar el primero
+            if (datos.empleados.length > 0 && !empleadoActual) {
+                empleadoActual = datos.empleados[0].id;
+                select.value = empleadoActual;
+                cargarEmpleado();
+            }
+        }
+
+        function limpiarTodosDatos() {
+            if (confirm('¿Estás seguro de eliminar TODOS los datos (empleados, turnos e histórico)? Esta acción no se puede deshacer.')) {
+                localStorage.removeItem('nominaData');
+                location.reload();
+            }
+        }
+
+        // ==================== GESTIÓN DE EMPLEADOS ====================
+        function abrirModalEmpleado(editar = false) {
+            empleadoEditando = editar ? empleadoActual : null;
+            const modal = document.getElementById('modalEmpleado');
+            const title = document.getElementById('modalTitle');
+
+            if (editar && empleadoActual) {
+                const datos = obtenerDatos();
+                const empleado = datos.empleados.find(e => e.id === empleadoActual);
+                if (empleado) {
+                    title.textContent = 'Editar Empleado';
+                    document.getElementById('nombreEmpleado').value = empleado.nombre;
+                    document.getElementById('salarioEmpleado').value = empleado.salarioBase;
+                    document.getElementById('auxilioEmpleado').checked = empleado.tieneAuxilio;
+                }
+            } else {
+                title.textContent = 'Nuevo Empleado';
+                document.getElementById('nombreEmpleado').value = '';
+                document.getElementById('salarioEmpleado').value = SMMLV;
+                document.getElementById('auxilioEmpleado').checked = true;
+            }
+
+            modal.classList.add('active');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalEmpleado').classList.remove('active');
+            empleadoEditando = null;
+        }
+
+        function guardarEmpleado() {
+            const nombre = document.getElementById('nombreEmpleado').value.trim();
+            const salario = parseFloat(document.getElementById('salarioEmpleado').value);
+            const auxilio = document.getElementById('auxilioEmpleado').checked;
+
+            if (!nombre) {
+                alert('Por favor ingresa el nombre del empleado');
+                return;
+            }
+
+            const datos = obtenerDatos();
+
+            if (empleadoEditando) {
+                // Editar empleado existente
+                const empleado = datos.empleados.find(e => e.id === empleadoEditando);
+                if (empleado) {
+                    empleado.nombre = nombre;
+                    empleado.salarioBase = salario;
+                    empleado.tieneAuxilio = auxilio;
+                }
+            } else {
+                // Crear nuevo empleado
+                const nuevoEmpleado = {
+                    id: 'emp_' + Date.now(),
+                    nombre: nombre,
+                    salarioBase: salario,
+                    tieneAuxilio: auxilio,
+                    fechaCreacion: new Date().toISOString().split('T')[0]
+                };
+                datos.empleados.push(nuevoEmpleado);
+                empleadoActual = nuevoEmpleado.id;
+            }
+
+            localStorage.setItem('nominaData', JSON.stringify(datos));
+            cerrarModal();
+            cargarDatos();
+
+            if (!empleadoEditando) {
+                document.getElementById('empleadoSelect').value = empleadoActual;
+                cargarEmpleado();
+            } else {
+                cargarEmpleado();
+            }
+        }
+
+        function editarEmpleado() {
+            abrirModalEmpleado(true);
+        }
+
+        function eliminarEmpleado() {
+            if (!empleadoActual) return;
+
+            const datos = obtenerDatos();
+            const empleado = datos.empleados.find(e => e.id === empleadoActual);
+
+            if (confirm(`¿Eliminar al empleado ${empleado.nombre}? Se borrarán todos sus turnos e histórico.`)) {
+                datos.empleados = datos.empleados.filter(e => e.id !== empleadoActual);
+                delete datos.turnos[empleadoActual];
+                datos.historial = datos.historial.filter(h => h.empleadoId !== empleadoActual);
+
+                localStorage.setItem('nominaData', JSON.stringify(datos));
+                empleadoActual = null;
+                location.reload();
+            }
+        }
+
+        function cambiarEmpleado() {
+            const select = document.getElementById('empleadoSelect');
+            empleadoActual = select.value;
+
+            if (empleadoActual) {
+                cargarEmpleado();
+            } else {
+                ocultarSecciones();
+            }
+        }
+
+        function cargarEmpleado() {
+            if (!empleadoActual) return;
+
+            const datos = obtenerDatos();
+            const empleado = datos.empleados.find(e => e.id === empleadoActual);
+
+            if (!empleado) return;
+
+            // Mostrar secciones
+            document.getElementById('configSection').style.display = 'block';
+            document.getElementById('turnosSection').style.display = 'block';
+            document.getElementById('btnCalcular').style.display = 'block';
+            document.getElementById('btnEditar').style.display = 'inline-block';
+            document.getElementById('btnEliminar').style.display = 'inline-block';
+
+            // Cargar configuración
+            document.getElementById('salarioBase').value = empleado.salarioBase;
+            document.getElementById('auxilioTransporte').checked = empleado.tieneAuxilio;
+
+            // Cargar turnos
+            const turnos = datos.turnos[empleadoActual] || [];
+            for (let i = 1; i <= 15; i++) {
+                const turno = turnos.find(t => t.fecha === document.getElementById(`fecha${i}`).value);
+                if (turno) {
+                    document.getElementById(`entrada${i}`).value = turno.entrada || '';
+                    document.getElementById(`salida${i}`).value = turno.salida || '';
+                    document.getElementById(`festivo${i}`).checked = turno.esFestivo || false;
+                    actualizarHoras(i);
+                }
+            }
+        }
+
+        function ocultarSecciones() {
+            document.getElementById('configSection').style.display = 'none';
+            document.getElementById('turnosSection').style.display = 'none';
+            document.getElementById('btnCalcular').style.display = 'none';
+            document.getElementById('resultadoSection').style.display = 'none';
+            document.getElementById('btnEditar').style.display = 'none';
+            document.getElementById('btnEliminar').style.display = 'none';
+        }
+
+        // ==================== FUNCIONES DE FESTIVOS ====================
+        function esFestivo(fecha) {
+            return FESTIVOS_2026.find(f => f.fecha === fecha);
+        }
+
+        function esDomingo(fecha) {
+            const date = new Date(fecha + 'T00:00:00');
+            return date.getDay() === 0;
+        }
+
+        function verificarFestivo(dia) {
+            const fechaInput = document.getElementById(`fecha${dia}`);
+            const checkbox = document.getElementById(`festivo${dia}`);
+            const fecha = fechaInput.value;
+
+            if (!fecha) return;
+
+            const festivo = esFestivo(fecha);
+            const domingo = esDomingo(fecha);
+
+            if (festivo || domingo) {
+                checkbox.checked = true;
+                fechaInput.classList.add('festivo');
+                if (festivo) {
+                    fechaInput.title = `Festivo: ${festivo.nombre}`;
+                } else {
+                    fechaInput.title = 'Domingo';
+                }
+            } else {
+                fechaInput.classList.remove('festivo');
+                fechaInput.title = '';
+            }
+        }
+
+        // ==================== FUNCIONES DE TURNOS ====================
+        function inicializarTurnos() {
+            const tbody = document.getElementById('turnosBody');
+            const hoy = new Date();
+
+            for (let i = 1; i <= 15; i++) {
+                const fecha = new Date(hoy);
+                fecha.setDate(hoy.getDate() + i - 1);
+                const fechaStr = fecha.toISOString().split('T')[0];
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${i}</td>
+                    <td><input type="date" id="fecha${i}" value="${fechaStr}" onchange="verificarFestivo(${i}); actualizarHoras(${i}); guardarDatos();"></td>
+                    <td><input type="time" id="entrada${i}" onchange="actualizarHoras(${i}); guardarDatos();"></td>
+                    <td><input type="time" id="salida${i}" onchange="actualizarHoras(${i}); guardarDatos();"></td>
+                    <td style="text-align: center;"><input type="checkbox" id="festivo${i}" onchange="guardarDatos();"></td>
+                    <td class="horas-calculadas" id="horas${i}">0.0</td>
+                `;
+                tbody.appendChild(row);
+
+                // Verificar si es festivo
+                verificarFestivo(i);
+            }
+        }
+
+        function actualizarHoras(dia) {
+            const entrada = document.getElementById(`entrada${dia}`).value;
+            const salida = document.getElementById(`salida${dia}`).value;
+
+            if (!entrada || !salida) {
+                document.getElementById(`horas${dia}`).textContent = '0.0';
+                return;
+            }
+
+            const [hEntrada, mEntrada] = entrada.split(':').map(Number);
+            const [hSalida, mSalida] = salida.split(':').map(Number);
+
+            let minEntrada = hEntrada * 60 + mEntrada;
+            let minSalida = hSalida * 60 + mSalida;
+
+            if (minSalida < minEntrada) {
+                minSalida += 24 * 60;
+            }
+
+            const totalMinutos = minSalida - minEntrada;
+            const horas = (totalMinutos / 60).toFixed(1);
+
+            document.getElementById(`horas${dia}`).textContent = horas;
+        }
+
+        function calcularHorasNocturnas(entrada, salida) {
+            if (!entrada || !salida) return 0;
+
+            const [hEntrada, mEntrada] = entrada.split(':').map(Number);
+            const [hSalida, mSalida] = salida.split(':').map(Number);
+
+            let minEntrada = hEntrada * 60 + mEntrada;
+            let minSalida = hSalida * 60 + mSalida;
+
+            if (minSalida < minEntrada) {
+                minSalida += 24 * 60;
+            }
+
+            const inicioNocturno = 21 * 60;
+            const finNocturno = 6 * 60;
+
+            let horasNocturnas = 0;
+
+            for (let min = minEntrada; min < minSalida; min++) {
+                const minNormalizado = min % (24 * 60);
+                if (minNormalizado >= inicioNocturno || minNormalizado < finNocturno) {
+                    horasNocturnas++;
+                }
+            }
+
+            return horasNocturnas / 60;
+        }
+
+        // ==================== CÁLCULO DE NÓMINA ====================
+        function calcularNomina() {
+            if (!empleadoActual) {
+                alert('Por favor selecciona un empleado');
+                return;
+            }
+
+            const datos = obtenerDatos();
+            const empleado = datos.empleados.find(e => e.id === empleadoActual);
+
+            const salarioBase = parseFloat(document.getElementById('salarioBase').value) || 0;
+            const tieneAuxilio = document.getElementById('auxilioTransporte').checked;
+
+            let totalHoras = 0;
+            let horasNocturnas = 0;
+            let horasDominicales = 0;
+
+            for (let i = 1; i <= 15; i++) {
+                const entrada = document.getElementById(`entrada${i}`).value;
+                const salida = document.getElementById(`salida${i}`).value;
+                const esFestivo = document.getElementById(`festivo${i}`).checked;
+                const horas = parseFloat(document.getElementById(`horas${i}`).textContent) || 0;
+
+                if (horas > 0) {
+                    totalHoras += horas;
+
+                    const nocturnas = calcularHorasNocturnas(entrada, salida);
+                    horasNocturnas += nocturnas;
+
+                    if (esFestivo) {
+                        horasDominicales += horas;
+                    }
+                }
+            }
+
+            const valorHora = salarioBase / 240;
+
+            const basico = salarioBase / 2;
+            const auxilio = (tieneAuxilio && salarioBase < 2 * SMMLV) ? AUXILIO_TRANSPORTE / 2 : 0;
+            const recargoNocturno = horasNocturnas * valorHora * RECARGO_NOCTURNO;
+            const recargoDominical = horasDominicales * valorHora * RECARGO_DOMINICAL;
+
+            const totalDevengado = basico + auxilio + recargoNocturno + recargoDominical;
+
+            const baseDeduccion = totalDevengado - auxilio;
+            const salud = baseDeduccion * DEDUCCION_SALUD;
+            const pension = baseDeduccion * DEDUCCION_PENSION;
+            const totalDeducciones = salud + pension;
+
+            const neto = totalDevengado - totalDeducciones;
+
+            ultimoResultado = {
+                empleadoId: empleadoActual,
+                empleadoNombre: empleado.nombre,
+                fecha: new Date().toISOString(),
+                basico,
+                auxilio,
+                recargoNocturno,
+                recargoDominical,
+                totalDevengado,
+                salud,
+                pension,
+                totalDeducciones,
+                neto,
+                totalHoras,
+                horasNocturnas,
+                horasDominicales
+            };
+
+            mostrarResultados(ultimoResultado);
+            guardarEnHistorial(ultimoResultado);
+        }
+
+        function formatearMoneda(valor) {
+            return '$' + Math.round(valor).toLocaleString('es-CO');
+        }
+
+        function mostrarResultados(datos) {
+            const devengadosHTML = `
+                <div class="linea-concepto">
+                    <span class="concepto">Salario Básico Quincenal</span>
+                    <span class="valor">${formatearMoneda(datos.basico)}</span>
+                </div>
+                ${datos.auxilio > 0 ? `
+                <div class="linea-concepto">
+                    <span class="concepto">Auxilio de Transporte</span>
+                    <span class="valor">${formatearMoneda(datos.auxilio)}</span>
+                </div>
+                ` : ''}
+                ${datos.horasNocturnas > 0 ? `
+                <div class="linea-concepto">
+                    <span class="concepto">Recargo Nocturno (${datos.horasNocturnas.toFixed(1)}h × 35%)</span>
+                    <span class="valor">${formatearMoneda(datos.recargoNocturno)}</span>
+                </div>
+                ` : ''}
+                ${datos.horasDominicales > 0 ? `
+                <div class="linea-concepto">
+                    <span class="concepto">Recargo Dominical/Festivo (${datos.horasDominicales.toFixed(1)}h × 75%)</span>
+                    <span class="valor">${formatearMoneda(datos.recargoDominical)}</span>
+                </div>
+                ` : ''}
+                <div class="linea-concepto" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #4CAF50;">
+                    <span class="concepto"><strong>TOTAL DEVENGADO</strong></span>
+                    <span class="valor" style="color: #4CAF50;">${formatearMoneda(datos.totalDevengado)}</span>
+                </div>
+            `;
+
+            const deduccionesHTML = `
+                <div class="linea-concepto">
+                    <span class="concepto">Salud (4%)</span>
+                    <span class="valor">${formatearMoneda(datos.salud)}</span>
+                </div>
+                <div class="linea-concepto">
+                    <span class="concepto">Pensión (4%)</span>
+                    <span class="valor">${formatearMoneda(datos.pension)}</span>
+                </div>
+                <div class="linea-concepto" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #ff6b6b;">
+                    <span class="concepto"><strong>TOTAL DEDUCCIONES</strong></span>
+                    <span class="valor" style="color: #ff6b6b;">${formatearMoneda(datos.totalDeducciones)}</span>
+                </div>
+            `;
+
+            document.getElementById('devengadosContent').innerHTML = devengadosHTML;
+            document.getElementById('deduccionesContent').innerHTML = deduccionesHTML;
+            document.getElementById('totalNeto').textContent = formatearMoneda(datos.neto);
+            document.getElementById('resultadoSection').style.display = 'block';
+
+            document.getElementById('resultadoSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== HISTÓRICO ====================
+        function guardarEnHistorial(resultado) {
+            const datos = obtenerDatos();
+
+            const itemHistorial = {
+                id: 'hist_' + Date.now(),
+                ...resultado
+            };
+
+            datos.historial.unshift(itemHistorial);
+
+            // Mantener solo los últimos 20
+            if (datos.historial.length > 20) {
+                datos.historial = datos.historial.slice(0, 20);
+            }
+
+            localStorage.setItem('nominaData', JSON.stringify(datos));
+        }
+
+        function toggleHistorial() {
+            const panel = document.getElementById('historialPanel');
+            panel.classList.toggle('active');
+
+            if (panel.classList.contains('active')) {
+                cargarHistorial();
+            }
+        }
+
+        function cargarHistorial() {
+            const datos = obtenerDatos();
+            const lista = document.getElementById('historialLista');
+
+            if (datos.historial.length === 0) {
+                lista.innerHTML = '<p style="color: #b5b5bb;">No hay cálculos guardados</p>';
+                return;
+            }
+
+            lista.innerHTML = datos.historial.map(item => `
+                <div class="historial-item">
+                    <h4>${item.empleadoNombre}</h4>
+                    <p>📅 ${new Date(item.fecha).toLocaleString('es-CO')}</p>
+                    <p class="total">💰 Total: ${formatearMoneda(item.neto)}</p>
+                    <div class="actions">
+                        <button class="btn-secondary" onclick='verDetalleHistorial(${JSON.stringify(item).replace(/'/g, "&apos;")})'>👁️ Ver</button>
+                        <button class="btn-primary" onclick='exportarPDFHistorial(${JSON.stringify(item).replace(/'/g, "&apos;")})'>📄 PDF</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function verDetalleHistorial(item) {
+            mostrarResultados(item);
+            toggleHistorial();
+            document.getElementById('resultadoSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function exportarPDFHistorial(item) {
+            ultimoResultado = item;
+            exportarPDF();
+        }
+
+        // ==================== EXPORTAR PDF ====================
+        function exportarPDF() {
+            if (!ultimoResultado) {
+                alert('Primero debes calcular la nómina');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Header
+            doc.setFontSize(20);
+            doc.setTextColor(76, 175, 80);
+            doc.text('DESPRENDIBLE DE PAGO', 105, 20, { align: 'center' });
+
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Sushi Franchise - Colombia', 105, 28, { align: 'center' });
+
+            // Información del empleado
+            doc.setFontSize(10);
+            doc.text(`Empleado: ${ultimoResultado.empleadoNombre}`, 20, 40);
+            doc.text(`Fecha: ${new Date(ultimoResultado.fecha).toLocaleDateString('es-CO')}`, 20, 46);
+            doc.text(`Período: Quincenal`, 20, 52);
+
+            // Tabla de devengados
+            doc.autoTable({
+                startY: 60,
+                head: [['DEVENGADOS', 'VALOR']],
+                body: [
+                    ['Salario Básico Quincenal', formatearMoneda(ultimoResultado.basico)],
+                    ...(ultimoResultado.auxilio > 0 ? [['Auxilio de Transporte', formatearMoneda(ultimoResultado.auxilio)]] : []),
+                    ...(ultimoResultado.horasNocturnas > 0 ? [[`Recargo Nocturno (${ultimoResultado.horasNocturnas.toFixed(1)}h × 35%)`, formatearMoneda(ultimoResultado.recargoNocturno)]] : []),
+                    ...(ultimoResultado.horasDominicales > 0 ? [[`Recargo Dominical (${ultimoResultado.horasDominicales.toFixed(1)}h × 75%)`, formatearMoneda(ultimoResultado.recargoDominical)]] : []),
+                    ['TOTAL DEVENGADO', formatearMoneda(ultimoResultado.totalDevengado)]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [76, 175, 80] },
+                footStyles: { fillColor: [200, 200, 200], textColor: [0, 0, 0], fontStyle: 'bold' }
+            });
+
+            // Tabla de deducciones
+            const finalY = doc.lastAutoTable.finalY + 10;
+            doc.autoTable({
+                startY: finalY,
+                head: [['DEDUCCIONES', 'VALOR']],
+                body: [
+                    ['Salud (4%)', formatearMoneda(ultimoResultado.salud)],
+                    ['Pensión (4%)', formatearMoneda(ultimoResultado.pension)],
+                    ['TOTAL DEDUCCIONES', formatearMoneda(ultimoResultado.totalDeducciones)]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [255, 107, 107] }
+            });
+
+            // Total Neto
+            const netoY = doc.lastAutoTable.finalY + 15;
+            doc.setFontSize(16);
+            doc.setTextColor(76, 175, 80);
+            doc.setFillColor(76, 175, 80);
+            doc.rect(20, netoY, 170, 15, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.text('TOTAL NETO A PAGAR:', 25, netoY + 10);
+            doc.text(formatearMoneda(ultimoResultado.neto), 165, netoY + 10, { align: 'right' });
+
+            // Footer
+            doc.setFontSize(8);
+            doc.setTextColor(128, 128, 128);
+            doc.text('Generado por Calculadora de Nómina - carlosmhernandezv.com', 105, 280, { align: 'center' });
+
+            // Guardar
+            const nombreArchivo = `Nomina_${ultimoResultado.empleadoNombre.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+            doc.save(nombreArchivo);
+        }
+
+        // ==================== INICIALIZACIÓN ====================
+        window.onload = function () {
+            inicializarTurnos();
+            cargarDatos();
+        };
+    </script>
+</body>
+
+</html>
