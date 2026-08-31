@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Caso: trazabilidad documental y CFDI 4.0 | Carlos M. Hernández V.</title>
+    <meta name="description"
+        content="Cómo reemplacé un Excel con 7.000 líneas de macros VBA por un sistema de trazabilidad documental con ingestión de CFDI 4.0, para un grupo de 17 empresas del sector construcción en México.">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Caso: trazabilidad documental y CFDI 4.0">
+    <meta property="og:description"
+        content="Migración de un Excel con 7.000 líneas de VBA a un sistema web con ingestión de CFDI, trazabilidad completa y auditoría de datos.">
+    <meta property="og:url" content="https://carlosmhernandezv.github.io/MiPaginaWeb/caso-cfdi.html">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="img/favicon16x16.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="brand" href="index.html">
+                <img src="img/favicon16x16.png" alt="" width="28" height="28">
+                <span>Carlos M. Hernández V.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#capacidades">Qué hago</a></li>
+                <li><a href="index.html#proyectos">Proyectos</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="contenido">
+
+        <header class="caso-hero">
+            <p class="caso-kicker">Caso de estudio</p>
+            <h1>Del Excel de 7.000 líneas a un sistema de trazabilidad fiscal</h1>
+            <p class="caso-bajada">
+                Un grupo de 17 empresas del sector construcción en México operaba toda su documentación comercial
+                desde un solo archivo <code>.xlsm</code>. Este es el sistema que lo reemplazó, y la auditoría de datos
+                que casi nadie habría hecho.
+            </p>
+            <span class="badge badge-progreso">Construido y probado con datos reales 2021–2025 · en fase de
+                despliegue</span>
+        </header>
+
+        <!--
+          CONFIDENCIALIDAD — leer antes de publicar:
+          · El cliente está anonimizado a propósito. Sustituir por el nombre real SOLO con autorización escrita.
+          · Las capturas que agregues deben usar datos ficticios. Nada de RFC, CLABE ni firmas reales.
+          · El repositorio del sistema es privado y de licencia propietaria: no enlazar código.
+        -->
+        <aside class="nota-confidencial">
+            <strong>Nota:</strong> el cliente aparece anonimizado y las cifras están agregadas. El código es privado
+            bajo licencia propietaria.
+        </aside>
+
+        <section id="el-problema" class="caso-seccion">
+            <h2>El problema</h2>
+            <p>
+                Diecisiete empresas relacionadas gestionaban cotizaciones, órdenes de compra, remisiones y facturas
+                dentro de un único libro de Excel con macros: 24 módulos VBA, cerca de 7.000 líneas de código y 23
+                hojas de cálculo, en uso diario.
+            </p>
+            <p>
+                El síntoma que más dolía era el de los folios. Se generaban con <code>MAX + 1</code> sobre la hoja
+                correspondiente, así que bastaba con que dos personas capturaran al mismo tiempo para que dos
+                documentos distintos nacieran con el mismo número. En un archivo compartido esto no es un caso raro:
+                es el día a día.
+            </p>
+            <p>
+                Debajo había un problema mayor. Nadie podía responder con certeza de qué cotización venía una factura
+                determinada. La relación existía en la cabeza de quien había capturado el documento, no en los datos.
+            </p>
+            <p>
+                Antes de escribir una línea del sistema nuevo hice ingeniería inversa del archivo completo. Los
+                catálogos formales estaban incompletos o desactualizados; las abreviaturas reales con las que el
+                equipo identificaba a cada empresa terminé recuperándolas de una función VBA enterrada en un módulo,
+                que era el único lugar donde estaban correctas.
+            </p>
+        </section>
+
+        <section id="restricciones" class="caso-seccion">
+            <h2>Las restricciones</h2>
+            <ul class="lista-restricciones">
+                <li>
+                    <strong>La fuente de verdad es fiscal.</strong> Un CFDI timbrado no se corrige ni se normaliza:
+                    se conserva íntegro. Cualquier cosa que el sistema quiera decir sobre un comprobante tiene que
+                    vivir aparte del comprobante.
+                </li>
+                <li>
+                    <strong>Diecisiete empresas sobre un mismo modelo.</strong> Cada razón social tiene su propia
+                    numeración de folios, su branding en los documentos y sus propias contrapartes. El sistema tenía
+                    que mantenerlas separadas sin duplicar la lógica en diecisiete variantes.
+                </li>
+                <li>
+                    <strong>Operación en marcha.</strong> El Excel seguía en uso mientras se construía el reemplazo,
+                    así que la migración tenía que ser repetible y idempotente: volver a correrla no podía duplicar
+                    nada.
+                </li>
+            </ul>
+        </section>
+
+        <section id="cadenas" class="caso-seccion">
+            <h2>Las dos cadenas</h2>
+            <p>
+                El cliente entregó un diagrama de su flujo. Al modelarlo contra los datos reales apareció que
+                describía solo la mitad: existían <em>dos</em> cadenas de compraventa encadenadas, no una. El mismo
+                grupo actuaba como comprador en una y como vendedor en la otra, y los documentos de una alimentaban a
+                la otra.
+            </p>
+
+            <figure class="diagrama">
+                <svg viewBox="0 0 720 300" role="img"
+                    aria-label="Diagrama de las dos cadenas de compraventa y de la cadena documental que las conecta"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+                            orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7d8590" />
+                        </marker>
+                    </defs>
+
+                    <text x="10" y="24" class="svg-titulo">Cadena comercial</text>
+
+                    <rect x="10" y="40" width="180" height="52" rx="8" class="svg-caja" />
+                    <text x="100" y="71" class="svg-etiqueta" text-anchor="middle">Proveedor</text>
+
+                    <line x1="196" y1="66" x2="264" y2="66" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="270" y="40" width="180" height="52" rx="8" class="svg-caja svg-caja-foco" />
+                    <text x="360" y="65" class="svg-etiqueta" text-anchor="middle">Materialista</text>
+                    <text x="360" y="82" class="svg-nota" text-anchor="middle">(el grupo: 17 empresas)</text>
+
+                    <line x1="456" y1="66" x2="524" y2="66" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="530" y="40" width="180" height="52" rx="8" class="svg-caja" />
+                    <text x="620" y="71" class="svg-etiqueta" text-anchor="middle">Constructora</text>
+
+                    <text x="100" y="122" class="svg-nota" text-anchor="middle">cadena de compra</text>
+                    <text x="620" y="122" class="svg-nota" text-anchor="middle">cadena de venta</text>
+
+                    <line x1="10" y1="146" x2="710" y2="146" class="svg-separador" />
+
+                    <text x="10" y="180" class="svg-titulo">Cadena documental (trazable en ambos sentidos)</text>
+
+                    <rect x="10" y="198" width="150" height="48" rx="8" class="svg-caja" />
+                    <text x="85" y="227" class="svg-etiqueta" text-anchor="middle">Cotización</text>
+
+                    <line x1="166" y1="222" x2="194" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="200" y="198" width="150" height="48" rx="8" class="svg-caja" />
+                    <text x="275" y="220" class="svg-etiqueta" text-anchor="middle">Orden</text>
+                    <text x="275" y="236" class="svg-nota" text-anchor="middle">de compra</text>
+
+                    <line x1="356" y1="222" x2="384" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="390" y="198" width="150" height="48" rx="8" class="svg-caja" />
+                    <text x="465" y="227" class="svg-etiqueta" text-anchor="middle">Remisión</text>
+
+                    <line x1="546" y1="222" x2="574" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="580" y="198" width="130" height="48" rx="8" class="svg-caja svg-caja-fiscal" />
+                    <text x="645" y="220" class="svg-etiqueta" text-anchor="middle">Factura</text>
+                    <text x="645" y="236" class="svg-nota" text-anchor="middle">CFDI · UUID</text>
+
+                    <text x="360" y="276" class="svg-nota" text-anchor="middle">
+                        Desde cualquier factura se recorre la cadena hacia atrás hasta su cotización de origen.
+                    </text>
+                </svg>
+                <figcaption>Las dos cadenas y los cuatro documentos que las conectan. El UUID del CFDI es la llave
+                    natural de todo el modelo.</figcaption>
+            </figure>
+        </section>
+
+        <section id="que-construi" class="caso-seccion">
+            <h2>Qué construí</h2>
+            <p>
+                Un sistema web con backend en Python y FastAPI, base de datos PostgreSQL y frontend en Next.js 16 con
+                App Router. Son 35 endpoints, 22 tablas, 12 migraciones versionadas y 15 pantallas de trabajo.
+            </p>
+            <p>
+                El <strong>ingestor de CFDI</strong> lee el XML del comprobante, extrae el Timbre Fiscal Digital y
+                usa el UUID como llave natural, de modo que reprocesar el mismo archivo no crea un duplicado. Cada
+                concepto se clasifica automáticamente como material o servicio a partir de los catálogos oficiales
+                del SAT (<code>c_ClaveProdServ</code> y <code>c_ClaveUnidad</code>), con una bandeja de clasificación
+                donde el equipo revisa y confirma los casos que lo requieren.
+            </p>
+            <p>
+                La <strong>pantalla de trazabilidad</strong> es la que justifica el proyecto: dada una factura,
+                recorre hacia atrás la cadena hasta la cotización de origen y muestra cada eslabón con su documento,
+                su folio y su fecha.
+            </p>
+            <p>
+                El <strong>generador documental</strong> replica celda por celda las cinco plantillas del Excel
+                original, con el branding de cada una de las empresas y salida en PDF sin el límite de ítems que
+                tenía la macro.
+            </p>
+            <p>
+                Está diseñado además el <strong>conector de Descarga Masiva del SAT</strong> con e.firma, para que
+                los comprobantes entren solos en vez de cargarse a mano.
+            </p>
+        </section>
+
+        <section id="modelo" class="caso-seccion">
+            <h2>El modelo de datos</h2>
+            <p>
+                Los folios dejaron de calcularse con <code>MAX + 1</code> y pasaron a funciones respaldadas por
+                secuencias reales de PostgreSQL: dos capturas simultáneas ya no pueden colisionar. La trazabilidad se
+                resuelve con una consulta recursiva que recorre la cadena documental completa, y hay vistas de saldo
+                y triggers de indexado para las búsquedas.
+            </p>
+            <p>
+                Probar el esquema contra la base real —no contra datos de prueba— hizo aparecer tres errores que en
+                un entorno limpio no se habrían visto: una columna demasiado angosta para los valores reales, una
+                duplicación de filas causada por un <code>JOIN</code> mal cardinalizado, y una recursión que no
+                terminaba cuando la cadena documental contenía un ciclo. Los tres se corrigieron antes de la carga
+                definitiva.
+            </p>
+        </section>
+
+        <section id="la-decision" class="caso-seccion caso-destacado">
+            <h2>La decisión difícil</h2>
+            <p>
+                La hoja <code>BDRemisiones</code> del Excel contenía 35.365 registros con lo que parecía un histórico
+                completo de remisiones, cada una con su UUID. Era, con diferencia, la fuente más rica del archivo, y
+                el plan era migrarla entera.
+            </p>
+            <p>
+                Antes de cargarla crucé esos UUID contra los comprobantes fiscales reales. <strong>Ninguno
+                    existía.</strong> Cero de 35.365. No eran identificadores de CFDI: eran cadenas con el formato
+                correcto y contenido inventado, generadas en algún momento para rellenar la hoja.
+            </p>
+            <p>
+                Migrarla habría metido 12.436 documentos falsos a un sistema con obligaciones fiscales, mezclados con
+                los reales y prácticamente indistinguibles una vez dentro. El costo de descubrirlo después —en una
+                auditoría, por ejemplo— no se compara con el de descubrirlo antes.
+            </p>
+            <p>
+                La hoja se descartó por completo y el histórico se reconstruyó únicamente desde comprobantes
+                verificables. El sistema quedó con menos datos de los que prometía el Excel, y con todos ellos
+                ciertos.
+            </p>
+            <p class="caso-leccion">
+                La lección que me llevo: cuando una fuente de datos parece demasiado completa, esa es exactamente la
+                razón para validarla contra algo externo antes de confiar en ella.
+            </p>
+        </section>
+
+        <section id="decisiones" class="caso-seccion">
+            <h2>Decisiones técnicas y por qué</h2>
+            <dl class="lista-decisiones">
+                <dt>Validar archivos por números mágicos, no por extensión</dt>
+                <dd>La extensión la controla quien sube el archivo; los primeros bytes, no. Renombrar un ejecutable
+                    a <code>.xml</code> deja de servir de nada.</dd>
+
+                <dt>Derivar el nombre almacenado del RFC</dt>
+                <dd>El nombre original del archivo nunca toca el sistema de archivos, lo que elimina de raíz el
+                    <em>path traversal</em> y los choques de nombres entre empresas.
+                </dd>
+
+                <dt>Sesión por cookie en lugar de autenticación básica</dt>
+                <dd>Basic Auth reenvía la credencial en cada petición y no se puede cerrar sesión. La cookie de
+                    sesión es revocable.</dd>
+
+                <dt>SQL explícito con SQLAlchemy Core, no ORM completo</dt>
+                <dd>En un dominio fiscal quiero poder leer la consulta exacta que se ejecuta y auditarla. Un ORM que
+                    genera SQL por mí es más cómodo y menos verificable.</dd>
+
+                <dt>Entornos reproducibles desde el primer día</dt>
+                <dd><code>docker-compose</code>, devcontainer de Codespaces y scripts de arranque para Windows y
+                    Linux, para que levantar el sistema no dependa de la máquina de nadie.</dd>
+            </dl>
+            <p>
+                Todo esto vive en 15 especificaciones por módulo y una bitácora de decisiones dentro del repositorio.
+                Documentar <em>por qué</em> se eligió algo es lo que permite revisarlo meses después sin repetir el
+                análisis.
+            </p>
+        </section>
+
+        <section id="proceso" class="caso-seccion">
+            <h2>Cómo trabajé: la IA como herramienta de desarrollo</h2>
+            <p>
+                Este sistema lo construí usando <strong>Claude Code</strong> como herramienta de desarrollo, y no
+                tengo interés en disimularlo: es precisamente lo que me permitió ampliar mi alcance técnico. Un año
+                antes mi terreno era HTML, CSS y JavaScript. Aquí levanté un backend en FastAPI, diseñé un esquema de
+                22 tablas en PostgreSQL con consultas recursivas y triggers, y monté 15 pantallas en Next.js 16.
+                Trabajando solo.
+            </p>
+            <p>
+                El método importa más que la herramienta. Todo arranca de un archivo <code>CLAUDE.md</code> que fija
+                por escrito las reglas de negocio y las restricciones fiscales del dominio, porque el criterio legal
+                no puede quedarse en una conversación: tiene que estar en el repositorio, versionado y revisable como
+                cualquier otro artefacto. A partir de ahí dirijo, reviso cada decisión y verifico contra datos reales.
+            </p>
+            <p>
+                Ese último paso es el que marca la diferencia. Ninguna herramienta me habría dicho que
+                <code>BDRemisiones</code> era una hoja de datos fabricados; eso salió de desconfiar de una fuente
+                demasiado limpia y cruzarla contra los comprobantes reales. La IA acelera la ejecución, pero el
+                criterio sobre el dominio y la decisión de qué se migra y qué se descarta siguen siendo míos.
+            </p>
+            <p>
+                Uso el mismo patrón en mis otros proyectos. En la <a href="nomina.html">calculadora de nómina</a>, el
+                documento de contexto con el marco legal colombiano se escribió antes que el primer cálculo.
+            </p>
+        </section>
+
+        <section id="resultados" class="caso-seccion">
+            <h2>Resultados</h2>
+            <ul class="lista-resultados">
+                <li><strong>9.535</strong> CFDI migrados y validados contra su comprobante real</li>
+                <li><strong>16.401</strong> documentos generados con su cadena documental completa</li>
+                <li><strong>0</strong> duplicados, con el UUID como llave natural del modelo</li>
+                <li><strong>12.436</strong> documentos falsos detectados y excluidos antes de la carga</li>
+                <li><strong>17</strong> empresas operando sobre un solo sistema en lugar de un archivo compartido</li>
+                <li>Folios sin colisiones, con secuencias de base de datos en vez de <code>MAX + 1</code></li>
+            </ul>
+            <p class="caso-pendiente">
+                <strong>Estado actual:</strong> el sistema está construido y probado con los datos reales del periodo
+                2021–2025. Quedan pendientes el despliegue en producción, la suite de pruebas automatizadas y la
+                autenticación por usuario individual.
+            </p>
+        </section>
+
+        <section class="caso-seccion caso-cierre">
+            <h2>¿Tienes un Excel que ya no aguanta?</h2>
+            <p>Es el problema que más me gusta resolver.</p>
+            <div class="proyecto-acciones">
+                <a class="btn btn-primario" href="index.html#contacto">Hablemos</a>
+                <a class="btn btn-secundario" href="index.html#proyectos">Ver otros proyectos</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>Carlos Manuel Hernández Vivas</p>
+    </footer>
+</body>
+
+</html>

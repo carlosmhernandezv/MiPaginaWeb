@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquidación de Nómina</title>
+    <title>Calculadora de liquidación de nómina — Colombia 2026 | Carlos M. Hernández V.</title>
+    <meta name="description"
+        content="Calculadora de nómina quincenal para Colombia 2026: recargos nocturnos y dominicales, festivos oficiales y desprendible de pago en PDF.">
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="img/favicon16x16.png">
 
@@ -32,7 +34,7 @@
         .nomina-header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: #4CAF50;
+            color: #FF7A7A;
         }
 
         .nomina-header p {
@@ -54,7 +56,7 @@
         }
 
         .empleados-section label {
-            color: #4CAF50;
+            color: #FF7A7A;
             font-weight: bold;
         }
 
@@ -70,7 +72,7 @@
         }
 
         .btn-primary {
-            background: #4CAF50;
+            background: #E5484D;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -81,7 +83,7 @@
         }
 
         .btn-primary:hover {
-            background: #45a049;
+            background: #C93B3F;
         }
 
         .btn-secondary {
@@ -99,19 +101,21 @@
             background: #0b7dda;
         }
 
+        /* Destructivo: contorneado, para no confundirse con el boton primario */
         .btn-danger {
-            background: #f44336;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
+            background: transparent;
+            color: #FF7A7A;
+            border: 2px solid #6b3a3c;
+            padding: 8px 18px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.3s;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .btn-danger:hover {
-            background: #da190b;
+            background: rgba(229, 72, 77, 0.15);
+            border-color: #E5484D;
         }
 
         .config-section {
@@ -123,7 +127,7 @@
         }
 
         .config-section h2 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
@@ -154,7 +158,7 @@
         .input-group input[type="number"]:focus,
         .input-group input[type="text"]:focus {
             outline: none;
-            border-color: #4CAF50;
+            border-color: #E5484D;
         }
 
         .checkbox-group {
@@ -179,7 +183,7 @@
         }
 
         .turnos-section h2 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
@@ -192,7 +196,7 @@
 
         .turnos-table th {
             background: #333;
-            color: #4CAF50;
+            color: #FF7A7A;
             padding: 12px;
             text-align: left;
             font-weight: bold;
@@ -217,7 +221,7 @@
 
         .turnos-table input[type="date"].festivo {
             background: #1b5e20;
-            border-color: #4CAF50;
+            border-color: #E5484D;
         }
 
         .turnos-table input[type="checkbox"] {
@@ -227,7 +231,7 @@
         }
 
         .turnos-table .horas-calculadas {
-            color: #4CAF50;
+            color: #ececec;
             font-weight: bold;
             text-align: center;
         }
@@ -241,7 +245,7 @@
         }
 
         .resultado-section h2 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 20px;
             font-size: 1.5rem;
             text-align: center;
@@ -325,7 +329,7 @@
         }
 
         .btn-calcular {
-            background: #4CAF50;
+            background: #E5484D;
             color: #fff;
             border: none;
             padding: 15px 40px;
@@ -338,7 +342,7 @@
         }
 
         .btn-calcular:hover {
-            background: #45a049;
+            background: #C93B3F;
         }
 
         /* Modal */
@@ -371,7 +375,7 @@
         }
 
         .modal-content h3 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 20px;
         }
 
@@ -406,13 +410,13 @@
         }
 
         .panel-lateral h3 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 20px;
             position: sticky;
             top: 0;
             background: #2a2a2a;
             padding-bottom: 10px;
-            border-bottom: 2px solid #4CAF50;
+            border-bottom: 2px solid #E5484D;
         }
 
         .panel-lateral .close-panel {
@@ -436,7 +440,7 @@
         }
 
         .historial-item h4 {
-            color: #4CAF50;
+            color: #FF7A7A;
             margin-bottom: 10px;
         }
 
@@ -518,21 +522,17 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul id="main-nav" class="nav-icons">
-                <li><a href="index.html" class="nav-icon">
-                        <img src="./img/favicon16x16.png" alt="Home">
-                    </a></li>
-                <li><a href="index.html#profile" class="nav-icon">
-                        <img src="./img/rocket_launch_16pxx16pxhome.png" alt="Profile">
-                    </a></li>
-                <li><a href="nomina.html" class="nav-icon">
-                        <img src="./img/paid_256dp_FFFFFF_16x16.png" alt="Nómina">
-                    </a></li>
-                <li><a href="#" class="nav-icon">
-                        <img src="./img/receipt_long_256dp_FFFFFF_16x16.png" alt="Recibos">
-                    </a></li>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="brand" href="index.html">
+                <img src="img/favicon16x16.png" alt="" width="28" height="28">
+                <span>Carlos M. Hernández V.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#capacidades">Qué hago</a></li>
+                <li><a href="index.html#proyectos">Proyectos</a></li>
+                <li><a href="caso-cfdi.html">Caso CFDI</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -1216,7 +1216,7 @@
 
             // Header
             doc.setFontSize(20);
-            doc.setTextColor(76, 175, 80);
+            doc.setTextColor(229, 72, 77);
             doc.text('DESPRENDIBLE DE PAGO', 105, 20, { align: 'center' });
 
             doc.setFontSize(12);
