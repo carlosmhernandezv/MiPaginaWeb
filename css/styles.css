@@ -545,7 +545,9 @@ main .social-icons #Platzi {
 .nota-confidencial {
     margin-top: 16px;
     padding: 14px 18px;
-    background: rgba(33, 150, 243, 0.1);
+    /* opaca a proposito: es el aviso de confidencialidad y debe leerse
+       sin que la imagen de fondo se transparente por detras */
+    background: rgb(26, 35, 46);
     border-left: 3px solid var(--azul);
     border-radius: 6px;
     color: var(--tenue);
