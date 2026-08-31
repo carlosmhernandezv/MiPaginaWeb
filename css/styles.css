@@ -2,8 +2,9 @@
    VARIABLES
    ========================================================= */
 :root {
-    --verde: #4CAF50;
-    --verde-hover: #45a049;
+    --acento: #E5484D;
+    --acento-hover: #C93B3F;
+    --acento-texto: #FF7A7A;
     --azul: #2196F3;
     --panel: #1f1f1f;
     --panel-2: #2a2a2a;
@@ -36,7 +37,7 @@ body {
 }
 
 a {
-    color: var(--verde);
+    color: var(--acento-texto);
 }
 
 code {
@@ -52,7 +53,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-    outline: 3px solid var(--verde);
+    outline: 3px solid var(--acento);
     outline-offset: 2px;
 }
 
@@ -60,7 +61,7 @@ select:focus-visible {
     position: absolute;
     left: -9999px;
     top: 0;
-    background: var(--verde);
+    background: var(--acento);
     color: #fff;
     padding: 10px 16px;
     z-index: 100;
@@ -153,7 +154,7 @@ main {
 
 .seccion h2 {
     font-size: 1.8rem;
-    color: var(--verde);
+    color: var(--acento-texto);
     margin-bottom: 12px;
 }
 
@@ -185,12 +186,12 @@ main {
 }
 
 .btn-primario {
-    background: var(--verde);
+    background: var(--acento);
     color: #fff;
 }
 
 .btn-primario:hover {
-    background: var(--verde-hover);
+    background: var(--acento-hover);
 }
 
 .btn-secundario {
@@ -200,8 +201,8 @@ main {
 }
 
 .btn-secundario:hover {
-    border-color: var(--verde);
-    color: var(--verde);
+    border-color: var(--acento-texto);
+    color: var(--acento-texto);
 }
 
 .badge {
@@ -214,9 +215,9 @@ main {
 }
 
 .badge-vivo {
-    background: rgba(76, 175, 80, 0.18);
-    color: var(--verde);
-    border: 1px solid var(--verde);
+    background: rgba(229, 72, 77, 0.18);
+    color: var(--acento-texto);
+    border: 1px solid var(--acento);
 }
 
 .badge-progreso {
@@ -248,7 +249,7 @@ main {
     height: 220px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid var(--verde);
+    border: 4px solid var(--acento);
 }
 
 .hero-kicker {
@@ -301,7 +302,7 @@ main {
     display: block;
     font-size: 1.9rem;
     font-weight: bold;
-    color: var(--verde);
+    color: var(--acento-texto);
 }
 
 .cifra-lbl {
@@ -331,7 +332,7 @@ main {
 }
 
 .cap-card.cap-destacada {
-    border-left-color: var(--verde);
+    border-left-color: var(--acento-texto);
 }
 
 .cap-card h3 {
@@ -415,7 +416,7 @@ main {
     content: "\2713";
     position: absolute;
     left: 0;
-    color: var(--verde);
+    color: var(--acento-texto);
 }
 
 .proyecto-datos strong {
@@ -515,7 +516,7 @@ main .social-icons #Platzi {
 }
 
 .caso-kicker {
-    color: var(--verde);
+    color: var(--acento-texto);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: 0.78rem;
@@ -556,7 +557,7 @@ main .social-icons #Platzi {
 
 .caso-seccion h2 {
     font-size: 1.6rem;
-    color: var(--verde);
+    color: var(--acento-texto);
     margin-bottom: 16px;
 }
 
@@ -571,13 +572,13 @@ main .social-icons #Platzi {
 }
 
 .caso-destacado {
-    border-left: 4px solid var(--verde);
+    border-left: 4px solid var(--acento);
 }
 
 .caso-leccion {
     margin-top: 20px;
     padding: 16px 20px;
-    background: rgba(76, 175, 80, 0.1);
+    background: rgba(229, 72, 77, 0.1);
     border-radius: 6px;
     color: var(--texto) !important;
 }
@@ -609,11 +610,11 @@ main .social-icons #Platzi {
     content: "\2013";
     position: absolute;
     left: 0;
-    color: var(--verde);
+    color: var(--acento-texto);
 }
 
 .lista-resultados strong {
-    color: var(--verde);
+    color: var(--acento-texto);
     font-size: 1.05rem;
 }
 
@@ -672,7 +673,7 @@ main .social-icons #Platzi {
 }
 
 .svg-caja-foco {
-    stroke: var(--verde);
+    stroke: var(--acento);
     stroke-width: 2;
 }
 
@@ -694,7 +695,7 @@ main .social-icons #Platzi {
 }
 
 .svg-titulo {
-    fill: #4CAF50;
+    fill: #FF7A7A;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: bold;
