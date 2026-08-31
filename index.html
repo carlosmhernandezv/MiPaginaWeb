@@ -1,90 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlos Manuel Hernandez Vivas</title>
+
+    <title>Carlos Manuel Hernández Vivas | Sistemas fiscales y documentales</title>
+    <meta name="description"
+        content="Construyo sistemas web para problemas reales de negocio: facturación electrónica CFDI 4.0, migración desde Excel con macros VBA, trazabilidad documental y liquidación de nómina.">
+    <meta name="author" content="Carlos Manuel Hernández Vivas">
+
+    <!-- Open Graph: así se ve el enlace al compartirlo en LinkedIn o WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Carlos Manuel Hernández Vivas | Sistemas fiscales y documentales">
+    <meta property="og:description"
+        content="Facturación electrónica CFDI 4.0, migración de sistemas legados y trazabilidad documental.">
+    <meta property="og:url" content="https://carlosmhernandezv.github.io/MiPaginaWeb/">
+    <meta property="og:image" content="https://carlosmhernandezv.github.io/MiPaginaWeb/img/Profile_Photo.jpg">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="img/favicon16x16.png">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul id="main-nav" class="nav-icons">
-                <li><a href="Home" class="nav-icon">
-                        <img src="./img/favicon16x16.png" alt="">
-                    </a></li>
-                <li><a href="nomina.html" class="nav-icon" title="Calculadora Nómina 2026">
-                        <img src="./img/rocket_launch_16pxx16pxhome.png" alt="Calculadora Nómina">
-                    </a></li>
-                <li><a href="Project #1" class="nav-icon">
-                        <img src="./img/paid_256dp_FFFFFF_16x16.png" alt="">
-                    </a></li>
-                <li><a href="Project #2" class="nav-icon">
-                        <img src="./img/receipt_long_256dp_FFFFFF_16x16.png" alt="">
-                    </a></li>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="brand" href="index.html">
+                <img src="img/favicon16x16.png" alt="" width="28" height="28">
+                <span>Carlos M. Hernández V.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#capacidades">Qué hago</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <div id="hero">
-        <div class="image-container" id="background-profile">
-            <img src="img/programmer_bg.png" id="background-profile" />
-        </div>
-        <div class="informacion-contendor">
-            <div class="image-container" id="photo">
-                <img src="img/Profile_Photo.jpg" alt="profile-photo" />
+    <main id="contenido">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero" aria-labelledby="hero-titulo">
+            <div class="hero-foto">
+                <img src="img/Profile_Photo.jpg" alt="Retrato de Carlos Manuel Hernández Vivas" width="220"
+                    height="220">
             </div>
-            <div class="info">
-                <h1>Carlos Manuel Hernandez Vivas</h1>
-                <span>@carlosmhernandezv</span>
-
-                <p>Estudiante de programación | Platzi</p>
+            <div class="hero-texto">
+                <p class="hero-kicker">@carlosmhernandezv</p>
+                <h1 id="hero-titulo">Construyo sistemas web que resuelven problemas reales de negocio</h1>
+                <p class="hero-sub">
+                    Facturación electrónica <strong>CFDI 4.0</strong>, migración de sistemas legados en Excel y VBA,
+                    trazabilidad documental y liquidación de nómina. Trabajo donde las reglas del negocio son
+                    complicadas y el margen de error es cero.
+                </p>
+                <div class="hero-acciones">
+                    <a class="btn btn-primario" href="#proyectos">Ver proyectos</a>
+                    <a class="btn btn-secundario" href="docs/CVCarlosMHernandezV.pdf" target="_blank"
+                        rel="noopener">Descargar CV (PDF)</a>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <main>
-        <p>Vamos a pulirnos!, Sin miedo al éxito.
-        </p>
+        <!-- ============ CIFRAS ============ -->
+        <section class="cifras" aria-label="Cifras de los proyectos">
+            <div class="cifra">
+                <span class="cifra-num">9,535</span>
+                <span class="cifra-lbl">CFDI migrados y validados</span>
+            </div>
+            <div class="cifra">
+                <span class="cifra-num">16,401</span>
+                <span class="cifra-lbl">documentos con cadena trazable</span>
+            </div>
+            <div class="cifra">
+                <span class="cifra-num">17</span>
+                <span class="cifra-lbl">empresas en un solo sistema</span>
+            </div>
+            <div class="cifra">
+                <span class="cifra-num">~7.000</span>
+                <span class="cifra-lbl">líneas de VBA revertidas</span>
+            </div>
+        </section>
 
-        <ul class="social-icons">
-            <li>
-                <a href="https://www.linkedin.com/in/carlosmanuelhernandezvivas/" class="social-icon" id="LinkedIn"
-                    target="_blank">
-                    <img src="img/icons/linkedin.png" alt="linkedin">
-                </a>
-            </li>
+        <!-- ============ CAPACIDADES ============ -->
+        <section id="capacidades" class="seccion" aria-labelledby="cap-titulo">
+            <h2 id="cap-titulo">Qué sé hacer</h2>
+            <p class="seccion-intro">
+                Cada punto enlaza al lugar donde está la evidencia. El stack va al final, entre paréntesis: importa
+                menos que el resultado.
+            </p>
 
-            <li>
-                <a href="https://github.com/carlosmhernandezv/" class="social-icon" id="GitHub" target="_blank">
-                    <img src="img/icons/github.png" alt="GitHub">
-                </a>
-            </li>
+            <div class="cap-grid">
 
-            <!--<li>
-                <a href="https://www.youtube.com/channel/UCfRl0Gs6cVorfPEe-SFkr4A" class="social-icon" id="YouTube" 
-                target="_blank">
-                    <img src="img/icons/youtube.png" alt="YouTube">
-                </a>
-            </li>-->
+                <article class="cap-card cap-destacada">
+                    <h3>Facturación electrónica CFDI 4.0 y SAT</h3>
+                    <p>
+                        Ingestión de comprobantes fiscales con idempotencia por UUID, lectura del Timbre Fiscal
+                        Digital y clasificación automática de material o servicio a partir de los catálogos oficiales
+                        del SAT. Diseño del conector de Descarga Masiva con e.firma.
+                    </p>
+                    <p class="cap-stack">Python · XML · catálogos <code>c_ClaveProdServ</code> y
+                        <code>c_ClaveUnidad</code> · e.firma
+                    </p>
+                    <a class="cap-link" href="caso-cfdi.html#que-construi">Ver la evidencia</a>
+                </article>
 
-            <li>
-                <a href="https://platzi.com/p/carlosmhernandezv/" class="social-icon" id="Platzi" target="_blank">
-                    <img src="img/icons/platzi.png" alt="Platzi">
-                </a>
-            </li>
+                <article class="cap-card">
+                    <h3>Migración de sistemas legados</h3>
+                    <p>
+                        Ingeniería inversa de un archivo <code>.xlsm</code> en operación: 24 módulos VBA, cerca de
+                        7.000 líneas y 23 hojas de cálculo, convertidos en un modelo de datos explícito. Las
+                        abreviaturas reales de las empresas salieron de leer el código, no de un catálogo.
+                    </p>
+                    <p class="cap-stack">VBA · Excel · análisis estático · PostgreSQL</p>
+                    <a class="cap-link" href="caso-cfdi.html#el-problema">Ver la evidencia</a>
+                </article>
 
-            <li>
-                <a href="/docs/CVCarlosMHernandezV.pdf" class="social-icon" id="CV" target="_blank">
-                    <img src="/img/icons/CV.png" alt="CV">
-                </a>
-            </li>
-        </ul>
+                <article class="cap-card cap-destacada">
+                    <h3>Auditoría forense de datos</h3>
+                    <p>
+                        Validación de un histórico de 35.365 registros contra los comprobantes fiscales reales:
+                        ninguno existía. Detectar que la fuente era dato fabricado evitó cargar 12.436 documentos
+                        falsos a un sistema con obligaciones fiscales.
+                    </p>
+                    <p class="cap-stack">SQL · conciliación de datos · validación cruzada</p>
+                    <a class="cap-link" href="caso-cfdi.html#la-decision">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Modelado de datos para información fiscal</h3>
+                    <p>
+                        Esquemas que preservan la integridad del comprobante — un CFDI no se corrige, se conserva — y
+                        permiten auditar la cadena documental completa. 22 tablas, folios con secuencia real en vez de
+                        <code>MAX+1</code>, vistas de saldo y consulta recursiva de trazabilidad.
+                    </p>
+                    <p class="cap-stack">PostgreSQL · CTE recursivos · triggers · Alembic (12 migraciones)</p>
+                    <a class="cap-link" href="caso-cfdi.html#modelo">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Backend y API</h3>
+                    <p>
+                        35 endpoints sobre SQL explícito y versionado, pensados para que la consulta que corre en el
+                        servidor sea la misma que se puede leer y auditar.
+                    </p>
+                    <p class="cap-stack">Python · FastAPI · SQLAlchemy Core · Alembic · Docker</p>
+                    <a class="cap-link" href="caso-cfdi.html#que-construi">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Interfaces de captura y consulta</h3>
+                    <p>
+                        15 pantallas de trabajo real: trazabilidad de la cadena documental, listados con filtros y
+                        paginación, captura, asignación por lote y bandeja de clasificación. En vanilla JS, una
+                        calculadora de nómina completa con persistencia local y exportación a PDF.
+                    </p>
+                    <p class="cap-stack">React · Next.js 16 (App Router) · JavaScript ES6+ · HTML5 · CSS3</p>
+                    <a class="cap-link" href="nomina.html">Probar la calculadora</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Análisis de negocio y levantamiento</h3>
+                    <p>
+                        Modelado de dos cadenas de compraventa (proveedor → materialista → constructora) y auditoría
+                        contra el diagrama que entregó el cliente, que destapó que faltaba la mitad del flujo. Esa
+                        parte no es programar: es entender el negocio antes de escribir código.
+                    </p>
+                    <p class="cap-stack">Entrevistas · modelado de procesos · documentación funcional</p>
+                    <a class="cap-link" href="caso-cfdi.html#cadenas">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Generación documental</h3>
+                    <p>
+                        Cinco plantillas replicadas celda por celda desde el Excel original, con branding por empresa
+                        y salida en PDF sin límite de ítems. Los desprendibles de pago de la calculadora de nómina
+                        usan el mismo enfoque.
+                    </p>
+                    <p class="cap-stack">Generación de PDF · plantillas · jsPDF</p>
+                    <a class="cap-link" href="nomina.html">Probar la calculadora</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Seguridad aplicada</h3>
+                    <p>
+                        Validación de archivos subidos por números mágicos y no por extensión, nombres derivados del
+                        RFC para neutralizar <em>path traversal</em>, y sesión por cookie en lugar de autenticación
+                        básica. Cada decisión con su motivo escrito.
+                    </p>
+                    <p class="cap-stack">Validación de entrada · manejo de sesión · superficie de archivos</p>
+                    <a class="cap-link" href="caso-cfdi.html#decisiones">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Entornos reproducibles y documentación</h3>
+                    <p>
+                        <code>docker-compose</code>, devcontainer y scripts de arranque para Windows y Linux, más 15
+                        especificaciones por módulo y una bitácora de decisiones. Documentar <em>por qué</em> se tomó
+                        una decisión vale más que documentar qué hace el código.
+                    </p>
+                    <p class="cap-stack">Docker · Codespaces · Git · especificación técnica</p>
+                    <a class="cap-link" href="caso-cfdi.html#decisiones">Ver la evidencia</a>
+                </article>
+
+                <article class="cap-card">
+                    <h3>Desarrollo asistido por IA</h3>
+                    <p>
+                        Trabajo con agentes de código sobre documentos de contexto que fijan las reglas de negocio por
+                        escrito, de forma que el criterio legal y fiscal quede en el repositorio y no en la
+                        conversación.
+                    </p>
+                    <p class="cap-stack">Claude Code · documentos de contexto · MCP</p>
+                    <a class="cap-link" href="caso-cfdi.html#proceso">Ver la evidencia</a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ============ PROYECTOS ============ -->
+        <section id="proyectos" class="seccion" aria-labelledby="proy-titulo">
+            <h2 id="proy-titulo">Proyectos</h2>
+
+            <article class="proyecto">
+                <div class="proyecto-cabecera">
+                    <h3>Sistema de trazabilidad documental y CFDI</h3>
+                    <span class="badge badge-progreso">Construido · en fase de despliegue</span>
+                </div>
+                <!--
+                  CONFIDENCIALIDAD: el cliente aparece anonimizado a propósito.
+                  Si obtienes autorización por escrito para nombrarlo, reemplaza
+                  "un grupo empresarial mexicano del sector construcción" por el nombre real.
+                  No publiques capturas con RFC, CLABE ni firmas reales.
+                -->
+                <p class="proyecto-resumen">
+                    Un grupo empresarial mexicano del sector construcción, con 17 empresas, operaba toda su
+                    documentación desde un Excel con cerca de 7.000 líneas de macros. Lo reemplacé por un sistema web
+                    que ingiere CFDI, genera los documentos de la cadena comercial y permite auditar cualquier factura
+                    hasta su cotización de origen.
+                </p>
+                <ul class="proyecto-datos">
+                    <li><strong>9.535</strong> CFDI migrados</li>
+                    <li><strong>16.401</strong> documentos generados con cadena completa</li>
+                    <li><strong>22</strong> tablas · <strong>35</strong> endpoints · <strong>15</strong> pantallas</li>
+                    <li>Cero duplicados: UUID como llave natural</li>
+                </ul>
+                <p class="proyecto-stack">Python · FastAPI · PostgreSQL · SQLAlchemy · Alembic · Next.js 16 · React ·
+                    Docker</p>
+                <div class="proyecto-acciones">
+                    <a class="btn btn-primario" href="caso-cfdi.html">Leer el caso completo</a>
+                    <span class="nota-privado">Código privado bajo licencia propietaria</span>
+                </div>
+            </article>
+
+            <article class="proyecto">
+                <div class="proyecto-cabecera">
+                    <h3>Calculadora de liquidación de nómina — Colombia 2026</h3>
+                    <span class="badge badge-vivo">Demo en vivo</span>
+                </div>
+                <p class="proyecto-resumen">
+                    Herramienta de liquidación quincenal ajustada a la legislación laboral colombiana vigente: detecta
+                    recargos nocturnos y dominicales a partir de las horas de entrada y salida, reconoce el calendario
+                    de festivos y emite un desprendible de pago en PDF. Pensada para pequeños empresarios con turnos
+                    rotativos.
+                </p>
+                <ul class="proyecto-datos">
+                    <li>Recargo nocturno del 35% calculado por intervalos, incluidos turnos que cruzan medianoche</li>
+                    <li>Recargo dominical y festivo del 75% con calendario oficial 2026</li>
+                    <li>Gestión de empleados e histórico con persistencia en el navegador</li>
+                    <li>Desprendible de pago exportable a PDF</li>
+                </ul>
+                <p class="proyecto-stack">JavaScript ES6+ · HTML5 · CSS3 · localStorage · jsPDF</p>
+                <div class="proyecto-acciones">
+                    <a class="btn btn-primario" href="nomina.html">Abrir la calculadora</a>
+                    <a class="btn btn-secundario" href="https://github.com/carlosmhernandezv/MiPaginaWeb"
+                        target="_blank" rel="noopener">Ver el código</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- ============ SOBRE MÍ ============ -->
+        <section id="sobre-mi" class="seccion" aria-labelledby="sobre-titulo">
+            <h2 id="sobre-titulo">Sobre mí</h2>
+            <div class="sobre-texto">
+                <p>
+                    Me interesa el software donde las reglas no las inventa el programador: facturación electrónica,
+                    liquidación de nómina, trazabilidad documental. Son dominios en los que un error no es un detalle
+                    cosmético, sino un problema legal o fiscal para alguien.
+                </p>
+                <p>
+                    Mi forma de trabajar empieza por escribir las reglas del negocio antes que el código. En el
+                    sistema de CFDI eso significó revertir 24 módulos de VBA y auditar el diagrama del cliente contra
+                    la realidad de sus datos; en la calculadora de nómina, dejar por escrito el marco legal antes de
+                    calcular un solo peso. Es más lento al principio y ahorra el rediseño completo después.
+                </p>
+                <p>
+                    Vengo de formación autodidacta y de Platzi, y sigo aprendiendo en proyectos reales con usuarios
+                    reales.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============ CONTACTO ============ -->
+        <section id="contacto" class="seccion seccion-contacto" aria-labelledby="cont-titulo">
+            <h2 id="cont-titulo">Hablemos</h2>
+            <p class="seccion-intro">
+                ¿Tienes un proceso corriendo en Excel que ya no aguanta, o necesitas ordenar tu documentación fiscal?
+                Escríbeme.
+            </p>
+
+            <ul class="social-icons">
+                <li>
+                    <a href="https://www.linkedin.com/in/carlosmanuelhernandezvivas/" class="social-icon" id="LinkedIn"
+                        target="_blank" rel="noopener">
+                        <img src="img/icons/linkedin.png" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/carlosmhernandezv/" class="social-icon" id="GitHub" target="_blank"
+                        rel="noopener">
+                        <img src="img/icons/github.png" alt="GitHub">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://platzi.com/p/carlosmhernandezv/" class="social-icon" id="Platzi" target="_blank"
+                        rel="noopener">
+                        <img src="img/icons/platzi.png" alt="Platzi">
+                    </a>
+                </li>
+                <li>
+                    <a href="docs/CVCarlosMHernandezV.pdf" class="social-icon" id="CV" target="_blank" rel="noopener">
+                        <img src="img/icons/CV.png" alt="Hoja de vida en PDF">
+                    </a>
+                </li>
+            </ul>
+        </section>
+
     </main>
+
+    <footer class="site-footer">
+        <p>Carlos Manuel Hernández Vivas — Sin miedo al éxito.</p>
+    </footer>
 </body>
 
 </html>
