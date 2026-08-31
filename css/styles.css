@@ -74,19 +74,22 @@ select:focus-visible {
 /* =========================================================
    HEADER  (compartido por las tres páginas)
    ========================================================= */
-header {
-    background: var(--panel);
-    padding: 10px 50px;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid var(--borde);
-}
-
+/* Ojo: esta regla va sobre .site-header, NUNCA sobre el selector `header`.
+   .caso-hero tambien es un <header>, y un `header { display: flex }` global
+   lo convertia en fila y descolocaba todo su contenido. */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
     padding: 0;
+    background: var(--panel);
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--borde);
+}
+
+.caso-hero {
+    display: block;
 }
 
 .site-nav {
@@ -721,8 +724,8 @@ main .social-icons #Platzi {
         background-attachment: scroll;
     }
 
-    header {
-        padding: 10px 16px;
+    .site-header {
+        padding: 0;
     }
 
     .site-nav {
