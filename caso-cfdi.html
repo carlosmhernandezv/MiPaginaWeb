@@ -96,9 +96,9 @@
                     vivir aparte del comprobante.
                 </li>
                 <li>
-                    <strong>La trazabilidad es parcial por diseño.</strong> No todos los documentos históricos tienen
-                    su cadena completa, y forzar un vínculo inexistente sería inventar información. El sistema debía
-                    poder decir «no se sabe» sin romperse.
+                    <strong>Diecisiete empresas sobre un mismo modelo.</strong> Cada razón social tiene su propia
+                    numeración de folios, su branding en los documentos y sus propias contrapartes. El sistema tenía
+                    que mantenerlas separadas sin duplicar la lógica en diecisiete variantes.
                 </li>
                 <li>
                     <strong>Operación en marcha.</strong> El Excel seguía en uso mientras se construía el reemplazo,
@@ -190,13 +190,13 @@
                 El <strong>ingestor de CFDI</strong> lee el XML del comprobante, extrae el Timbre Fiscal Digital y
                 usa el UUID como llave natural, de modo que reprocesar el mismo archivo no crea un duplicado. Cada
                 concepto se clasifica automáticamente como material o servicio a partir de los catálogos oficiales
-                del SAT (<code>c_ClaveProdServ</code> y <code>c_ClaveUnidad</code>), y lo que el clasificador no
-                resuelve con confianza cae en una bandeja para revisión humana en lugar de adivinar.
+                del SAT (<code>c_ClaveProdServ</code> y <code>c_ClaveUnidad</code>), con una bandeja de clasificación
+                donde el equipo revisa y confirma los casos que lo requieren.
             </p>
             <p>
                 La <strong>pantalla de trazabilidad</strong> es la que justifica el proyecto: dada una factura,
-                recorre hacia atrás la cadena hasta la cotización de origen, y muestra explícitamente los eslabones
-                que faltan en vez de ocultarlos.
+                recorre hacia atrás la cadena hasta la cotización de origen y muestra cada eslabón con su documento,
+                su folio y su fecha.
             </p>
             <p>
                 El <strong>generador documental</strong> replica celda por celda las cinco plantillas del Excel
