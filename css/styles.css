@@ -207,11 +207,13 @@ main {
 
 .badge {
     display: inline-block;
+    max-width: 100%;
     padding: 5px 12px;
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: bold;
-    white-space: nowrap;
+    /* sin nowrap: los badges largos deben partirse en movil en vez de
+       estirar la pagina y provocar scroll horizontal */
 }
 
 .badge-vivo {
