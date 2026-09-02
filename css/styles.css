@@ -742,6 +742,16 @@ main .social-icons #Platzi {
 
     .nav-links {
         justify-content: center;
+        gap: 2px;
+    }
+
+    /* Los cuatro enlaces caben en una sola fila si el texto y el relleno
+       acompañan al ancho de pantalla: ~3.5vw es la proporción que hace que
+       "Lo que desarrollo" + los otros tres entren desde 320px. Los topes del
+       clamp dejan intacto el tamaño de escritorio en cuanto hay sitio. */
+    .nav-links a {
+        padding: 11px clamp(4px, 1.6vw, 12px);
+        font-size: clamp(0.7rem, 3.5vw, 0.95rem);
     }
 
     main {
