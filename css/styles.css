@@ -290,7 +290,9 @@ main {
    ========================================================= */
 .cifras {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    /* Mismo blindaje que .cap-grid: por debajo de 190px la columna se encoge
+       en vez de desbordar la página. */
+    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
     gap: 16px;
     margin-top: 28px;
 }
@@ -322,7 +324,10 @@ main {
    ========================================================= */
 .cap-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* El min() evita que la tarjeta imponga 300px cuando la pantalla es más
+       angosta que eso: por debajo de ~320px la columna se encoge en vez de
+       desbordar la página. */
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 18px;
 }
 
