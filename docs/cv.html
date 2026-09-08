@@ -157,15 +157,20 @@
             font-weight: 700;
         }
 
-        .resultados {
-            margin: 5px 0 0;
-            padding: 4px 8px;
+        /* ---------- Stack por puesto ----------
+           Va inmediatamente bajo el cargo, no al final: los reclutadores y
+           los filtros ATS asocian las herramientas al puesto concreto. El
+           fondo y el filete lo convierten en el primer elemento que salta a
+           la vista dentro de la entrada. */
+        .stack {
+            margin: 0 0 5px;
+            padding: 3.5px 8px;
             background: #f4f5f7;
             border-left: 2.5px solid var(--acento);
-            font-size: 8.7pt;
+            font-size: 8.8pt;
         }
 
-        .resultados strong {
+        .stack b {
             color: var(--acento);
         }
 
@@ -243,30 +248,29 @@
                 <span class="fecha">Ene 2025 – Actualidad</span>
             </div>
             <p class="org">Sistema de trazabilidad documental y CFDI · Grupo empresarial del sector construcción,
-                México (17 empresas)</p>
+                México</p>
+            <p class="stack"><b>Stack:</b> Python · FastAPI · SQLAlchemy Core · PostgreSQL · Alembic · Next.js ·
+                React · Docker · VBA · XML / CFDI 4.0</p>
             <ul>
-                <li>Levanté las reglas de negocio de 17 empresas que operaban toda su documentación comercial desde un
-                    único Excel con macros, mediante ingeniería inversa de <span class="cifra">24 módulos VBA</span>
-                    (cerca de 7.000 líneas) y 23 hojas de cálculo.</li>
-                <li>Audité el diagrama de procesos entregado por el cliente contra sus datos reales: describía solo la
-                    mitad del flujo. Modelé las <span class="cifra">dos cadenas de compraventa</span> encadenadas que
-                    existían en la operación.</li>
-                <li>Validé una hoja de <span class="cifra">35.365 registros</span> presentada como histórico completo
-                    cruzando sus UUID contra los comprobantes fiscales reales: ninguno existía. Evitó cargar documentos
-                    fabricados a un sistema con obligaciones fiscales.</li>
-                <li>Diseñé el modelo de <span class="cifra">22 tablas</span> preservando la integridad del comprobante,
-                    con trazabilidad de cualquier factura hasta su cotización de origen por consulta recursiva, y
-                    folios respaldados por secuencias en lugar de <em>MAX+1</em>, eliminando las colisiones de
-                    numeración.</li>
-                <li>Construí el sistema: Python y FastAPI con 35 endpoints, PostgreSQL, ingestor de CFDI idempotente
-                    por UUID con clasificación según catálogos del SAT, 15 pantallas en Next.js 16 y 15
-                    especificaciones funcionales con bitácora de decisiones.</li>
+                <li>Levanté las reglas de negocio de un grupo de empresas relacionadas que operaba toda su
+                    documentación comercial desde un único archivo de <span class="cifra">Excel con macros</span>,
+                    mediante ingeniería inversa de sus módulos de <span class="cifra">VBA</span> y de sus hojas de
+                    cálculo.</li>
+                <li>Audité el diagrama de procesos entregado por el cliente contra sus datos reales: describía solo
+                    una parte del flujo. Modelé las cadenas de compraventa encadenadas que existían en la operación.
+                </li>
+                <li>Validé el histórico que el cliente daba por completo cruzando sus UUID contra los comprobantes
+                    fiscales reales: ninguno existía. La detección evitó cargar documentos fabricados a un sistema con
+                    obligaciones fiscales.</li>
+                <li>Diseñé el modelo de datos en <span class="cifra">PostgreSQL</span> preservando la integridad del
+                    comprobante fiscal, con trazabilidad de cualquier factura hasta su cotización de origen mediante
+                    consulta recursiva, y folios respaldados por secuencias de base de datos en lugar de
+                    <em>MAX+1</em>, eliminando las colisiones de numeración.</li>
+                <li>Construí el sistema completo: API en <span class="cifra">Python</span> y
+                    <span class="cifra">FastAPI</span>, ingestor de CFDI idempotente por UUID con clasificación según
+                    los catálogos del SAT, interfaz en <span class="cifra">Next.js</span> y especificaciones
+                    funcionales por módulo con bitácora de decisiones.</li>
             </ul>
-            <p class="resultados">
-                <strong>Resultados:</strong> 9.535 CFDI migrados y validados contra su comprobante real · 16.401
-                documentos con cadena documental completa · 0 duplicados · 12.436 registros falsos detectados y
-                excluidos · 17 empresas sobre un solo sistema.
-            </p>
         </div>
 
         <div class="puesto">
@@ -275,6 +279,7 @@
                 <span class="fecha">2026</span>
             </div>
             <p class="org">Proyecto propio · Demo pública en carlosmhernandezv.com</p>
+            <p class="stack"><b>Stack:</b> JavaScript ES6+ · HTML5 · CSS3 · localStorage · jsPDF</p>
             <ul>
                 <li>Traduje el marco legal laboral colombiano vigente a especificación escrita antes del primer
                     cálculo: recargo nocturno del 35%, dominical y festivo del 75%, jornada de 44 a 42 horas.</li>
@@ -293,7 +298,7 @@
                 y conciliación de datos · migraciones versionadas con Alembic</p>
             <p><b>Dominio:</b> CFDI 4.0 y catálogos del SAT (<em>c_ClaveProdServ</em>, <em>c_ClaveUnidad</em>) · Timbre
                 Fiscal Digital · e.firma y Descarga Masiva · legislación laboral colombiana</p>
-            <p><b>Desarrollo:</b> Python · FastAPI · SQLAlchemy Core · JavaScript ES6+ · React · Next.js 16 · HTML5 ·
+            <p><b>Desarrollo:</b> Python · FastAPI · SQLAlchemy Core · JavaScript ES6+ · React · Next.js · HTML5 ·
                 CSS3 · VBA (lectura y reversión)</p>
             <p><b>Herramientas:</b> Git · Docker y docker-compose · devcontainers / Codespaces · desarrollo asistido
                 por IA con Claude Code, dirigido por documento de contexto y verificado contra datos reales</p>
