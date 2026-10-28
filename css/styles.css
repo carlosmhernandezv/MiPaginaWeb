@@ -28,7 +28,7 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #14161a;
-    background-image: url('../img/programmer_theme_bg.png');
+    background-image: url('../img/programmer_theme_bg.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -279,6 +279,29 @@ main {
     color: var(--texto);
 }
 
+/* El rol va encima del H1 y con el color de acento: es lo primero que busca
+   un reclutador. */
+.hero-rol {
+    color: var(--acento-texto);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.hero-disponible {
+    color: var(--texto);
+    font-size: 0.92rem;
+    margin: -12px 0 24px;
+}
+
+/* Correo visible como botón: un ícono no basta para que te escriban. */
+.contacto-correo {
+    margin-top: 22px;
+}
+
+.contacto-correo .btn {
+    overflow-wrap: anywhere;
+}
+
 .hero-acciones {
     display: flex;
     gap: 14px;
@@ -288,16 +311,20 @@ main {
 /* =========================================================
    CIFRAS
    ========================================================= */
+/* Flex y no rejilla: con cinco cifras, una rejilla auto-fit dejaba la quinta
+   sola en una fila a anchos de laptop. Con flex-wrap la fila incompleta se
+   estira hasta llenar el ancho, y min-width: 0 deja encoger cada caja en
+   pantallas angostas en vez de desbordar la página. */
 .cifras {
-    display: grid;
-    /* Mismo blindaje que .cap-grid: por debajo de 190px la columna se encoge
-       en vez de desbordar la página. */
-    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-top: 28px;
 }
 
 .cifra {
+    flex: 1 1 170px;
+    min-width: 0;
     background: rgba(42, 42, 42, 0.94);
     border: 1px solid var(--borde);
     border-radius: var(--radio);
@@ -345,6 +372,12 @@ main {
     border-left-color: var(--acento-texto);
 }
 
+/* Tarjeta de cierre a todo el ancho: con siete capacidades, la última quedaría
+   sola en su fila tanto a dos como a tres columnas. */
+.cap-card.cap-ancha {
+    grid-column: 1 / -1;
+}
+
 .cap-card h3 {
     font-size: 1.12rem;
     margin-bottom: 10px;
@@ -371,6 +404,12 @@ main {
 
 .cap-link::after {
     content: " \2192";
+}
+
+/* Capacidad con evidencia en dos casos: el segundo enlace va pegado al
+   primero en lugar de abrir otro hueco de 14px. */
+.cap-link+.cap-link {
+    margin-top: 6px;
 }
 
 .cap-link:hover {
@@ -676,6 +715,92 @@ main .social-icons #Platzi {
     color: #8b8b93;
     font-size: 0.85rem;
     margin-top: 10px;
+}
+
+/* ---------- Capturas de pantalla en los casos ----------
+   Mismo lenguaje que .diagrama: borde del panel y pie gris. Las capturas son
+   de entornos de prueba con datos ficticios. */
+.captura {
+    margin: 24px 0 10px;
+}
+
+.captura img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.captura figcaption {
+    color: #8b8b93;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+/* Dos capturas lado a lado en escritorio; se apilan en pantallas angostas. */
+.captura-par {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 14px;
+    align-items: start;
+}
+
+/* La app del conductor es de celular: se muestra angosta y centrada. */
+.captura-movil img {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.captura-movil figcaption {
+    text-align: center;
+}
+
+/* ---------- «En 30 segundos»: resumen al inicio de cada caso ----------
+   Para quien solo va a leer cuatro líneas: problema, qué hice, resultado, stack. */
+.caso-resumen {
+    margin: 18px 0 24px;
+    padding: 18px 22px;
+    background: rgba(42, 42, 42, 0.94);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--acento-texto);
+    border-radius: 8px;
+}
+
+.caso-resumen dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 18px;
+    margin: 0;
+}
+
+.caso-resumen-titulo {
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--acento-texto);
+}
+
+.caso-resumen dt {
+    font-weight: bold;
+}
+
+.caso-resumen dd {
+    margin: 0;
+    color: var(--tenue);
+}
+
+@media (max-width: 560px) {
+    .caso-resumen dl {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .caso-resumen dd {
+        margin-bottom: 8px;
+    }
 }
 
 .svg-caja {

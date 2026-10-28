@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Caso: MiComercializadora, plataforma B2B de empaques | Carlos M. Hernández V.</title>
+    <meta name="description"
+        content="La plataforma B2B de mi propia comercializadora de empaques en Bogotá: tienda con catálogo técnico, inventario con kardex, entregas sin señal, caja del punto físico y facturación electrónica DIAN en un solo sistema.">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Caso: MiComercializadora, plataforma B2B de empaques">
+    <meta property="og:description"
+        content="8 módulos, 15 pantallas diseñadas en Figma y 471 pruebas automáticas. Las reglas del negocio las decidí como dueño.">
+    <meta property="og:url" content="https://carlosmhernandezv.com/caso-micomercializadora.html">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="img/favicon16x16.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a class="brand" href="index.html">
+                <img src="img/favicon16x16.png" alt="" width="28" height="28">
+                <span>Carlos M. Hernández V.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#capacidades">Lo que desarrollo</a></li>
+                <li><a href="index.html#proyectos">Proyectos</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="contenido">
+
+        <header class="caso-hero">
+            <p class="caso-kicker">Caso de estudio · proyecto propio</p>
+            <h1>De pedidos por WhatsApp a una plataforma B2B con factura electrónica</h1>
+            <p class="caso-bajada">
+                Fundé una comercializadora de empaques para restaurantes, hoteles e industria en Bogotá y la Sabana, y
+                construí su plataforma. Un solo sistema para vender, despachar, cobrar y facturar ante la DIAN. Esta vez
+                las reglas del negocio no las levanté de un cliente: las decidí yo, como dueño.
+            </p>
+            <span class="badge badge-progreso">Construido · en preparación para piloto</span>
+        </header>
+
+        <!--
+          CONFIDENCIALIDAD — leer antes de publicar:
+          · NO nombrar al proveedor principal de empaques: la relación comercial está en trámite.
+          · El repositorio es privado: no enlazar código.
+          · Las capturas que agregues deben usar SOLO datos de prueba: nada de NIT, precios de compra
+            ni clientes reales.
+          · El sistema NO está en producción. No describirlo así hasta que arranque el piloto.
+        -->
+        <aside class="nota-confidencial">
+            <strong>Nota:</strong> el código es privado. Omito el nombre del proveedor principal porque la relación
+            comercial está en trámite, y cualquier captura de este caso usa datos de prueba.
+        </aside>
+
+        <div class="caso-resumen">
+            <p class="caso-resumen-titulo">En 30 segundos</p>
+            <dl>
+            <dt>Problema</dt>
+            <dd>Pedidos por WhatsApp, inventario en Excel, cobros contra entrega difíciles de cuadrar y factura
+                electrónica obligatoria ante la DIAN.</dd>
+            <dt>Qué hice</dt>
+            <dd>Fundé el negocio, levanté los requerimientos y decidí las reglas como dueño, diseñé las pantallas en
+                Figma y construí la plataforma.</dd>
+            <dt>Resultado</dt>
+            <dd>8 módulos, 15 pantallas y 471 pruebas automáticas. En preparación para piloto.</dd>
+            <dt>Stack</dt>
+            <dd>Next.js 16 · TypeScript · PostgreSQL · Prisma · Supabase · Tailwind · Vitest · Playwright · Docker</dd>
+            </dl>
+        </div>
+
+        <section id="el-problema" class="caso-seccion">
+            <h2>El problema</h2>
+            <p>
+                En este sector los empaques se compran por WhatsApp. El cliente escribe, alguien confirma si hay
+                existencias revisando un Excel, se despacha y se cobra contra entrega. Funciona mientras el volumen es
+                pequeño y la memoria de quien atiende alcanza.
+            </p>
+            <p>
+                Cuando deja de alcanzar, falla por tres lados a la vez. El <strong>inventario en Excel</strong> no sabe
+                qué mercancía ya está comprometida con otro pedido, así que se promete lo que no hay. El
+                <strong>cobro contra entrega</strong> es difícil de cuadrar: al final del día hay que reconciliar lo
+                que salió de la bodega con lo que volvió en efectivo y transferencias. Y la <strong>factura
+                    electrónica</strong> no es opcional: la DIAN la exige en cada venta.
+            </p>
+            <p>
+                El problema de fondo es que la mercancía y el dinero se mueven por caminos separados y nadie los junta.
+                Resolver solo el inventario, o solo la facturación, deja el cuadre manual exactamente donde estaba.
+            </p>
+        </section>
+
+        <section id="la-idea" class="caso-seccion">
+            <h2>La idea de negocio</h2>
+            <p>
+                MiComercializadora vende empaques a restaurantes, hoteles e industria en Bogotá y la Sabana. Para un
+                cliente así el empaque no es un producto que se elige con calma: es un insumo que no puede faltar, y
+                lo que decide a quién se le compra es la respuesta y el servicio.
+            </p>
+            <p>
+                La apuesta fue competir con orden: un <strong>catálogo técnico</strong> en el que el cliente ve las
+                especificaciones del empaque en vez de preguntarlas por chat, una <strong>cotización en PDF</strong>
+                que sale del mismo sistema, pedidos con estado visible, entrega con soporte y factura electrónica sin
+                tener que pedirla.
+            </p>
+            <figure class="captura">
+                <img src="img/micomercializadora/tienda-inicio.png" width="1280" height="744" loading="lazy"
+                    decoding="async"
+                    alt="Inicio de la tienda en línea: buscador de empaques por medida, entrega al día siguiente, precio por caja y factura electrónica.">
+                <figcaption>La tienda: lo primero que ve el cliente es la promesa de servicio, no un catálogo.
+                </figcaption>
+            </figure>
+            <p>
+                Eso solo se sostiene si la operación entera vive en un mismo lugar. Por eso la plataforma no es una
+                herramienta al lado del negocio: es la forma en que el negocio opera.
+            </p>
+        </section>
+
+        <section id="requerimientos" class="caso-seccion">
+            <h2>Cómo levanté los requerimientos</h2>
+            <p>
+                Antes de dibujar una sola pantalla dibujé dos recorridos: <strong>el de la mercancía y el del
+                    dinero</strong>. Qué entra, qué sale, en qué momento una existencia queda comprometida y en qué
+                momento nace una obligación de cobro. Mientras esos dos caminos no estuvieran escritos, cualquier
+                pantalla habría sido una suposición.
+            </p>
+
+            <figure class="diagrama">
+                <svg viewBox="0 0 720 300" role="img"
+                    aria-label="Diagrama de los dos recorridos de la plataforma: el de la mercancía y el del dinero"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+                            orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7d8590" />
+                        </marker>
+                    </defs>
+
+                    <text x="10" y="24" class="svg-titulo">Recorrido de la mercancía</text>
+
+                    <rect x="10" y="40" width="152" height="52" rx="8" class="svg-caja" />
+                    <text x="86" y="71" class="svg-etiqueta" text-anchor="middle">Proveedor</text>
+
+                    <line x1="168" y1="66" x2="190" y2="66" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="196" y="40" width="152" height="52" rx="8" class="svg-caja" />
+                    <text x="272" y="64" class="svg-etiqueta" text-anchor="middle">Compra</text>
+                    <text x="272" y="81" class="svg-nota" text-anchor="middle">y recibo en bodega</text>
+
+                    <line x1="354" y1="66" x2="376" y2="66" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="382" y="40" width="152" height="52" rx="8" class="svg-caja svg-caja-foco" />
+                    <text x="458" y="64" class="svg-etiqueta" text-anchor="middle">Inventario</text>
+                    <text x="458" y="81" class="svg-nota" text-anchor="middle">kardex y reservas</text>
+
+                    <line x1="540" y1="66" x2="562" y2="66" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="568" y="40" width="142" height="52" rx="8" class="svg-caja" />
+                    <text x="639" y="64" class="svg-etiqueta" text-anchor="middle">Cliente</text>
+                    <text x="639" y="81" class="svg-nota" text-anchor="middle">ruta o punto físico</text>
+
+                    <line x1="10" y1="146" x2="710" y2="146" class="svg-separador" />
+
+                    <text x="10" y="180" class="svg-titulo">Recorrido del dinero</text>
+
+                    <rect x="10" y="198" width="152" height="48" rx="8" class="svg-caja" />
+                    <text x="86" y="220" class="svg-etiqueta" text-anchor="middle">Cotización</text>
+                    <text x="86" y="236" class="svg-nota" text-anchor="middle">en PDF</text>
+
+                    <line x1="168" y1="222" x2="190" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="196" y="198" width="152" height="48" rx="8" class="svg-caja" />
+                    <text x="272" y="220" class="svg-etiqueta" text-anchor="middle">Pedido</text>
+                    <text x="272" y="236" class="svg-nota" text-anchor="middle">contado o crédito</text>
+
+                    <line x1="354" y1="222" x2="376" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="382" y="198" width="152" height="48" rx="8" class="svg-caja svg-caja-fiscal" />
+                    <text x="458" y="220" class="svg-etiqueta" text-anchor="middle">Factura</text>
+                    <text x="458" y="236" class="svg-nota" text-anchor="middle">electrónica DIAN</text>
+
+                    <line x1="540" y1="222" x2="562" y2="222" class="svg-linea" marker-end="url(#flecha)" />
+
+                    <rect x="568" y="198" width="142" height="48" rx="8" class="svg-caja" />
+                    <text x="639" y="220" class="svg-etiqueta" text-anchor="middle">Cobro</text>
+                    <text x="639" y="236" class="svg-nota" text-anchor="middle">caja, ruta o cartera</text>
+
+                    <text x="360" y="276" class="svg-nota" text-anchor="middle">
+                        Las notas crédito y el saldo a favor vuelven sobre esta cadena: nada se cobra dos veces.
+                    </text>
+                </svg>
+                <figcaption>Los dos recorridos que escribí antes de la primera pantalla. La reserva compromete la
+                    mercancía; el cobro cierra el dinero.</figcaption>
+            </figure>
+
+            <p>
+                Con los dos recorridos escritos, el alcance quedó en <strong>8 módulos</strong>, cada uno responsable
+                de un tramo de esos caminos y no de una pantalla.
+            </p>
+            <p>
+                En paralelo hice la parte que no es técnica: <strong>investigar proveedores</strong> de empaque, sus
+                catálogos y sus listas de precios. De ahí salió un requisito que no habría aparecido mirando
+                pantallas: los precios del proveedor cambian y tienen vigencia, así que el sistema necesitaba un
+                <strong>importador de listas de precios con vigencias</strong>, no una tabla que alguien teclea a mano.
+            </p>
+            <p>
+                Las reglas las escribí <strong>en el lenguaje del negocio</strong> antes de traducirlas a código:
+                «el saldo a favor lo absorbe el primer cobro», no una instrucción técnica. Una regla que no se
+                entiende leída en voz alta no se puede discutir con quien atiende el mostrador, y es ahí donde se
+                descubre que está mal.
+            </p>
+            <p>
+                Después diseñé las <strong>15 pantallas en Figma</strong>, con un sistema de diseño propio, antes de
+                programar ninguna. Cambiar una pantalla en Figma cuesta minutos; cambiarla en código cuesta
+                rehacerla.
+            </p>
+            <figure class="captura">
+                <img src="img/micomercializadora/sistema-diseno.png" width="1280" height="800" loading="lazy"
+                    decoding="async"
+                    alt="Página del sistema visual: paleta de colores con sus códigos y escala tipográfica de la plataforma.">
+                <figcaption>El sistema de diseño vive también dentro de la aplicación, como espejo de Figma: colores,
+                    tipografía y componentes salen de la misma fuente.</figcaption>
+            </figure>
+            <p>
+                La última decisión del levantamiento fue el proveedor de facturación electrónica. Comparé
+                <strong>Alegra</strong> frente a <strong>Siigo</strong> y <strong>Facture</strong>, y me quedé con
+                Alegra para la integración real.
+            </p>
+        </section>
+
+        <section id="reglas" class="caso-seccion caso-destacado">
+            <h2>Las reglas que decidí como dueño</h2>
+            <p>
+                Es la diferencia con cualquier otro proyecto que he hecho. En el sistema de CFDI las reglas las
+                levanté de un cliente; aquí las tomé yo, sabiendo que si me equivoco el costo sale de mi propia caja.
+            </p>
+            <ul class="lista-restricciones">
+                <li>
+                    <strong>Cambios hasta 5 días hábiles, con el empaque sin abrir.</strong> Es un plazo corto y
+                    verificable: el empaque cerrado vuelve a la bodega como mercancía vendible.
+                </li>
+                <li>
+                    <strong>Venta que se hace, se factura.</strong> Sin excepciones ni «después la cuadramos». Así el
+                    sistema queda alineado con la DIAN por construcción, en lugar de por conciliación.
+                </li>
+                <li>
+                    <strong>El crédito nace apagado.</strong> Todo cliente arranca de contado, y el crédito se habilita
+                    de forma explícita, cliente por cliente.
+                </li>
+                <li>
+                    <strong>El saldo a favor se aplica por defecto, y lo absorbe el primer cobro.</strong> Nadie tiene
+                    que acordarse de aplicarlo: el sistema lo descuenta solo en el siguiente cobro.
+                </li>
+                <li>
+                    <strong>Si se cancela lo pendiente de un pedido ya pagado, lo pagado queda como saldo.</strong> El
+                    dinero no se pierde ni obliga a una devolución inmediata: queda a favor del cliente, con la opción
+                    de devolvérselo si lo prefiere.
+                </li>
+            </ul>
+            <p class="caso-leccion">
+                Escribir estas reglas antes del código no fue un trámite: fue diseñar el negocio. El sistema es la
+                consecuencia.
+            </p>
+        </section>
+
+        <section id="que-construi" class="caso-seccion">
+            <h2>Qué construí</h2>
+            <p>
+                Una plataforma web en Next.js 16 con App Router y TypeScript, sobre PostgreSQL con Prisma y Supabase,
+                interfaz en Tailwind y entorno reproducible con Docker. Son <strong>8 módulos</strong> y
+                <strong>15 pantallas</strong>, construidos en unas dos semanas de desarrollo intensivo.
+            </p>
+            <figure class="captura">
+                <img src="img/micomercializadora/admin-panel.png" width="1280" height="800" loading="lazy"
+                    decoding="async"
+                    alt="Panel de administración con las tareas del día: un documento rechazado por la DIAN, pedidos por aprobar, entregas sin facturar y rutas con la caja sin cuadrar.">
+                <figcaption>El panel no muestra gráficas: muestra lo que necesita atención hoy, empezando por lo
+                    urgente.</figcaption>
+            </figure>
+            <p>
+                <strong>Venta.</strong> La tienda en línea publica un catálogo técnico y genera la cotización en PDF.
+                Los pedidos pasan por aprobación de crédito cuando el cliente lo tiene habilitado, y al confirmarse
+                reservan existencias.
+            </p>
+            <figure class="captura">
+                <img src="img/micomercializadora/admin-pedidos.png" width="1280" height="800" loading="lazy"
+                    decoding="async"
+                    alt="Listado de pedidos con contadores por estado, buscador y columnas de cliente, entrega, total, pago y estado.">
+                <figcaption>Pedidos por estado. Los clientes son de prueba.</figcaption>
+            </figure>
+            <p>
+                <strong>Inventario y abastecimiento.</strong> El inventario lleva kardex y separa lo disponible de lo
+                reservado. Compras y recibo en bodega registran lo que llega, el importador de listas de precios
+                carga los precios de los proveedores con sus vigencias, y las cuentas por pagar cierran ese extremo.
+            </p>
+            <p>
+                <strong>Entrega.</strong> Las entregas se organizan en rutas, y el conductor usa una app que
+                <strong>funciona sin señal</strong>: captura la firma y la foto de la entrega en el celular y las
+                sincroniza cuando recupera conexión.
+            </p>
+            <figure class="captura captura-movil">
+                <img src="img/micomercializadora/ruta-conductor.png" width="780" height="1688" loading="lazy"
+                    decoding="async"
+                    alt="App del conductor en el celular: ruta terminada con 2 de 2 entregas, total cobrado en efectivo y estado sincronizado.">
+                <figcaption>La app del conductor al cerrar una ruta: entregas, lo cobrado y el estado de
+                    sincronización.</figcaption>
+            </figure>
+            <p>
+                <strong>Punto físico.</strong> La caja opera por turnos con <strong>cierre a ciegas</strong>, resuelve
+                cambios y devoluciones con nota crédito y lleva el saldo a favor de cada cliente.
+            </p>
+            <div class="captura-par">
+                <figure class="captura">
+                    <img src="img/micomercializadora/caja.png" width="1280" height="800" loading="lazy"
+                        decoding="async"
+                        alt="Caja del punto físico: buscador por referencia o código de barras, productos con precio y existencias, y cobro.">
+                    <figcaption>La caja: búsqueda por referencia o lector de código de barras.</figcaption>
+                </figure>
+                <figure class="captura">
+                    <img src="img/micomercializadora/caja-cierre.png" width="1280" height="800" loading="lazy"
+                        decoding="async"
+                        alt="Cierre de turno a ciegas: el cajero escribe el efectivo, el datáfono y las transferencias contados sin ver lo esperado.">
+                    <figcaption>Cierre a ciegas: el cajero cuenta primero y solo al cerrar ve si cuadra.</figcaption>
+                </figure>
+            </div>
+            <p>
+                <strong>Cobro y facturación.</strong> La cartera sigue lo que se debe, y la facturación electrónica
+                DIAN ya funciona de punta a punta contra un <strong>proveedor simulado</strong>. Falta conectarla a
+                Alegra.
+            </p>
+            <figure class="captura">
+                <img src="img/micomercializadora/admin-facturacion.png" width="1280" height="800" loading="lazy"
+                    decoding="async"
+                    alt="Facturación electrónica: entregas pendientes por facturar, botón para facturar todo lo entregado y aviso de que el proveedor es simulado.">
+                <figcaption>Facturación electrónica contra el proveedor simulado: la pantalla lo indica arriba, y los
+                    documentos de prueba no tienen validez fiscal.</figcaption>
+            </figure>
+        </section>
+
+        <section id="decisiones" class="caso-seccion">
+            <h2>Decisiones técnicas y por qué</h2>
+            <dl class="lista-decisiones">
+                <dt>Las reglas de dinero viven en funciones puras, con pruebas</dt>
+                <dd>Aplicar un saldo a favor, repartir un abono o calcular lo que queda tras una nota crédito no
+                    depende de la base de datos ni de la pantalla. Separadas así, cada regla se prueba con sus casos
+                    límite sin montar un pedido completo, y la interfaz puede cambiar sin tocar la aritmética.</dd>
+
+                <dt>Bloqueos en la base de datos para que nada se cobre ni se descuente dos veces</dt>
+                <dd>Dos operaciones simultáneas sobre el mismo pedido o la misma existencia son el caso normal, no el
+                    raro. La base de datos es el único lugar donde esa concurrencia se puede arbitrar de verdad, así que
+                    ahí viven los bloqueos.</dd>
+
+                <dt>La entrega sin señal se guarda en el celular y se sincroniza sin duplicarse</dt>
+                <dd>Si el conductor pierde la señal a mitad del envío y lo reintenta, la entrega no aparece dos veces.
+                    La firma y la foto esperan en el dispositivo hasta que haya conexión.</dd>
+
+                <dt>Enlaces privados firmados y límites de uso</dt>
+                <dd>Lo que se comparte por enlace va firmado, para que solo funcione el enlace que el sistema emitió, y
+                    las operaciones expuestas tienen límites de uso.</dd>
+            </dl>
+        </section>
+
+        <section id="proceso" class="caso-seccion">
+            <h2>Cómo dirigí la IA</h2>
+            <p>
+                Construí la plataforma con <strong>Claude Code</strong>. Lo que cambió desde el sistema de CFDI es que
+                ya no uso un solo modelo para todo: <strong>asigno el modelo según el riesgo</strong> de la tarea.
+            </p>
+            <p>
+                Lo que toca <strong>dinero, seguridad o integraciones</strong> va al modelo más capaz. Las tareas
+                acotadas, que se verifican de un vistazo, van a uno más ágil. Es la misma lógica con la que un equipo
+                decide qué cambio necesita dos revisores y cuál no.
+            </p>
+            <p>
+                Lo demás se mantiene: <strong>escribo las reglas antes que el código</strong>, en el lenguaje del
+                negocio, y <strong>reviso y apruebo cada decisión</strong>. La IA acelera la ejecución; el criterio
+                sobre qué se cobra, qué se reserva y qué se factura sigue siendo mío. Y en este proyecto, además, es
+                mi dinero el que responde.
+            </p>
+        </section>
+
+        <section id="resultados" class="caso-seccion">
+            <h2>Calidad y resultados</h2>
+            <ul class="lista-resultados">
+                <li><strong>8</strong> módulos que cubren el circuito completo, de la compra al proveedor al cobro al
+                    cliente</li>
+                <li><strong>15</strong> pantallas diseñadas primero en Figma, con sistema de diseño propio</li>
+                <li><strong>377</strong> pruebas unitarias</li>
+                <li><strong>94</strong> pruebas de punta a punta</li>
+                <li><strong>471</strong> pruebas automáticas en total, con revisión de accesibilidad con axe</li>
+                <li>Facturación electrónica funcionando de punta a punta contra un proveedor simulado</li>
+            </ul>
+            <p>
+                Con las reglas de dinero en funciones puras, cubrirlas con pruebas es barato, y el día que haya que
+                cambiar una política —el plazo de cambios, el comportamiento del saldo— la red ya está puesta.
+            </p>
+            <p class="caso-pendiente">
+                <strong>Estado actual:</strong> la plataforma está construida y en preparación para el piloto. Todavía
+                no está en producción.
+            </p>
+        </section>
+
+        <section id="que-sigue" class="caso-seccion">
+            <h2>Qué sigue</h2>
+            <ul class="lista-restricciones">
+                <li><strong>Facturación DIAN real.</strong> Conectar Alegra y reemplazar el proveedor simulado.</li>
+                <li><strong>Pagos en línea con Wompi.</strong></li>
+                <li><strong>Avisos por correo y WhatsApp.</strong></li>
+                <li><strong>Publicación y piloto</strong> con clientes reales.</li>
+            </ul>
+        </section>
+
+        <section class="caso-seccion caso-cierre">
+            <h2>¿Tu operación vive en WhatsApp y Excel?</h2>
+            <p>Es el mismo problema que estoy resolviendo para mi propio negocio.</p>
+            <div class="proyecto-acciones">
+                <a class="btn btn-primario" href="index.html#contacto">Hablemos</a>
+                <a class="btn btn-secundario" href="index.html#proyectos">Ver otros proyectos</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>Carlos Manuel Hernández Vivas</p>
+    </footer>
+</body>
+
+</html>

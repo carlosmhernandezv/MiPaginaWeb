@@ -219,7 +219,8 @@
         <p class="rol">Analista funcional técnico · Reglas de negocio, datos y sistemas fiscales</p>
         <div class="contacto">
             Bogotá D.C., Colombia<span class="sep">|</span>318 831 2846<span
-                class="sep">|</span>carlosmanuelhernandezvivas@gmail.com<br>
+                class="sep">|</span>carlosmanuelhernandezvivas@gmail.com<span class="sep">|</span>Inglés B1<span
+                class="sep">|</span>Tiempo completo, remoto o híbrido<br>
             <a href="https://carlosmhernandezv.com">carlosmhernandezv.com</a><span class="sep">|</span>
             <a
                 href="https://www.linkedin.com/in/carlosmanuelhernandezvivas/">linkedin.com/in/carlosmanuelhernandezvivas</a><span
@@ -232,10 +233,9 @@
         <h2>Perfil</h2>
         <p class="perfil">
             Analista funcional con perfil técnico en dominios donde las reglas no las inventa el programador:
-            facturación electrónica, liquidación de nómina y trazabilidad documental. Dejo escritas las reglas de
-            negocio y las restricciones legales antes de que se construya nada, y valido los datos de origen en lugar
-            de confiar en ellos. Traduzco procesos atrapados en hojas de cálculo a modelos de datos explícitos y
-            auditables, documentando por qué se tomó cada decisión.
+            facturación electrónica, nómina, inventario y trazabilidad documental. Escribo las reglas de negocio y las
+            restricciones legales antes del código, valido los datos de origen en vez de confiar en ellos y documento
+            por qué se toma cada decisión.
         </p>
     </section>
 
@@ -244,32 +244,42 @@
 
         <div class="puesto">
             <div class="cab">
+                <span class="cargo">Fundador, analista funcional y desarrollador — MiComercializadora</span>
+                <span class="fecha">2026 – Actualidad</span>
+            </div>
+            <p class="org">Plataforma B2B de mi comercializadora de empaques · Bogotá · en preparación para piloto</p>
+            <p class="stack"><b>Stack:</b> Next.js · TypeScript · PostgreSQL · Prisma · Supabase · Tailwind · Vitest
+                · Playwright · Docker</p>
+            <ul>
+                <li>Definí como dueño las reglas del negocio —cambios, crédito, saldo a favor, cancelaciones— y las
+                    escribí antes del código, a partir del recorrido del dinero y la mercancía.</li>
+                <li>Un solo sistema para tienda con catálogo técnico, pedidos con crédito, inventario con kardex,
+                    rutas con app del conductor sin señal, caja del punto físico, cartera y facturación
+                    <span class="cifra">DIAN</span>.</li>
+                <li>Diseño en <span class="cifra">Figma</span> antes de programar; pruebas unitarias y de punta a
+                    punta con <span class="cifra">Vitest</span> y <span class="cifra">Playwright</span>.</li>
+            </ul>
+        </div>
+
+        <div class="puesto">
+            <div class="cab">
                 <span class="cargo">Analista funcional y desarrollador freelance</span>
                 <span class="fecha">Ene 2025 – Actualidad</span>
             </div>
-            <p class="org">Sistema de trazabilidad documental y CFDI · Grupo empresarial del sector construcción,
-                México</p>
+            <p class="org">Sistema de trazabilidad documental y CFDI · grupo empresarial de construcción, México</p>
             <p class="stack"><b>Stack:</b> Python · FastAPI · SQLAlchemy Core · PostgreSQL · Alembic · Next.js ·
                 React · Docker · VBA · XML / CFDI 4.0</p>
             <ul>
-                <li>Levanté las reglas de negocio de un grupo de empresas relacionadas que operaba toda su
-                    documentación comercial desde un único archivo de <span class="cifra">Excel con macros</span>,
-                    mediante ingeniería inversa de sus módulos de <span class="cifra">VBA</span> y de sus hojas de
-                    cálculo.</li>
-                <li>Audité el diagrama de procesos entregado por el cliente contra sus datos reales: describía solo
-                    una parte del flujo. Modelé las cadenas de compraventa encadenadas que existían en la operación.
+                <li>Levanté las reglas de negocio de un grupo de empresas que operaba desde un único
+                    <span class="cifra">Excel con macros</span>, mediante ingeniería inversa de su
+                    <span class="cifra">VBA</span> y sus hojas de cálculo.</li>
+                <li>Audité el diagrama de procesos del cliente contra sus datos reales y modelé las cadenas de
+                    compraventa que de verdad existían en la operación.</li>
+                <li>Validé el histórico del cliente cruzando sus UUID contra los comprobantes fiscales reales: ninguno
+                    existía, y evité cargar documentos fabricados a un sistema con obligaciones fiscales.</li>
+                <li>Diseñé el modelo de datos en <span class="cifra">PostgreSQL</span> con trazabilidad de cada factura
+                    hasta su cotización por consulta recursiva, y folios por secuencias en lugar de <em>MAX+1</em>.
                 </li>
-                <li>Validé el histórico que el cliente daba por completo cruzando sus UUID contra los comprobantes
-                    fiscales reales: ninguno existía. La detección evitó cargar documentos fabricados a un sistema con
-                    obligaciones fiscales.</li>
-                <li>Diseñé el modelo de datos en <span class="cifra">PostgreSQL</span> preservando la integridad del
-                    comprobante fiscal, con trazabilidad de cualquier factura hasta su cotización de origen mediante
-                    consulta recursiva, y folios respaldados por secuencias de base de datos en lugar de
-                    <em>MAX+1</em>, eliminando las colisiones de numeración.</li>
-                <li>Construí el sistema completo: API en <span class="cifra">Python</span> y
-                    <span class="cifra">FastAPI</span>, ingestor de CFDI idempotente por UUID con clasificación según
-                    los catálogos del SAT, interfaz en <span class="cifra">Next.js</span> y especificaciones
-                    funcionales por módulo con bitácora de decisiones.</li>
             </ul>
         </div>
 
@@ -281,10 +291,9 @@
             <p class="org">Proyecto propio · Demo pública en carlosmhernandezv.com</p>
             <p class="stack"><b>Stack:</b> JavaScript ES6+ · HTML5 · CSS3 · localStorage · jsPDF</p>
             <ul>
-                <li>Traduje el marco legal laboral colombiano vigente a especificación escrita antes del primer
-                    cálculo: recargo nocturno del 35%, dominical y festivo del 75%, jornada de 44 a 42 horas.</li>
-                <li>Cálculo por intervalos horarios, incluidos turnos que cruzan medianoche, con calendario oficial de
-                    festivos y desprendible de pago exportable a PDF.</li>
+                <li>Traduje el marco legal laboral vigente a especificación escrita antes del primer cálculo: recargos
+                    nocturno (35%) y dominical (75%) por intervalos horarios, festivos y desprendible de pago en PDF.
+                </li>
             </ul>
         </div>
     </section>
@@ -292,16 +301,16 @@
     <section>
         <h2>Competencias</h2>
         <div class="comp">
-            <p><b>Análisis funcional:</b> levantamiento de requisitos · modelado de procesos · ingeniería inversa de
-                sistemas legados · especificaciones funcionales · bitácora de decisiones</p>
-            <p><b>Datos:</b> modelado relacional · PostgreSQL (CTE recursivos, triggers, secuencias) · SQL · auditoría
-                y conciliación de datos · migraciones versionadas con Alembic</p>
-            <p><b>Dominio:</b> CFDI 4.0 y catálogos del SAT (<em>c_ClaveProdServ</em>, <em>c_ClaveUnidad</em>) · Timbre
-                Fiscal Digital · e.firma y Descarga Masiva · legislación laboral colombiana</p>
-            <p><b>Desarrollo:</b> Python · FastAPI · SQLAlchemy Core · JavaScript ES6+ · React · Next.js · HTML5 ·
-                CSS3 · VBA (lectura y reversión)</p>
-            <p><b>Herramientas:</b> Git · Docker y docker-compose · devcontainers / Codespaces · desarrollo asistido
-                por IA con Claude Code, dirigido por documento de contexto y verificado contra datos reales</p>
+            <p><b>Análisis funcional:</b> levantamiento de requisitos · modelado de procesos · ingeniería inversa ·
+                especificaciones funcionales</p>
+            <p><b>Datos:</b> modelado relacional · PostgreSQL (CTE recursivos, triggers) · SQL · auditoría y
+                conciliación · Alembic</p>
+            <p><b>Dominio:</b> CFDI 4.0 y catálogos del SAT · facturación electrónica DIAN · inventario y kardex ·
+                legislación laboral colombiana</p>
+            <p><b>Desarrollo:</b> Python · FastAPI · SQLAlchemy Core · TypeScript · JavaScript ES6+ · React · Next.js ·
+                Prisma · Tailwind · HTML5 · CSS3 · VBA</p>
+            <p><b>Calidad y herramientas:</b> Vitest · Playwright · axe · Figma · Git · Docker · Supabase · Claude Code
+                (modelo según riesgo)</p>
         </div>
     </section>
 
