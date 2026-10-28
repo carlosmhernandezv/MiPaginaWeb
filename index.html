@@ -34,8 +34,8 @@
                 <span>Carlos M. Hernández V.</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#capacidades">Lo que desarrollo</a></li>
                 <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#capacidades">Lo que desarrollo</a></li>
                 <li><a href="#sobre-mi">Sobre mí</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -70,28 +70,101 @@
             </div>
         </section>
 
-        <!-- ============ CIFRAS ============ -->
-        <section class="cifras" aria-label="Cifras de los proyectos">
-            <div class="cifra">
-                <span class="cifra-num">9.535</span>
-                <span class="cifra-lbl">CFDI migrados y validados</span>
+        <!-- ============ PROYECTOS: TABLERO DE ESTADO ============
+          Resume el estado real de cada proyecto y enlaza a su caso. Mantener la fecha
+          de «Actualizado» al día: un estado viejo resta más que no tener tablero.
+          CONFIDENCIALIDAD: el cliente de CFDI va anonimizado; no nombrar al proveedor
+          principal de MiComercializadora. Ningún proyecto está «en producción».
+        -->
+        <section id="proyectos" class="seccion tablero" aria-labelledby="proy-titulo">
+            <div class="tablero-cabecera">
+                <h2 id="proy-titulo">Proyectos</h2>
+                <p class="tablero-fecha">Actualizado: octubre de 2026</p>
             </div>
-            <div class="cifra">
-                <span class="cifra-num">16.401</span>
-                <span class="cifra-lbl">documentos con cadena trazable</span>
+
+            <div class="cifras" aria-label="Cifras de los proyectos">
+                <div class="cifra">
+                    <span class="cifra-num">3</span>
+                    <span class="cifra-lbl">proyectos construidos</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">9.535</span>
+                    <span class="cifra-lbl">CFDI migrados y validados</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">12.436</span>
+                    <span class="cifra-lbl">registros falsos detectados antes de migrar</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">470+</span>
+                    <span class="cifra-lbl">pruebas automáticas</span>
+                </div>
             </div>
-            <div class="cifra">
-                <span class="cifra-num">17</span>
-                <span class="cifra-lbl">empresas en un solo sistema</span>
-            </div>
-            <div class="cifra">
-                <span class="cifra-num">~7.000</span>
-                <span class="cifra-lbl">líneas de VBA revertidas</span>
-            </div>
-            <div class="cifra">
-                <span class="cifra-num">470+</span>
-                <span class="cifra-lbl">pruebas automáticas</span>
-            </div>
+
+            <table class="tablero-tabla">
+                <caption class="visualmente-oculto">Estado de cada proyecto, mi rol, resultado clave y herramientas
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Proyecto y mi rol</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Resultado clave y herramientas</th>
+                        <th scope="col"><span class="visualmente-oculto">Evidencia</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <span class="tablero-nombre">Sistema de trazabilidad documental y CFDI</span>
+                            <span class="tablero-rol">Analista funcional y desarrollador freelance · México · ene 2025
+                                – hoy</span>
+                        </th>
+                        <td data-etiqueta="Estado"><span class="estado estado-despliegue">En despliegue</span></td>
+                        <td data-etiqueta="Resultado">
+                            Reemplazó un Excel con cerca de 7.000 líneas de VBA para 17 empresas. Antes de migrar
+                            detecté 12.436 registros fabricados.
+                            <span class="tablero-stack">Python · FastAPI · PostgreSQL · SQLAlchemy · Next.js ·
+                                Docker</span>
+                        </td>
+                        <td class="tablero-accion"><a class="cap-link" href="caso-cfdi.html">Leer el caso</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <span class="tablero-nombre">MiComercializadora</span>
+                            <span class="tablero-rol">Fundador, analista funcional y desarrollador · Bogotá · 2026 –
+                                hoy</span>
+                        </th>
+                        <td data-etiqueta="Estado"><span class="estado estado-piloto">Preparando piloto</span></td>
+                        <td data-etiqueta="Resultado">
+                            Plataforma B2B de mi comercializadora de empaques: 8 módulos, 15 pantallas y 471 pruebas
+                            automáticas, con facturación DIAN contra un proveedor simulado.
+                            <span class="tablero-stack">Next.js · TypeScript · PostgreSQL · Prisma · Supabase · Vitest ·
+                                Playwright</span>
+                        </td>
+                        <td class="tablero-accion"><a class="cap-link" href="caso-micomercializadora.html">Leer el
+                                caso</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <span class="tablero-nombre">Calculadora de nómina — Colombia 2026</span>
+                            <span class="tablero-rol">Proyecto propio · demo pública</span>
+                        </th>
+                        <td data-etiqueta="Estado"><span class="estado estado-vivo">En vivo</span></td>
+                        <td data-etiqueta="Resultado">
+                            Recargos nocturno y dominical por intervalos horarios, festivos oficiales y desprendible de
+                            pago en PDF.
+                            <span class="tablero-stack">JavaScript · HTML5 · CSS3 · localStorage · jsPDF</span>
+                        </td>
+                        <td class="tablero-accion">
+                            <a class="cap-link" href="nomina.html">Probar</a>
+                            <a class="cap-link" href="https://github.com/carlosmhernandezv/MiPaginaWeb" target="_blank"
+                                rel="noopener">Código</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="tablero-nota">El código del sistema de CFDI y de MiComercializadora es privado: cada caso documenta
+                el problema, las decisiones y los resultados, con capturas de entornos de prueba.</p>
         </section>
 
         <!-- ============ CAPACIDADES ============ -->
@@ -209,96 +282,6 @@
             </div>
         </section>
 
-        <!-- ============ PROYECTOS ============ -->
-        <section id="proyectos" class="seccion" aria-labelledby="proy-titulo">
-            <h2 id="proy-titulo">Proyectos</h2>
-
-            <article class="proyecto">
-                <div class="proyecto-cabecera">
-                    <h3>Sistema de trazabilidad documental y CFDI</h3>
-                    <span class="badge badge-progreso">Construido · en fase de despliegue</span>
-                </div>
-                <!--
-                  CONFIDENCIALIDAD: el cliente aparece anonimizado a propósito.
-                  Si obtienes autorización por escrito para nombrarlo, reemplaza
-                  "un grupo empresarial mexicano del sector construcción" por el nombre real.
-                  No publiques capturas con RFC, CLABE ni firmas reales.
-                -->
-                <p class="proyecto-resumen">
-                    Un grupo empresarial mexicano del sector construcción, con 17 empresas, operaba toda su
-                    documentación desde un Excel con cerca de 7.000 líneas de macros. Lo reemplacé por un sistema web
-                    que ingiere CFDI, genera los documentos de la cadena comercial y permite auditar cualquier factura
-                    hasta su cotización de origen.
-                </p>
-                <ul class="proyecto-datos">
-                    <li><strong>9.535</strong> CFDI migrados</li>
-                    <li><strong>16.401</strong> documentos generados con cadena completa</li>
-                    <li><strong>22</strong> tablas · <strong>35</strong> endpoints · <strong>15</strong> pantallas</li>
-                    <li>Cero duplicados: UUID como llave natural</li>
-                </ul>
-                <p class="proyecto-stack">Python · FastAPI · PostgreSQL · SQLAlchemy · Alembic · Next.js 16 · React ·
-                    Docker</p>
-                <div class="proyecto-acciones">
-                    <a class="btn btn-primario" href="caso-cfdi.html">Leer el caso completo</a>
-                    <span class="nota-privado">Código privado bajo licencia propietaria</span>
-                </div>
-            </article>
-
-            <article class="proyecto">
-                <div class="proyecto-cabecera">
-                    <h3>MiComercializadora — plataforma B2B de empaques</h3>
-                    <span class="badge badge-progreso">Proyecto propio · en preparación para piloto</span>
-                </div>
-                <!--
-                  CONFIDENCIALIDAD: no nombrar al proveedor principal (relación comercial en trámite).
-                  Solo capturas con datos de prueba. No describir el sistema como "en producción".
-                -->
-                <p class="proyecto-resumen">
-                    Fundé una comercializadora de empaques para restaurantes, hoteles e industria en Bogotá y la
-                    Sabana, y construí su plataforma. Une en un solo sistema la tienda en línea con catálogo técnico y
-                    cotización en PDF, los pedidos con aprobación de crédito, el inventario con kardex y reservas, las
-                    rutas de entrega, la caja del punto físico, la cartera y la facturación electrónica DIAN.
-                </p>
-                <ul class="proyecto-datos">
-                    <li><strong>8</strong> módulos · <strong>15</strong> pantallas diseñadas primero en Figma</li>
-                    <li><strong>377</strong> pruebas unitarias · <strong>94</strong> de punta a punta</li>
-                    <li>App del conductor que funciona sin señal, con firma y foto de la entrega</li>
-                    <li>Caja con turnos, cierre a ciegas y devoluciones con nota crédito</li>
-                </ul>
-                <p class="proyecto-stack">Next.js 16 · TypeScript · PostgreSQL · Prisma · Supabase · Tailwind ·
-                    Vitest · Playwright · Docker</p>
-                <div class="proyecto-acciones">
-                    <a class="btn btn-primario" href="caso-micomercializadora.html">Leer el caso completo</a>
-                    <span class="nota-privado">Código privado</span>
-                </div>
-            </article>
-
-            <article class="proyecto">
-                <div class="proyecto-cabecera">
-                    <h3>Calculadora de liquidación de nómina — Colombia 2026</h3>
-                    <span class="badge badge-vivo">Demo en vivo</span>
-                </div>
-                <p class="proyecto-resumen">
-                    Herramienta de liquidación quincenal ajustada a la legislación laboral colombiana vigente: detecta
-                    recargos nocturnos y dominicales a partir de las horas de entrada y salida, reconoce el calendario
-                    de festivos y emite un desprendible de pago en PDF. Pensada para pequeños empresarios con turnos
-                    rotativos.
-                </p>
-                <ul class="proyecto-datos">
-                    <li>Recargo nocturno del 35% calculado por intervalos, incluidos turnos que cruzan medianoche</li>
-                    <li>Recargo dominical y festivo del 75% con calendario oficial 2026</li>
-                    <li>Gestión de empleados e histórico con persistencia en el navegador</li>
-                    <li>Desprendible de pago exportable a PDF</li>
-                </ul>
-                <p class="proyecto-stack">JavaScript ES6+ · HTML5 · CSS3 · localStorage · jsPDF</p>
-                <div class="proyecto-acciones">
-                    <a class="btn btn-primario" href="nomina.html">Abrir la calculadora</a>
-                    <a class="btn btn-secundario" href="https://github.com/carlosmhernandezv/MiPaginaWeb"
-                        target="_blank" rel="noopener">Ver el código</a>
-                </div>
-            </article>
-        </section>
-
         <!-- ============ SOBRE MÍ ============ -->
         <section id="sobre-mi" class="seccion" aria-labelledby="sobre-titulo">
             <h2 id="sobre-titulo">Sobre mí</h2>
@@ -340,10 +323,15 @@
                 ¿Buscas un analista funcional para tu equipo, o tienes un proceso en Excel que ya no aguanta?
                 Escríbeme.
             </p>
-            <p class="contacto-correo">
+            <!-- Correo primero: es el canal formal de reclutamiento. WhatsApp como vía rápida,
+                 con un mensaje inicial ya escrito. -->
+            <div class="contacto-correo">
                 <a class="btn btn-primario" href="mailto:carlosmanuelhernandezvivas@gmail.com">
                     carlosmanuelhernandezvivas@gmail.com</a>
-            </p>
+                <a class="btn btn-secundario"
+                    href="https://wa.me/573188312846?text=Hola%20Carlos%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo."
+                    target="_blank" rel="noopener">WhatsApp · 318 831 2846</a>
+            </div>
 
             <ul class="social-icons">
                 <li>

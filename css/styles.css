@@ -296,6 +296,10 @@ main {
 /* Correo visible como botón: un ícono no basta para que te escriban. */
 .contacto-correo {
     margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
 .contacto-correo .btn {
@@ -846,6 +850,187 @@ main .social-icons #Platzi {
 .svg-separador {
     stroke: #3a3a3a;
     stroke-width: 1;
+}
+
+/* =========================================================
+   TABLERO DE PROYECTOS
+   Estado real de cada proyecto, con su rol, resultado y evidencia. En pantallas
+   angostas cada fila se convierte en una tarjeta apilada.
+   ========================================================= */
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.tablero-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 16px;
+}
+
+.tablero-fecha {
+    color: #8b8b93;
+    font-size: 0.85rem;
+}
+
+.tablero .cifras {
+    margin: 14px 0 24px;
+}
+
+.tablero-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.94rem;
+}
+
+.tablero-tabla thead th {
+    text-align: left;
+    color: #8b8b93;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 0 14px 10px 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tablero-tabla tbody th,
+.tablero-tabla td {
+    text-align: left;
+    vertical-align: top;
+    padding: 16px 14px 16px 0;
+    border-bottom: 1px solid var(--borde);
+    color: var(--tenue);
+    font-weight: normal;
+}
+
+.tablero-tabla tbody tr:last-child th,
+.tablero-tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tablero-nombre {
+    display: block;
+    color: var(--texto);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.tablero-rol {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.tablero-stack {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: #8b8b93;
+}
+
+.tablero-accion {
+    white-space: nowrap;
+}
+
+.tablero-accion .cap-link {
+    display: block;
+    margin-top: 0;
+}
+
+.tablero-accion .cap-link+.cap-link {
+    margin-top: 6px;
+}
+
+/* Etiquetas de estado: el color dice en qué punto está cada proyecto. */
+.estado {
+    display: inline-block;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.estado-despliegue {
+    background: rgba(33, 150, 243, 0.15);
+    color: #7cc4fa;
+    border: 1px solid #2f6f9f;
+}
+
+.estado-piloto {
+    background: rgba(245, 166, 35, 0.14);
+    color: #f5c46b;
+    border: 1px solid #8a6420;
+}
+
+.estado-vivo {
+    background: rgba(46, 160, 67, 0.15);
+    color: #6fdc8c;
+    border: 1px solid #2c7a3f;
+}
+
+.tablero-nota {
+    margin-top: 18px;
+    color: #8b8b93;
+    font-size: 0.85rem;
+}
+
+/* Móvil: la tabla pasa a tarjetas y cada dato se presenta con su etiqueta. */
+@media (max-width: 720px) {
+    .tablero-tabla thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .tablero-tabla,
+    .tablero-tabla tbody,
+    .tablero-tabla tr,
+    .tablero-tabla th,
+    .tablero-tabla td {
+        display: block;
+        width: 100%;
+    }
+
+    .tablero-tabla tr {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--borde);
+    }
+
+    .tablero-tabla tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .tablero-tabla tbody th,
+    .tablero-tabla td {
+        border-bottom: none;
+        padding: 4px 0;
+    }
+
+    .tablero-tabla td[data-etiqueta="Estado"] {
+        padding: 8px 0;
+    }
+
+    .tablero-accion {
+        display: flex !important;
+        gap: 16px;
+        padding-top: 10px !important;
+    }
+
+    .tablero-accion .cap-link+.cap-link {
+        margin-top: 0;
+    }
 }
 
 /* =========================================================
