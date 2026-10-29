@@ -1,0 +1,529 @@
+/* =========================================================
+   CALCULADORA DE NÓMINA
+   Usa los tokens de styles.css; aquí solo lo propio de la página.
+   ========================================================= */
+
+.nom-hero .proyecto-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+button.btn {
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nom-aviso {
+    margin-top: 22px;
+    padding: 12px 16px;
+    background: rgb(26, 35, 46);
+    border-left: 3px solid var(--azul);
+    border-radius: 6px;
+    color: var(--tenue);
+    font-size: 0.9rem;
+}
+
+/* ---------- Pasos ---------- */
+.nom-paso h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.4rem;
+}
+
+.nom-num {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--acento);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.nom-ayuda {
+    color: var(--tenue);
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+    max-width: 75ch;
+}
+
+/* ---------- Formularios ---------- */
+.nom-campos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+@media (min-width: 760px) {
+    .nom-campo-empleado {
+        grid-column: span 2;
+    }
+}
+
+.nom-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.nom-campo label,
+.nom-etiqueta {
+    font-size: 0.85rem;
+    color: var(--tenue);
+    font-weight: bold;
+}
+
+.nom-campo input,
+.nom-campo select,
+.nom-tabla input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+    background: #151619;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    color: var(--texto);
+    font: inherit;
+    color-scheme: dark;
+}
+
+.nom-campo input:focus,
+.nom-campo select:focus,
+.nom-tabla input:focus {
+    border-color: var(--acento-texto);
+}
+
+.nom-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-top: 34px;
+}
+
+.nom-check input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--acento);
+}
+
+.nom-check label {
+    font-weight: normal;
+    color: var(--texto);
+}
+
+.nom-empleado {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.nom-empleado select {
+    flex: 1 1 160px;
+}
+
+.nom-btn-chico {
+    flex: none;
+    padding: 9px 12px;
+    background: transparent;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    color: var(--texto);
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.nom-btn-chico:hover {
+    border-color: var(--acento-texto);
+    color: var(--acento-texto);
+}
+
+/* ---------- Reglas de la quincena ---------- */
+.nom-reglas-quincena {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(165px, 100%), 1fr));
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.nom-regla {
+    padding: 12px 14px;
+    background: rgba(42, 42, 42, 0.94);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    min-width: 0;
+}
+
+.nom-regla b {
+    display: block;
+    font-size: 1.15rem;
+    color: var(--acento-texto);
+}
+
+.nom-regla span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--tenue);
+}
+
+.nom-regla .nom-cambio {
+    color: #ffc46b;
+    margin-top: 4px;
+}
+
+/* ---------- Turnos ---------- */
+.nom-relleno {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed var(--borde);
+    border-radius: 8px;
+}
+
+.nom-relleno .nom-campo {
+    width: 150px;
+}
+
+.nom-relleno .nom-btn-chico {
+    flex: 0 1 auto;
+    min-width: 0;
+    text-align: left;
+}
+
+.nom-tabla-envoltura {
+    overflow-x: auto;
+}
+
+.nom-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.nom-tabla th {
+    text-align: left;
+    color: var(--tenue);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.nom-tabla td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: middle;
+}
+
+.nom-tabla input {
+    padding: 7px 8px;
+    max-width: 130px;
+}
+
+.nom-num-celda {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.nom-tabla tr.es-descanso td:first-child {
+    box-shadow: inset 3px 0 0 var(--acento);
+}
+
+.nom-dia {
+    display: block;
+    font-weight: bold;
+}
+
+.nom-dia-fecha {
+    color: var(--tenue);
+    font-size: 0.82rem;
+}
+
+.nom-etiqueta-dia {
+    display: inline-block;
+    margin-top: 3px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: rgba(229, 72, 77, 0.16);
+    color: var(--acento-texto);
+    font-size: 0.72rem;
+    font-weight: bold;
+}
+
+.nom-tabla tfoot td {
+    font-weight: bold;
+    border-top: 1px solid var(--borde);
+    border-bottom: none;
+    padding-top: 12px;
+}
+
+.nom-cero {
+    color: #5d5d63;
+}
+
+/* ---------- Desprendible ---------- */
+.nom-desprendible {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 18px;
+}
+
+.nom-columna {
+    padding: 18px 20px;
+    background: rgba(42, 42, 42, 0.94);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.nom-columna h3 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--tenue);
+    margin-bottom: 10px;
+}
+
+.nom-linea {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nom-linea small {
+    display: block;
+    color: var(--tenue);
+    font-size: 0.78rem;
+}
+
+.nom-linea .nom-valor {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.nom-linea.nom-total {
+    border-bottom: none;
+    font-weight: bold;
+    padding-top: 12px;
+}
+
+.nom-neto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 20px 22px;
+    border-radius: 8px;
+    background: rgba(229, 72, 77, 0.12);
+    border: 1px solid var(--acento);
+}
+
+.nom-neto span {
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.nom-neto b {
+    font-size: 1.9rem;
+    color: var(--acento-texto);
+    font-variant-numeric: tabular-nums;
+}
+
+.nom-avisos {
+    margin-top: 16px;
+    padding: 12px 16px 12px 34px;
+    background: rgba(245, 166, 35, 0.1);
+    border-left: 3px solid #f5a623;
+    border-radius: 6px;
+    color: #ffd699;
+    font-size: 0.9rem;
+}
+
+.nom-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* ---------- Reglas y alcance ---------- */
+.nom-tabla-reglas td:first-child {
+    font-weight: bold;
+}
+
+.nom-tabla-reglas td {
+    padding: 10px;
+}
+
+.nom-alcance {
+    margin-top: 18px;
+    color: var(--tenue);
+    font-size: 0.9rem;
+}
+
+/* ---------- Historial ---------- */
+.nom-historial {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.nom-historial li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(42, 42, 42, 0.94);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.nom-historial small {
+    display: block;
+    color: var(--tenue);
+}
+
+.nom-historial .nom-botones {
+    display: flex;
+    gap: 8px;
+}
+
+.nom-vacio {
+    color: var(--tenue);
+    font-size: 0.92rem;
+}
+
+/* ---------- Móvil: la tabla de turnos pasa a tarjetas ---------- */
+@media (max-width: 680px) {
+    .seccion.nom-paso {
+        padding: 24px 18px;
+    }
+
+    .nom-check {
+        padding-top: 0;
+    }
+
+    .nom-tabla-turnos thead {
+        display: none;
+    }
+
+    .nom-tabla-turnos,
+    .nom-tabla-turnos tbody,
+    .nom-tabla-turnos tr,
+    .nom-tabla-turnos td {
+        display: block;
+    }
+
+    .nom-tabla-turnos tbody tr {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px 12px;
+        padding: 12px;
+        margin-bottom: 10px;
+        background: rgba(42, 42, 42, 0.94);
+        border: 1px solid var(--borde);
+        border-radius: 8px;
+    }
+
+    .nom-tabla-turnos tbody tr.es-descanso {
+        border-color: var(--acento);
+    }
+
+    .nom-tabla-turnos tbody td {
+        padding: 0;
+        border: none;
+        box-shadow: none !important;
+    }
+
+    .nom-tabla-turnos tbody td:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .nom-tabla-turnos tbody td:nth-child(2),
+    .nom-tabla-turnos tbody td:nth-child(3) {
+        grid-column: span 3;
+    }
+
+    .nom-tabla-turnos tbody td:nth-child(n + 4) {
+        grid-column: span 2;
+    }
+
+    .nom-tabla-turnos .nom-dia {
+        display: inline;
+        margin-right: 6px;
+    }
+
+    .nom-tabla-turnos tbody td[data-etiqueta]::before {
+        content: attr(data-etiqueta);
+        display: block;
+        color: var(--tenue);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    .nom-tabla-turnos .nom-num-celda {
+        text-align: left;
+    }
+
+    .nom-tabla-turnos input {
+        max-width: none;
+    }
+
+    .nom-tabla-turnos tfoot,
+    .nom-tabla-turnos tfoot tr {
+        display: block;
+    }
+
+    .nom-tabla-turnos tfoot tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 12px;
+    }
+
+    .nom-tabla-turnos tfoot td {
+        display: block;
+        padding: 0;
+    }
+
+    .nom-tabla-turnos tfoot td[data-etiqueta]::before {
+        content: attr(data-etiqueta);
+        display: block;
+        color: var(--tenue);
+        font-size: 0.72rem;
+        font-weight: normal;
+    }
+
+    .nom-tabla-turnos tfoot td.nom-vacia {
+        display: none;
+    }
+
+    .nom-relleno .nom-campo {
+        width: calc(50% - 5px);
+    }
+
+    .nom-neto b {
+        font-size: 1.5rem;
+    }
+}
