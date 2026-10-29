@@ -13,7 +13,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Caso: trazabilidad documental y CFDI 4.0">
     <meta property="og:description"
-        content="Migración de un Excel con 7.000 líneas de VBA a un sistema web con ingestión de CFDI, trazabilidad completa y auditoría de datos.">
+        content="Migración de un Excel con 7.000 líneas de VBA a un sistema web con ingestión de CFDI y trazabilidad completa entre documentos.">
     <meta property="og:url" content="https://carlosmhernandezv.com/caso-cfdi.html">
 
     <link rel="stylesheet" href="css/styles.css">
@@ -45,11 +45,11 @@
             <h1>Del Excel de 7.000 líneas a un sistema de trazabilidad fiscal</h1>
             <p class="caso-bajada">
                 Un grupo de 17 empresas del sector construcción en México operaba toda su documentación comercial
-                desde un solo archivo <code>.xlsm</code>. Este es el sistema que lo reemplazó, y la auditoría de datos
-                que casi nadie habría hecho.
+                desde un solo archivo <code>.xlsm</code>. Este es el sistema que diseñé y construí para
+                reemplazarlo.
             </p>
-            <span class="badge badge-progreso">Construido y probado con datos reales 2021–2025 · en fase de
-                despliegue</span>
+            <span class="badge badge-progreso">Construido y probado con datos reales · propuesta en
+                aprobación</span>
         </header>
 
         <!--
@@ -59,7 +59,7 @@
           · El repositorio del sistema es privado y de licencia propietaria: no enlazar código.
         -->
         <aside class="nota-confidencial">
-            <strong>Nota:</strong> el cliente aparece anonimizado y las cifras están agregadas. El código es privado
+            <strong>Nota:</strong> el cliente aparece anonimizado y no se publican volúmenes de su operación. El código es privado
             bajo licencia propietaria.
         </aside>
 
@@ -70,11 +70,11 @@
                 <dd>17 empresas operaban toda su documentación comercial desde un Excel con cerca de 7.000 líneas de
                     VBA, con folios que colisionaban y sin trazabilidad entre documentos.</dd>
                 <dt>Qué hice</dt>
-                <dd>Ingeniería inversa del legado, modelado de las dos cadenas de compraventa, auditoría de los datos
-                    de origen y un sistema web que lo reemplaza.</dd>
+                <dd>Ingeniería inversa del legado, modelado de las dos cadenas de compraventa, validación de los datos
+                    de origen contra los comprobantes fiscales y un sistema web que lo reemplaza.</dd>
                 <dt>Resultado</dt>
-                <dd>9.535 CFDI migrados y validados, 16.401 documentos con cadena completa y 12.436 registros falsos
-                    detectados antes de la carga.</dd>
+                <dd>Cualquier factura se recorre hasta su cotización de origen, con folios sin colisiones y las
+                    17 empresas sobre un solo modelo. La versión 2 está en aprobación con el cliente.</dd>
                 <dt>Stack</dt>
                 <dd>Python · FastAPI · PostgreSQL · SQLAlchemy · Alembic · Next.js 16 · React · Docker</dd>
             </dl>
@@ -130,8 +130,8 @@
         <section id="cadenas" class="caso-seccion">
             <h2>Las dos cadenas</h2>
             <p>
-                El diagrama que entregó el cliente describía la mitad del flujo. Al modelarlo contra los datos reales
-                aparecieron <em>dos</em> cadenas de compraventa encadenadas: el grupo compra en una y vende en la otra.
+                Al modelar el flujo junto con el cliente y contrastarlo con los datos
+                reales aparecieron <em>dos</em> cadenas de compraventa encadenadas: el grupo compra en una y vende en la otra.
             </p>
             <figure class="diagrama">
                 <svg viewBox="0 0 720 300" role="img"
@@ -276,6 +276,54 @@
             </div>
         </section>
 
+        <section id="interfaz" class="caso-seccion">
+            <h2>Cómo se ve</h2>
+            <p>
+                Antes de programar la segunda versión diseñé la interfaz en Figma, pantalla por pantalla. Estas son
+                capturas de ese prototipo; los nombres de empresas, obras y personas, los folios y los montos aparecen
+                desenfocados.
+            </p>
+
+            <figure class="captura">
+                <img src="img/cfdi/trazabilidad.png" width="1440" height="1024" loading="lazy" decoding="async"
+                    alt="Pantalla de trazabilidad: se busca un folio del sistema anterior y se dibuja la cadena de compra con cotización, orden de compra, remisión, factura CFDI y pago, más el detalle de la orden a la derecha. Folios, empresas y montos desenfocados.">
+                <figcaption>Trazabilidad: un folio viejo del Excel dibuja la cadena que exista, aunque esté
+                    incompleta.</figcaption>
+            </figure>
+
+            <figure class="captura">
+                <img src="img/cfdi/nueva-remision.png" width="1440" height="1112" loading="lazy" decoding="async"
+                    alt="Captura de una nueva remisión: el origen viene de la orden y la factura, una partida marcada en rojo porque supera el saldo de la orden, dos vehículos en la misma remisión y la vista previa del documento impreso.">
+                <figcaption>Nueva remisión: el saldo se valida en vivo y se ve cómo va a imprimirse.</figcaption>
+            </figure>
+
+            <div class="galeria">
+                <figure class="captura">
+                    <img src="img/cfdi/inicio.png" width="1440" height="1134" loading="lazy" decoding="async"
+                        alt="Inicio con los asuntos que requieren atención (documentos sin obra, PDF sin vincular, documentos por vencer, remisiones sin firma, claves por clasificar), facturas cargadas por mes, últimas cargas de XML y próximos vencimientos.">
+                    <figcaption>Inicio: lo que requiere atención, antes que cualquier listado.</figcaption>
+                </figure>
+                <figure class="captura">
+                    <img src="img/cfdi/empresas.png" width="1440" height="1024" loading="lazy" decoding="async"
+                        alt="Catálogo de empresas en tarjetas con el estado de su documentación legal: vencido, por vencer, al día o sin documentos, y avisos de logo faltante.">
+                    <figcaption>Empresas: semáforo de documentación legal por razón social.</figcaption>
+                </figure>
+            </div>
+
+            <div class="captura-par">
+                <figure class="captura captura-movil">
+                    <img src="img/cfdi/movil-recibir.png" width="390" height="900" loading="lazy" decoding="async"
+                        alt="Recepción en obra en el teléfono: el residente marca las partidas que llegaron completas, reporta una diferencia y toma fotos de la descarga.">
+                    <figcaption>En la obra: qué llegó y qué no.</figcaption>
+                </figure>
+                <figure class="captura captura-movil">
+                    <img src="img/cfdi/movil-firma.png" width="390" height="844" loading="lazy" decoding="async"
+                        alt="Firma de recibido con el dedo en la pantalla, confirmación de las partidas y observaciones; se registra con fecha, hora y usuario.">
+                    <figcaption>Firma de recibido; la firma aparece en el PDF.</figcaption>
+                </figure>
+            </div>
+        </section>
+
         <section id="modelo" class="caso-seccion">
             <h2>El modelo de datos</h2>
             <p>
@@ -301,35 +349,18 @@
         </section>
 
         <section id="la-decision" class="caso-seccion caso-destacado">
-            <h2>La decisión difícil</h2>
+            <h2>La decisión de fondo</h2>
             <p>
-                La hoja <code>BDRemisiones</code> parecía el histórico completo de remisiones, cada una con su UUID, y
-                el plan era migrarla entera. Antes, crucé esos UUID contra los comprobantes fiscales reales.
+                <strong>La factura es la fuente de verdad.</strong> Los datos fiscales nunca se teclean: salen del
+                CFDI. La captura se limita a lo que el comprobante no trae: la obra, el transporte y las cantidades
+                despachadas.
             </p>
-
-            <ol class="embudo" aria-label="Resultado de la auditoría de BDRemisiones">
-                <li>
-                    <span class="embudo-num">35.365</span>
-                    <span class="embudo-lbl">registros en la hoja, cada uno con UUID</span>
-                </li>
-                <li>
-                    <span class="embudo-num">0</span>
-                    <span class="embudo-lbl">coincidían con un comprobante real</span>
-                </li>
-                <li class="embudo-final">
-                    <span class="embudo-num">12.436</span>
-                    <span class="embudo-lbl">documentos falsos que no entraron al sistema</span>
-                </li>
-            </ol>
-
             <p>
-                Eran cadenas con el formato correcto y contenido inventado. La hoja se descartó y el histórico se
-                reconstruyó solo desde comprobantes verificables: menos datos de los que prometía el Excel, y todos
-                ciertos.
+                Para llegar ahí pregunté antes de suponer. Varias cosas que parecían datos sucios eran reglas reales
+                del negocio: una obra la trabajan varias constructoras y en una obra firma más de una persona.
             </p>
             <p class="caso-leccion">
-                Cuando una fuente de datos parece demasiado completa, esa es exactamente la razón para validarla contra
-                algo externo antes de confiar en ella.
+                Si un dato ya existe en un documento oficial, volver a teclearlo solo abre la puerta a errores.
             </p>
         </section>
 
@@ -383,8 +414,8 @@
                 </li>
                 <li>
                     <span class="paso-titulo">Verifico contra datos reales</span>
-                    <span class="paso-texto">Así salió lo de <code>BDRemisiones</code>: ninguna herramienta lo habría
-                        detectado sola.</span>
+                    <span class="paso-texto">Probar contra la base real sacó errores que un
+                        entorno limpio no muestra.</span>
                 </li>
             </ol>
             <p>
@@ -397,14 +428,6 @@
             <h2>Resultados</h2>
             <div class="cifras">
                 <div class="cifra">
-                    <span class="cifra-num">9.535</span>
-                    <span class="cifra-lbl">CFDI migrados y validados contra su comprobante</span>
-                </div>
-                <div class="cifra">
-                    <span class="cifra-num">16.401</span>
-                    <span class="cifra-lbl">documentos con cadena documental completa</span>
-                </div>
-                <div class="cifra">
                     <span class="cifra-num">0</span>
                     <span class="cifra-lbl">duplicados: el UUID es la llave natural</span>
                 </div>
@@ -412,10 +435,18 @@
                     <span class="cifra-num">17</span>
                     <span class="cifra-lbl">empresas sobre un solo sistema</span>
                 </div>
+                <div class="cifra">
+                    <span class="cifra-num">22</span>
+                    <span class="cifra-lbl">tablas en PostgreSQL</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">35</span>
+                    <span class="cifra-lbl">endpoints en FastAPI</span>
+                </div>
             </div>
             <p class="caso-pendiente">
-                <strong>Estado actual:</strong> construido y probado con los datos reales de 2021 a 2025. Faltan el
-                despliegue en producción, la suite de pruebas automatizadas y la autenticación por usuario.
+                <strong>Estado actual:</strong> construido y probado con datos reales. La versión 2, diseñada en
+                Figma, está en aprobación con el cliente; todavía no está en producción.
             </p>
         </section>
 
