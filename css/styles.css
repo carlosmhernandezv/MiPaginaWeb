@@ -1042,7 +1042,7 @@ main .social-icons #Platzi {
 /* Tarjetas cortas: título y una o dos líneas */
 .tarjetas-mini {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
     gap: 14px;
     margin-top: 18px;
 }
@@ -1075,6 +1075,26 @@ main .social-icons #Platzi {
    no 4 + 2 con huecos. */
 .tarjetas-mini.tarjetas-tres {
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+/* Cuatro y cinco tarjetas: columnas más angostas para que quepan en una fila
+   en escritorio en lugar de dejar una sola en la última. */
+.tarjetas-mini.tarjetas-cuatro,
+.pasos.pasos-cuatro {
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+}
+
+.tarjetas-mini.tarjetas-cinco,
+.pasos.pasos-cinco {
+    grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+}
+
+/* Galería de capturas: dos por fila en escritorio, una en móvil. */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 4px 18px;
+    margin-top: 10px;
 }
 
 /* Embudo de cifras: cada paso reduce al anterior hasta el resultado. */
