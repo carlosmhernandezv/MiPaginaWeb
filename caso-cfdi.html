@@ -82,59 +82,57 @@
 
         <section id="el-problema" class="caso-seccion">
             <h2>El problema</h2>
-            <p>
+            <p class="caso-entrada">
                 Diecisiete empresas relacionadas gestionaban cotizaciones, órdenes de compra, remisiones y facturas
-                dentro de un único libro de Excel con macros: 24 módulos VBA, cerca de 7.000 líneas de código y 23
-                hojas de cálculo, en uso diario.
+                dentro de un único libro de Excel con macros, en uso diario.
             </p>
-            <p>
-                El síntoma que más dolía era el de los folios. Se generaban con <code>MAX + 1</code> sobre la hoja
-                correspondiente, así que bastaba con que dos personas capturaran al mismo tiempo para que dos
-                documentos distintos nacieran con el mismo número. En un archivo compartido esto no es un caso raro:
-                es el día a día.
-            </p>
-            <p>
-                Debajo había un problema mayor. Nadie podía responder con certeza de qué cotización venía una factura
-                determinada. La relación existía en la cabeza de quien había capturado el documento, no en los datos.
-            </p>
-            <p>
-                Antes de escribir una línea del sistema nuevo hice ingeniería inversa del archivo completo. Los
-                catálogos formales estaban incompletos o desactualizados; las abreviaturas reales con las que el
-                equipo identificaba a cada empresa terminé recuperándolas de una función VBA enterrada en un módulo,
-                que era el único lugar donde estaban correctas.
-            </p>
+
+            <div class="comparativa">
+                <div class="comp-col comp-antes">
+                    <p class="comp-titulo">Antes · un <code>.xlsm</code> compartido</p>
+                    <ul>
+                        <li><strong>24 módulos VBA</strong>, cerca de 7.000 líneas y 23 hojas de cálculo</li>
+                        <li>Folios con <code>MAX + 1</code>: dos capturas al mismo tiempo, el mismo número</li>
+                        <li>De qué cotización venía una factura solo lo sabía quien la capturó</li>
+                        <li>Catálogos incompletos; las abreviaturas correctas estaban enterradas en una función VBA</li>
+                    </ul>
+                </div>
+                <div class="comp-col comp-despues">
+                    <p class="comp-titulo">Después · un sistema web auditable</p>
+                    <ul>
+                        <li><strong>22 tablas, 35 endpoints y 15 pantallas</strong> sobre PostgreSQL</li>
+                        <li>Folios con secuencias de la base de datos: sin colisiones</li>
+                        <li>Cualquier factura se recorre hasta su cotización de origen</li>
+                        <li>Las 17 empresas sobre un solo modelo, sin duplicar la lógica</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <section id="restricciones" class="caso-seccion">
             <h2>Las restricciones</h2>
-            <ul class="lista-restricciones">
-                <li>
-                    <strong>La fuente de verdad es fiscal.</strong> Un CFDI timbrado no se corrige ni se normaliza:
-                    se conserva íntegro. Cualquier cosa que el sistema quiera decir sobre un comprobante tiene que
-                    vivir aparte del comprobante.
-                </li>
-                <li>
-                    <strong>Diecisiete empresas sobre un mismo modelo.</strong> Cada razón social tiene su propia
-                    numeración de folios, su branding en los documentos y sus propias contrapartes. El sistema tenía
-                    que mantenerlas separadas sin duplicar la lógica en diecisiete variantes.
-                </li>
-                <li>
-                    <strong>Operación en marcha.</strong> El Excel seguía en uso mientras se construía el reemplazo,
-                    así que la migración tenía que ser repetible y idempotente: volver a correrla no podía duplicar
-                    nada.
-                </li>
-            </ul>
+            <div class="tarjetas-mini">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">La fuente de verdad es fiscal</p>
+                    <p>Un CFDI timbrado no se corrige: se conserva íntegro. Todo lo demás vive aparte.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">17 empresas, un modelo</p>
+                    <p>Cada razón social con sus folios, su branding y sus contrapartes, sin 17 variantes de código.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Operación en marcha</p>
+                    <p>El Excel siguió en uso: la migración tenía que poder repetirse sin duplicar nada.</p>
+                </div>
+            </div>
         </section>
 
         <section id="cadenas" class="caso-seccion">
             <h2>Las dos cadenas</h2>
             <p>
-                El cliente entregó un diagrama de su flujo. Al modelarlo contra los datos reales apareció que
-                describía solo la mitad: existían <em>dos</em> cadenas de compraventa encadenadas, no una. El mismo
-                grupo actuaba como comprador en una y como vendedor en la otra, y los documentos de una alimentaban a
-                la otra.
+                El diagrama que entregó el cliente describía la mitad del flujo. Al modelarlo contra los datos reales
+                aparecieron <em>dos</em> cadenas de compraventa encadenadas: el grupo compra en una y vende en la otra.
             </p>
-
             <figure class="diagrama">
                 <svg viewBox="0 0 720 300" role="img"
                     aria-label="Diagrama de las dos cadenas de compraventa y de la cadena documental que las conecta"
@@ -200,150 +198,224 @@
 
         <section id="que-construi" class="caso-seccion">
             <h2>Qué construí</h2>
-            <p>
-                Un sistema web con backend en Python y FastAPI, base de datos PostgreSQL y frontend en Next.js 16 con
-                App Router. Son 35 endpoints, 22 tablas, 12 migraciones versionadas y 15 pantallas de trabajo.
-            </p>
-            <p>
-                El <strong>ingestor de CFDI</strong> lee el XML del comprobante, extrae el Timbre Fiscal Digital y
-                usa el UUID como llave natural, de modo que reprocesar el mismo archivo no crea un duplicado. Cada
-                concepto se clasifica automáticamente como material o servicio a partir de los catálogos oficiales
-                del SAT (<code>c_ClaveProdServ</code> y <code>c_ClaveUnidad</code>), con una bandeja de clasificación
-                donde el equipo revisa y confirma los casos que lo requieren.
-            </p>
-            <p>
-                La <strong>pantalla de trazabilidad</strong> es la que justifica el proyecto: dada una factura,
-                recorre hacia atrás la cadena hasta la cotización de origen y muestra cada eslabón con su documento,
-                su folio y su fecha.
-            </p>
-            <p>
-                El <strong>generador documental</strong> replica celda por celda las cinco plantillas del Excel
-                original, con el branding de cada una de las empresas y salida en PDF sin el límite de ítems que
-                tenía la macro.
-            </p>
-            <p>
-                Está diseñado además el <strong>conector de Descarga Masiva del SAT</strong> con e.firma, para que
-                los comprobantes entren solos en vez de cargarse a mano.
-            </p>
+            <figure class="diagrama">
+                <svg viewBox="0 0 720 270" role="img"
+                    aria-label="Arquitectura del sistema: el XML del CFDI entra por el ingestor, se guarda en PostgreSQL, lo expone una API en FastAPI y lo consume un frontend en Next.js"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="flecha-arq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+                            orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7d8590" />
+                        </marker>
+                    </defs>
+
+                    <text x="10" y="22" class="svg-titulo">Del comprobante a la pantalla</text>
+
+                    <rect x="10" y="44" width="120" height="70" rx="8" class="svg-caja svg-caja-fiscal" />
+                    <text x="70" y="74" class="svg-etiqueta" text-anchor="middle">XML</text>
+                    <text x="70" y="92" class="svg-nota" text-anchor="middle">del CFDI</text>
+
+                    <line x1="136" y1="79" x2="156" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
+
+                    <rect x="162" y="44" width="130" height="70" rx="8" class="svg-caja svg-caja-foco" />
+                    <text x="227" y="68" class="svg-etiqueta" text-anchor="middle">Ingestor</text>
+                    <text x="227" y="86" class="svg-nota" text-anchor="middle">UUID como llave</text>
+                    <text x="227" y="101" class="svg-nota" text-anchor="middle">catálogos del SAT</text>
+
+                    <line x1="298" y1="79" x2="318" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
+
+                    <rect x="324" y="44" width="122" height="70" rx="8" class="svg-caja" />
+                    <text x="385" y="68" class="svg-etiqueta" text-anchor="middle">PostgreSQL</text>
+                    <text x="385" y="86" class="svg-nota" text-anchor="middle">22 tablas</text>
+                    <text x="385" y="101" class="svg-nota" text-anchor="middle">CTE recursivos</text>
+
+                    <line x1="452" y1="79" x2="472" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
+
+                    <rect x="478" y="44" width="110" height="70" rx="8" class="svg-caja" />
+                    <text x="533" y="68" class="svg-etiqueta" text-anchor="middle">FastAPI</text>
+                    <text x="533" y="86" class="svg-nota" text-anchor="middle">35 endpoints</text>
+                    <text x="533" y="101" class="svg-nota" text-anchor="middle">SQL explícito</text>
+
+                    <line x1="594" y1="79" x2="614" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
+
+                    <rect x="620" y="44" width="90" height="70" rx="8" class="svg-caja" />
+                    <text x="665" y="74" class="svg-etiqueta" text-anchor="middle">Next.js</text>
+                    <text x="665" y="92" class="svg-nota" text-anchor="middle">15 pantallas</text>
+
+                    <rect x="152" y="176" width="150" height="58" rx="8" class="svg-caja svg-caja-diseno" />
+                    <text x="227" y="200" class="svg-etiqueta" text-anchor="middle">Descarga Masiva</text>
+                    <text x="227" y="218" class="svg-nota" text-anchor="middle">SAT con e.firma · diseñado</text>
+                    <line x1="227" y1="170" x2="227" y2="120" class="svg-linea svg-linea-diseno"
+                        marker-end="url(#flecha-arq)" />
+
+                    <rect x="468" y="176" width="130" height="58" rx="8" class="svg-caja" />
+                    <text x="533" y="200" class="svg-etiqueta" text-anchor="middle">Documentos</text>
+                    <text x="533" y="218" class="svg-nota" text-anchor="middle">5 plantillas en PDF</text>
+                    <line x1="533" y1="120" x2="533" y2="170" class="svg-linea" marker-end="url(#flecha-arq)" />
+                </svg>
+                <figcaption>El recorrido de un comprobante. La línea punteada es el conector con el SAT: está
+                    diseñado y aún no en uso.</figcaption>
+            </figure>
+
+            <div class="tarjetas-mini">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Ingestor de CFDI</p>
+                    <p>Lee el XML y el Timbre Fiscal Digital. Reprocesar el mismo archivo no crea un duplicado, y cada
+                        concepto se clasifica como material o servicio.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Pantalla de trazabilidad</p>
+                    <p>Dada una factura, recorre la cadena hasta la cotización de origen: cada eslabón con su
+                        documento, folio y fecha.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Generador documental</p>
+                    <p>Las cinco plantillas del Excel, replicadas celda por celda con el branding de cada empresa y
+                        sin el límite de ítems de la macro.</p>
+                </div>
+            </div>
         </section>
 
         <section id="modelo" class="caso-seccion">
             <h2>El modelo de datos</h2>
             <p>
-                Los folios dejaron de calcularse con <code>MAX + 1</code> y pasaron a funciones respaldadas por
-                secuencias reales de PostgreSQL: dos capturas simultáneas ya no pueden colisionar. La trazabilidad se
-                resuelve con una consulta recursiva que recorre la cadena documental completa, y hay vistas de saldo
-                y triggers de indexado para las búsquedas.
+                Folios con secuencias reales de PostgreSQL en lugar de <code>MAX + 1</code>, trazabilidad con una
+                consulta recursiva, vistas de saldo y triggers de indexado. Probarlo contra la <strong>base
+                    real</strong>, y no contra datos de prueba, sacó tres errores que un entorno limpio no muestra:
             </p>
-            <p>
-                Probar el esquema contra la base real —no contra datos de prueba— hizo aparecer tres errores que en
-                un entorno limpio no se habrían visto: una columna demasiado angosta para los valores reales, una
-                duplicación de filas causada por un <code>JOIN</code> mal cardinalizado, y una recursión que no
-                terminaba cuando la cadena documental contenía un ciclo. Los tres se corrigieron antes de la carga
-                definitiva.
-            </p>
+            <div class="tarjetas-mini tarjetas-errores">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Columna angosta</p>
+                    <p>Los valores reales no cabían.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Filas duplicadas</p>
+                    <p>Un <code>JOIN</code> mal cardinalizado.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Recursión infinita</p>
+                    <p>Una cadena documental con un ciclo.</p>
+                </div>
+            </div>
+            <p class="caso-nota">Los tres se corrigieron antes de la carga definitiva.</p>
         </section>
 
         <section id="la-decision" class="caso-seccion caso-destacado">
             <h2>La decisión difícil</h2>
             <p>
-                La hoja <code>BDRemisiones</code> del Excel contenía 35.365 registros con lo que parecía un histórico
-                completo de remisiones, cada una con su UUID. Era, con diferencia, la fuente más rica del archivo, y
-                el plan era migrarla entera.
+                La hoja <code>BDRemisiones</code> parecía el histórico completo de remisiones, cada una con su UUID, y
+                el plan era migrarla entera. Antes, crucé esos UUID contra los comprobantes fiscales reales.
             </p>
+
+            <ol class="embudo" aria-label="Resultado de la auditoría de BDRemisiones">
+                <li>
+                    <span class="embudo-num">35.365</span>
+                    <span class="embudo-lbl">registros en la hoja, cada uno con UUID</span>
+                </li>
+                <li>
+                    <span class="embudo-num">0</span>
+                    <span class="embudo-lbl">coincidían con un comprobante real</span>
+                </li>
+                <li class="embudo-final">
+                    <span class="embudo-num">12.436</span>
+                    <span class="embudo-lbl">documentos falsos que no entraron al sistema</span>
+                </li>
+            </ol>
+
             <p>
-                Antes de cargarla crucé esos UUID contra los comprobantes fiscales reales. <strong>Ninguno
-                    existía.</strong> Cero de 35.365. No eran identificadores de CFDI: eran cadenas con el formato
-                correcto y contenido inventado, generadas en algún momento para rellenar la hoja.
-            </p>
-            <p>
-                Migrarla habría metido 12.436 documentos falsos a un sistema con obligaciones fiscales, mezclados con
-                los reales y prácticamente indistinguibles una vez dentro. El costo de descubrirlo después —en una
-                auditoría, por ejemplo— no se compara con el de descubrirlo antes.
-            </p>
-            <p>
-                La hoja se descartó por completo y el histórico se reconstruyó únicamente desde comprobantes
-                verificables. El sistema quedó con menos datos de los que prometía el Excel, y con todos ellos
+                Eran cadenas con el formato correcto y contenido inventado. La hoja se descartó y el histórico se
+                reconstruyó solo desde comprobantes verificables: menos datos de los que prometía el Excel, y todos
                 ciertos.
             </p>
             <p class="caso-leccion">
-                La lección que me llevo: cuando una fuente de datos parece demasiado completa, esa es exactamente la
-                razón para validarla contra algo externo antes de confiar en ella.
+                Cuando una fuente de datos parece demasiado completa, esa es exactamente la razón para validarla contra
+                algo externo antes de confiar en ella.
             </p>
         </section>
 
         <section id="decisiones" class="caso-seccion">
             <h2>Decisiones técnicas y por qué</h2>
-            <dl class="lista-decisiones">
-                <dt>Validar archivos por números mágicos, no por extensión</dt>
-                <dd>La extensión la controla quien sube el archivo; los primeros bytes, no. Renombrar un ejecutable
-                    a <code>.xml</code> deja de servir de nada.</dd>
-
-                <dt>Derivar el nombre almacenado del RFC</dt>
-                <dd>El nombre original del archivo nunca toca el sistema de archivos, lo que elimina de raíz el
-                    <em>path traversal</em> y los choques de nombres entre empresas.
-                </dd>
-
-                <dt>Sesión por cookie en lugar de autenticación básica</dt>
-                <dd>Basic Auth reenvía la credencial en cada petición y no se puede cerrar sesión. La cookie de
-                    sesión es revocable.</dd>
-
-                <dt>SQL explícito con SQLAlchemy Core, no ORM completo</dt>
-                <dd>En un dominio fiscal quiero poder leer la consulta exacta que se ejecuta y auditarla. Un ORM que
-                    genera SQL por mí es más cómodo y menos verificable.</dd>
-
-                <dt>Entornos reproducibles desde el primer día</dt>
-                <dd><code>docker-compose</code>, devcontainer de Codespaces y scripts de arranque para Windows y
-                    Linux, para que levantar el sistema no dependa de la máquina de nadie.</dd>
-            </dl>
-            <p>
-                Todo esto vive en 15 especificaciones por módulo y una bitácora de decisiones dentro del repositorio.
-                Documentar <em>por qué</em> se eligió algo es lo que permite revisarlo meses después sin repetir el
-                análisis.
-            </p>
+            <div class="tarjetas-mini tarjetas-tres">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Archivos validados por números mágicos</p>
+                    <p>La extensión la controla quien sube el archivo; los primeros bytes, no.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Nombre de archivo derivado del RFC</p>
+                    <p>El nombre original nunca toca el disco: sin <em>path traversal</em> ni choques entre
+                        empresas.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Sesión por cookie</p>
+                    <p>Basic Auth reenvía la credencial siempre y no permite cerrar sesión; la cookie es revocable.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">SQL explícito, no ORM completo</p>
+                    <p>En un dominio fiscal quiero leer y auditar la consulta exacta que se ejecuta.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Entorno reproducible</p>
+                    <p><code>docker-compose</code>, devcontainer y scripts para Windows y Linux desde el primer día.
+                    </p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">El porqué, por escrito</p>
+                    <p>15 especificaciones por módulo y una bitácora de decisiones dentro del repositorio.</p>
+                </div>
+            </div>
         </section>
 
         <section id="proceso" class="caso-seccion">
-            <h2>Cómo trabajé: la IA como herramienta de desarrollo</h2>
+            <h2>Cómo trabajé con la IA</h2>
             <p>
-                Este sistema lo construí usando <strong>Claude Code</strong> como herramienta de desarrollo, y no
-                tengo interés en disimularlo: es precisamente lo que me permitió ampliar mi alcance técnico. Un año
-                antes mi terreno era HTML, CSS y JavaScript. Aquí levanté un backend en FastAPI, diseñé un esquema de
-                22 tablas en PostgreSQL con consultas recursivas y triggers, y monté 15 pantallas en Next.js 16.
-                Trabajando solo.
+                Lo construí con <strong>Claude Code</strong>, trabajando solo. Un año antes mi terreno era HTML, CSS y
+                JavaScript. El método fue este:
             </p>
+            <ol class="pasos">
+                <li>
+                    <span class="paso-titulo">Reglas por escrito</span>
+                    <span class="paso-texto">Las reglas de negocio y fiscales viven en un <code>CLAUDE.md</code>
+                        versionado, no en una conversación.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Dirijo y reviso</span>
+                    <span class="paso-texto">Cada decisión pasa por mí antes de quedarse.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Verifico contra datos reales</span>
+                    <span class="paso-texto">Así salió lo de <code>BDRemisiones</code>: ninguna herramienta lo habría
+                        detectado sola.</span>
+                </li>
+            </ol>
             <p>
-                El método importa más que la herramienta. Todo arranca de un archivo <code>CLAUDE.md</code> que fija
-                por escrito las reglas de negocio y las restricciones fiscales del dominio, porque el criterio legal
-                no puede quedarse en una conversación: tiene que estar en el repositorio, versionado y revisable como
-                cualquier otro artefacto. A partir de ahí dirijo, reviso cada decisión y verifico contra datos reales.
-            </p>
-            <p>
-                Ese último paso es el que marca la diferencia. Ninguna herramienta me habría dicho que
-                <code>BDRemisiones</code> era una hoja de datos fabricados; eso salió de desconfiar de una fuente
-                demasiado limpia y cruzarla contra los comprobantes reales. La IA acelera la ejecución, pero el
-                criterio sobre el dominio y la decisión de qué se migra y qué se descarta siguen siendo míos.
-            </p>
-            <p>
-                Uso el mismo patrón en mis otros proyectos. En la <a href="nomina.html">calculadora de nómina</a>, el
-                documento de contexto con el marco legal colombiano se escribió antes que el primer cálculo.
+                Uso el mismo patrón en mis otros proyectos, como la <a href="nomina.html">calculadora de nómina</a> y
+                <a href="caso-micomercializadora.html">MiComercializadora</a>.
             </p>
         </section>
 
         <section id="resultados" class="caso-seccion">
             <h2>Resultados</h2>
-            <ul class="lista-resultados">
-                <li><strong>9.535</strong> CFDI migrados y validados contra su comprobante real</li>
-                <li><strong>16.401</strong> documentos generados con su cadena documental completa</li>
-                <li><strong>0</strong> duplicados, con el UUID como llave natural del modelo</li>
-                <li><strong>12.436</strong> documentos falsos detectados y excluidos antes de la carga</li>
-                <li><strong>17</strong> empresas operando sobre un solo sistema en lugar de un archivo compartido</li>
-                <li>Folios sin colisiones, con secuencias de base de datos en vez de <code>MAX + 1</code></li>
-            </ul>
+            <div class="cifras">
+                <div class="cifra">
+                    <span class="cifra-num">9.535</span>
+                    <span class="cifra-lbl">CFDI migrados y validados contra su comprobante</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">16.401</span>
+                    <span class="cifra-lbl">documentos con cadena documental completa</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">0</span>
+                    <span class="cifra-lbl">duplicados: el UUID es la llave natural</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">17</span>
+                    <span class="cifra-lbl">empresas sobre un solo sistema</span>
+                </div>
+            </div>
             <p class="caso-pendiente">
-                <strong>Estado actual:</strong> el sistema está construido y probado con los datos reales del periodo
-                2021–2025. Quedan pendientes el despliegue en producción, la suite de pruebas automatizadas y la
-                autenticación por usuario individual.
+                <strong>Estado actual:</strong> construido y probado con los datos reales de 2021 a 2025. Faltan el
+                despliegue en producción, la suite de pruebas automatizadas y la autenticación por usuario.
             </p>
         </section>
 

@@ -952,6 +952,248 @@ main .social-icons #Platzi {
     stroke-width: 1;
 }
 
+/* Lo diseñado pero aún no en uso se dibuja punteado. */
+.svg-caja-diseno {
+    stroke-dasharray: 5 4;
+}
+
+.svg-linea-diseno {
+    stroke-dasharray: 4 4;
+}
+
+/* =========================================================
+   CASOS: PIEZAS GRÁFICAS
+   Antes y después, tarjetas cortas, embudo de cifras y pasos numerados:
+   reemplazan párrafos largos por algo que se lee de un vistazo.
+   ========================================================= */
+.caso-seccion .caso-entrada {
+    color: var(--texto);
+    font-size: 1.05rem;
+}
+
+.caso-seccion .caso-nota {
+    font-size: 0.9rem;
+    margin-top: 12px;
+}
+
+/* Antes y después */
+.comparativa {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.comp-col {
+    border-radius: 8px;
+    padding: 20px 22px;
+    border: 1px solid var(--borde);
+}
+
+.comp-antes {
+    background: rgba(229, 72, 77, 0.07);
+    border-top: 3px solid var(--acento);
+}
+
+.comp-despues {
+    background: rgba(46, 160, 67, 0.07);
+    border-top: 3px solid #2c7a3f;
+}
+
+.caso-seccion .comp-titulo {
+    color: var(--texto);
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.comp-col ul {
+    list-style: none;
+}
+
+.comp-col li {
+    position: relative;
+    padding-left: 26px;
+    color: var(--tenue);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.comp-col li strong {
+    color: var(--texto);
+}
+
+.comp-col li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+}
+
+.comp-antes li::before {
+    content: "\2715";
+    color: var(--acento-texto);
+}
+
+.comp-despues li::before {
+    content: "\2713";
+    color: #6fdc8c;
+}
+
+/* Tarjetas cortas: título y una o dos líneas */
+.tarjetas-mini {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.tarjeta-mini {
+    background: var(--panel-2);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--borde);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+}
+
+.caso-seccion .tarjeta-mini p {
+    margin-bottom: 0;
+    font-size: 0.92rem;
+}
+
+.caso-seccion .tarjeta-mini .tarjeta-mini-titulo {
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 0.98rem;
+    margin-bottom: 6px;
+}
+
+.tarjetas-errores .tarjeta-mini {
+    border-left-color: var(--acento);
+}
+
+/* Seis tarjetas: columnas más anchas para que queden 3 + 3 (o 2 + 2 + 2) y
+   no 4 + 2 con huecos. */
+.tarjetas-mini.tarjetas-tres {
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+/* Embudo de cifras: cada paso reduce al anterior hasta el resultado. */
+.embudo {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 34px;
+    margin: 22px 0;
+}
+
+.embudo li {
+    position: relative;
+    background: var(--panel-2);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 20px 18px;
+    text-align: center;
+}
+
+.embudo li+li::before {
+    content: "\2192";
+    position: absolute;
+    left: -27px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9aa3ad;
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.embudo-num {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--texto);
+}
+
+.embudo-lbl {
+    display: block;
+    color: var(--tenue);
+    font-size: 0.88rem;
+    margin-top: 4px;
+}
+
+.embudo-final {
+    border-color: var(--acento) !important;
+    background: rgba(229, 72, 77, 0.1) !important;
+}
+
+.embudo-final .embudo-num {
+    color: var(--acento-texto);
+}
+
+/* Pasos numerados */
+.pasos {
+    list-style: none;
+    counter-reset: paso;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 14px;
+    margin: 18px 0;
+}
+
+.pasos li {
+    counter-increment: paso;
+    background: var(--panel-2);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 18px;
+}
+
+.pasos li::before {
+    content: counter(paso);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--acento);
+    color: var(--acento-texto);
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.paso-titulo {
+    display: block;
+    color: var(--texto);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.paso-texto {
+    display: block;
+    color: var(--tenue);
+    font-size: 0.92rem;
+}
+
+.caso-seccion .cifras {
+    margin-top: 6px;
+}
+
+/* En una sola columna el embudo baja: la flecha apunta hacia abajo. */
+@media (max-width: 720px) {
+    .embudo {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .embudo li+li::before {
+        content: "\2193";
+        left: 50%;
+        top: -26px;
+        transform: translateX(-50%);
+    }
+}
+
 /* =========================================================
    TABLERO DE PROYECTOS
    Estado real de cada proyecto, con su rol, resultado y evidencia. En pantallas
