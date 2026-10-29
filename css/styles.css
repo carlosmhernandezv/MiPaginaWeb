@@ -25,13 +25,22 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Fondo propio, sin fotos de stock: un mapa de procesos abstracto (img/fondo-flujos.svg)
+   sobre una rejilla tenue tipo plano y dos halos con los colores del sitio. El SVG va
+   en «cover» para que se lea como una composición y no como un mosaico repetido. */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #14161a;
-    background-image: url('../img/programmer_theme_bg.jpg');
-    background-size: cover;
+    background-color: #111215;
+    background-image:
+        url('../img/fondo-flujos.svg'),
+        radial-gradient(circle at 10% 6%, rgba(229, 72, 77, 0.16), transparent 40%),
+        radial-gradient(circle at 92% 72%, rgba(33, 150, 243, 0.13), transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: cover, auto, auto, 32px 32px, 32px 32px;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+    background-position: center, 0 0, 0 0, 0 0, 0 0;
     background-attachment: fixed;
-    background-position: center;
     color: var(--texto);
     line-height: 1.6;
 }
@@ -497,10 +506,101 @@ main {
 /* =========================================================
    SOBRE MÍ
    ========================================================= */
-.sobre-texto p {
+/* Sobre mí en dos columnas: el relato a la izquierda y, a la derecha, una ficha
+   con lo que un reclutador busca primero. En pantallas angostas se apilan. */
+.sobre-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+    margin-top: 8px;
+}
+
+.sobre-relato p {
     color: var(--tenue);
-    max-width: 75ch;
     margin-bottom: 16px;
+}
+
+.sobre-relato .sobre-cita {
+    font-size: 1.35rem;
+    line-height: 1.45;
+    color: var(--texto);
+    border-left: 3px solid var(--acento);
+    padding-left: 18px;
+    margin-bottom: 20px;
+}
+
+.sobre-principios {
+    list-style: none;
+    counter-reset: principio;
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.sobre-principios li {
+    counter-increment: principio;
+    position: relative;
+    padding-left: 46px;
+    color: var(--tenue);
+}
+
+.sobre-principios li::before {
+    content: counter(principio);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--acento);
+    color: var(--acento-texto);
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sobre-principios strong {
+    display: block;
+    color: var(--texto);
+    margin-bottom: 2px;
+}
+
+.sobre-ficha {
+    background: var(--panel-2);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--acento);
+    border-radius: 0 0 var(--radio) var(--radio);
+    padding: 22px 24px;
+}
+
+.sobre-ficha dt {
+    color: #8b8b93;
+    font-size: 0.76rem;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.sobre-ficha dd {
+    color: var(--texto);
+    margin: 2px 0 14px;
+}
+
+.sobre-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+@media (max-width: 860px) {
+    .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
 }
 
 /* =========================================================
@@ -1037,8 +1137,13 @@ main .social-icons #Platzi {
    RESPONSIVE
    ========================================================= */
 @media (max-width: 768px) {
+    /* iOS ignora «fixed». Con «scroll», «cover» estiraría el SVG a la altura de toda
+       la página, así que en móvil se repite hacia abajo con un ancho fijo. */
     body {
         background-attachment: scroll;
+        background-size: 900px auto, auto, auto, 32px 32px, 32px 32px;
+        background-repeat: repeat-y, no-repeat, no-repeat, repeat, repeat;
+        background-position: center top, 0 0, 0 0, 0 0, 0 0;
     }
 
     .site-header {

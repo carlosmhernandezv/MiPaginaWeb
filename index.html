@@ -285,34 +285,56 @@
         <!-- ============ SOBRE MÍ ============ -->
         <section id="sobre-mi" class="seccion" aria-labelledby="sobre-titulo">
             <h2 id="sobre-titulo">Sobre mí</h2>
-            <div class="sobre-texto">
-                <p>
-                    Me interesa el software donde las reglas no las inventa el programador: facturación electrónica,
-                    liquidación de nómina, trazabilidad documental. Son dominios en los que un error no es un detalle
-                    cosmético, sino un problema legal o fiscal para alguien.
-                </p>
-                <p>
-                    También soy fundador de MiComercializadora, una comercializadora de empaques en Bogotá, y construyo
-                    su plataforma: ahí las reglas del negocio las decido yo, y los errores los pago yo.
-                </p>
-                <p>
-                    Mi forma de trabajar empieza por escribir las reglas del negocio antes que el código. En el
-                    sistema de CFDI eso significó revertir 24 módulos de VBA y auditar el diagrama del cliente contra
-                    la realidad de sus datos; en la calculadora de nómina, dejar por escrito el marco legal antes de
-                    calcular un solo peso. Es más lento al principio y ahorra el rediseño completo después.
-                </p>
-                <p>
-                    Trabajo con Claude como herramienta de desarrollo, y lo digo abiertamente porque ha sido parte de
-                    cómo llegué hasta aquí: me permitió pasar de HTML y CSS a levantar un backend en FastAPI, diseñar
-                    un esquema de 22 tablas en PostgreSQL y montar un frontend en Next.js dentro de un proyecto real.
-                    Lo que no delego es el criterio: las reglas fiscales y laborales las escribo yo antes de que se
-                    genere una línea de código, y los resultados los verifico contra los datos del cliente.
-                </p>
-                <p>
-                    Vengo de formación autodidacta y de Platzi. Hoy curso Análisis y Desarrollo de Software en el SENA
-                    y me estoy especializando en analítica de datos con certificaciones de IBM SkillsBuild, sin dejar
-                    de aprender en proyectos reales con usuarios reales.
-                </p>
+            <div class="sobre-grid">
+                <div class="sobre-relato">
+                    <p class="sobre-cita">Me interesa el software donde las reglas no las inventa el programador.</p>
+                    <p>
+                        Facturación electrónica, liquidación de nómina, trazabilidad documental: dominios en los que un
+                        error no es un detalle cosmético, sino un problema legal o fiscal para alguien. También soy
+                        fundador de MiComercializadora, una comercializadora de empaques en Bogotá, y construyo su
+                        plataforma: ahí las reglas del negocio las decido yo, y los errores los pago yo.
+                    </p>
+
+                    <ol class="sobre-principios">
+                        <li>
+                            <strong>Reglas antes que código.</strong>
+                            En el sistema de CFDI eso significó revertir 24 módulos de VBA; en la calculadora de
+                            nómina, dejar por escrito el marco legal antes de calcular un solo peso. Es más lento al
+                            principio y ahorra el rediseño completo después.
+                        </li>
+                        <li>
+                            <strong>Desconfío de los datos de origen.</strong>
+                            Audité el diagrama del cliente contra la realidad de sus datos, y crucé el histórico contra
+                            los comprobantes reales antes de migrarlo.
+                        </li>
+                        <li>
+                            <strong>La IA ejecuta; el criterio es mío.</strong>
+                            Trabajo con Claude como herramienta de desarrollo: me llevó de HTML y CSS a un backend en
+                            FastAPI y un esquema de 22 tablas en PostgreSQL. Las reglas fiscales y laborales las escribo
+                            yo, y los resultados los verifico contra los datos reales.
+                        </li>
+                    </ol>
+                </div>
+
+                <aside class="sobre-ficha" aria-label="Datos para reclutadores">
+                    <dl>
+                        <dt>Busco</dt>
+                        <dd>Rol de analista funcional, tiempo completo</dd>
+                        <dt>Modalidad</dt>
+                        <dd>Remoto o híbrido, desde Bogotá</dd>
+                        <dt>Inglés</dt>
+                        <dd>B1</dd>
+                        <dt>Formación</dt>
+                        <dd>Análisis y Desarrollo de Software, SENA (en curso) · base autodidacta y Platzi</dd>
+                        <dt>Certificaciones</dt>
+                        <dd>Analítica de datos con IBM SkillsBuild · Cisco · Coursera · Platzi</dd>
+                    </dl>
+                    <div class="sobre-acciones">
+                        <a class="btn btn-primario" href="docs/CVCarlosMHernandezV.pdf" target="_blank"
+                            rel="noopener">Descargar CV</a>
+                        <a class="btn btn-secundario" href="#contacto">Escríbeme</a>
+                    </div>
+                </aside>
             </div>
         </section>
 
