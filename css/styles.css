@@ -963,7 +963,7 @@ main .social-icons #Platzi {
 
 /* =========================================================
    CASOS: PIEZAS GRÁFICAS
-   Antes y después, tarjetas cortas, embudo de cifras y pasos numerados:
+   Antes y después, tarjetas cortas y pasos numerados:
    reemplazan párrafos largos por algo que se lee de un vistazo.
    ========================================================= */
 .caso-seccion .caso-entrada {
@@ -1097,58 +1097,6 @@ main .social-icons #Platzi {
     margin-top: 10px;
 }
 
-/* Embudo de cifras: cada paso reduce al anterior hasta el resultado. */
-.embudo {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 34px;
-    margin: 22px 0;
-}
-
-.embudo li {
-    position: relative;
-    background: var(--panel-2);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    padding: 20px 18px;
-    text-align: center;
-}
-
-.embudo li+li::before {
-    content: "\2192";
-    position: absolute;
-    left: -27px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9aa3ad;
-    font-size: 1.7rem;
-    line-height: 1;
-}
-
-.embudo-num {
-    display: block;
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--texto);
-}
-
-.embudo-lbl {
-    display: block;
-    color: var(--tenue);
-    font-size: 0.88rem;
-    margin-top: 4px;
-}
-
-.embudo-final {
-    border-color: var(--acento) !important;
-    background: rgba(229, 72, 77, 0.1) !important;
-}
-
-.embudo-final .embudo-num {
-    color: var(--acento-texto);
-}
-
 /* Pasos numerados */
 .pasos {
     list-style: none;
@@ -1197,21 +1145,6 @@ main .social-icons #Platzi {
 
 .caso-seccion .cifras {
     margin-top: 6px;
-}
-
-/* En una sola columna el embudo baja: la flecha apunta hacia abajo. */
-@media (max-width: 720px) {
-    .embudo {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .embudo li+li::before {
-        content: "\2193";
-        left: 50%;
-        top: -26px;
-        transform: translateX(-50%);
-    }
 }
 
 /* =========================================================
