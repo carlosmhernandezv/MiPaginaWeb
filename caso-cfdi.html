@@ -13,7 +13,8 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Caso: trazabilidad documental y CFDI 4.0">
     <meta property="og:description"
-        content="Migración de un Excel con 7.000 líneas de VBA a un sistema web con ingestión de CFDI y trazabilidad completa entre documentos.">
+        content="Migración de un Excel con 7.000 líneas de VBA a un sistema web en producción, con ingesta de CFDI y trazabilidad completa entre documentos.">
+    <link rel="canonical" href="https://carlosmhernandezv.com/caso-cfdi.html">
     <meta property="og:url" content="https://carlosmhernandezv.com/caso-cfdi.html">
     <meta property="og:image" content="https://carlosmhernandezv.com/img/og/cfdi.png">
     <meta property="og:image:width" content="1200">
@@ -50,10 +51,9 @@
             <p class="caso-bajada">
                 Un grupo de 17 empresas del sector construcción en México operaba toda su documentación comercial
                 desde un solo archivo <code>.xlsm</code>. Este es el sistema que diseñé y construí para
-                reemplazarlo.
+                reemplazarlo, en producción desde noviembre de 2026.
             </p>
-            <span class="badge badge-progreso">Construido y probado con datos reales · propuesta en
-                aprobación</span>
+            <span class="badge badge-vivo">En producción desde noviembre de 2026 · en adopción por el equipo</span>
         </header>
 
         <!--
@@ -74,13 +74,14 @@
                 <dd>17 empresas operaban toda su documentación comercial desde un Excel con cerca de 7.000 líneas de
                     VBA, con folios que colisionaban y sin trazabilidad entre documentos.</dd>
                 <dt>Qué hice</dt>
-                <dd>Ingeniería inversa del legado, modelado de las dos cadenas de compraventa, validación de los datos
-                    de origen contra los comprobantes fiscales y un sistema web que lo reemplaza.</dd>
+                <dd>Ingeniería inversa del legado, especificación por módulo, prototipo en Figma, construcción,
+                    migración de los datos y puesta en producción.</dd>
                 <dt>Resultado</dt>
-                <dd>Cualquier factura se recorre hasta su cotización de origen, con folios sin colisiones y las
-                    17 empresas sobre un solo modelo. La versión 2 está en aprobación con el cliente.</dd>
+                <dd>En producción y aprobado por el cliente. Cualquier factura se recorre hasta su cotización de
+                    origen, con folios sin colisiones y las 17 empresas sobre un solo modelo.</dd>
                 <dt>Stack</dt>
-                <dd>Python · FastAPI · PostgreSQL · SQLAlchemy · Alembic · Next.js 16 · React · Docker</dd>
+                <dd>Python · FastAPI · PostgreSQL · SQLAlchemy · Alembic · Next.js 16 · React · Docker · pytest ·
+                    GitHub Actions</dd>
             </dl>
         </div>
 
@@ -104,7 +105,7 @@
                 <div class="comp-col comp-despues">
                     <p class="comp-titulo">Después · un sistema web auditable</p>
                     <ul>
-                        <li><strong>22 tablas, 35 endpoints y 15 pantallas</strong> sobre PostgreSQL</li>
+                        <li><strong>26 tablas, 94 endpoints y 32 pantallas</strong> sobre PostgreSQL</li>
                         <li>Folios con secuencias de la base de datos: sin colisiones</li>
                         <li>Cualquier factura se recorre hasta su cotización de origen</li>
                         <li>Las 17 empresas sobre un solo modelo, sin duplicar la lógica</li>
@@ -200,6 +201,56 @@
             </figure>
         </section>
 
+        <section id="entregables" class="caso-seccion">
+            <h2>Lo que entrego antes del código</h2>
+            <p>
+                Cada módulo tiene su especificación: qué resuelve, las reglas de negocio numeradas y los criterios
+                de aceptación. Son 24, y cada criterio está ligado a una prueba automática. Este es un fragmento
+                adaptado de la de recepción en obra.
+            </p>
+
+            <article class="espec" aria-label="Fragmento de una especificación funcional">
+                <p class="espec-cab">Especificación · Recepción en obra (versión móvil)</p>
+
+                <h3>Resumen funcional</h3>
+                <p>
+                    El residente recibe el material en la obra con su teléfono: abre la remisión, confirma partida
+                    por partida qué llegó completo, reporta lo que no, toma fotos de la descarga y firma con el
+                    dedo. La firma deja de ser la imagen escaneada de quien <em>puede</em> firmar y pasa a ser la
+                    de quien <em>firmó esa entrega</em>, ese día, con su sesión.
+                </p>
+
+                <h3>Reglas de negocio</h3>
+                <dl class="espec-reglas">
+                    <dt>RR-1</dt>
+                    <dd><strong>Solo firma quien está autorizado en esa obra.</strong> La persona debe estar
+                        autorizada en la obra de la remisión y tener su cuenta ligada a esa autorización. Ser
+                        administrador no basta.</dd>
+                    <dt>RR-2</dt>
+                    <dd><strong>Una entrega se recibe una vez.</strong> Dos toques o dos teléfonos no dejan dos
+                        recepciones. Lo que no llegó completo no es otra recepción: es una diferencia.</dd>
+                    <dt>RR-3</dt>
+                    <dd><strong>Diferencias.</strong> Cada partida se confirma o se reporta con cuánto llegó y qué
+                        pasó. No se recibe más de lo despachado, y cada diferencia crea una incidencia que aparece
+                        en el inicio.</dd>
+                    <dt>RR-4</dt>
+                    <dd><strong>Lo firmado en obra no se reescribe.</strong> Después de recibir ya no se puede
+                        cambiar el firmante ni la obra desde la captura.</dd>
+                </dl>
+
+                <h3>Criterios de aceptación</h3>
+                <ul class="espec-criterios">
+                    <li>El residente ve lo que tiene por recibir; una persona no autorizada, no.</li>
+                    <li>Recibir completo deja el estatus, el firmante y la firma en el PDF.</li>
+                    <li>Con diferencia, la recepción queda incompleta y se crea la incidencia con el detalle.</li>
+                    <li>No se acepta más de lo despachado, ni partidas ajenas, ni recibir dos veces.</li>
+                    <li>Una «firma» que no es una imagen real se rechaza.</li>
+                </ul>
+                <p class="espec-pie">Cada criterio lo cubre una prueba automática, y el flujo completo se verificó en
+                    el navegador con tamaño de teléfono antes de publicarlo.</p>
+            </article>
+        </section>
+
         <section id="que-construi" class="caso-seccion">
             <h2>Qué construí</h2>
             <figure class="diagrama">
@@ -230,21 +281,21 @@
 
                     <rect x="324" y="44" width="122" height="70" rx="8" class="svg-caja" />
                     <text x="385" y="68" class="svg-etiqueta" text-anchor="middle">PostgreSQL</text>
-                    <text x="385" y="86" class="svg-nota" text-anchor="middle">22 tablas</text>
+                    <text x="385" y="86" class="svg-nota" text-anchor="middle">26 tablas</text>
                     <text x="385" y="101" class="svg-nota" text-anchor="middle">CTE recursivos</text>
 
                     <line x1="452" y1="79" x2="472" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
 
                     <rect x="478" y="44" width="110" height="70" rx="8" class="svg-caja" />
                     <text x="533" y="68" class="svg-etiqueta" text-anchor="middle">FastAPI</text>
-                    <text x="533" y="86" class="svg-nota" text-anchor="middle">35 endpoints</text>
+                    <text x="533" y="86" class="svg-nota" text-anchor="middle">94 endpoints</text>
                     <text x="533" y="101" class="svg-nota" text-anchor="middle">SQL explícito</text>
 
                     <line x1="594" y1="79" x2="614" y2="79" class="svg-linea" marker-end="url(#flecha-arq)" />
 
                     <rect x="620" y="44" width="90" height="70" rx="8" class="svg-caja" />
                     <text x="665" y="74" class="svg-etiqueta" text-anchor="middle">Next.js</text>
-                    <text x="665" y="92" class="svg-nota" text-anchor="middle">15 pantallas</text>
+                    <text x="665" y="92" class="svg-nota" text-anchor="middle">32 pantallas</text>
 
                     <rect x="152" y="176" width="150" height="58" rx="8" class="svg-caja svg-caja-diseno" />
                     <text x="227" y="200" class="svg-etiqueta" text-anchor="middle">Descarga Masiva</text>
@@ -261,21 +312,36 @@
                     diseñado y aún no en uso.</figcaption>
             </figure>
 
-            <div class="tarjetas-mini">
+            <div class="tarjetas-mini tarjetas-tres">
                 <div class="tarjeta-mini">
-                    <p class="tarjeta-mini-titulo">Ingestor de CFDI</p>
-                    <p>Lee el XML y el Timbre Fiscal Digital. Reprocesar el mismo archivo no crea un duplicado, y cada
-                        concepto se clasifica como material o servicio.</p>
+                    <p class="tarjeta-mini-titulo">Ingesta de CFDI</p>
+                    <p>Lee el XML de CFDI 3.3 y 4.0 con su Timbre Fiscal Digital. Reprocesar el mismo archivo no
+                        crea un duplicado, y cada concepto se clasifica como material o servicio.</p>
                 </div>
                 <div class="tarjeta-mini">
-                    <p class="tarjeta-mini-titulo">Pantalla de trazabilidad</p>
-                    <p>Dada una factura, recorre la cadena hasta la cotización de origen: cada eslabón con su
-                        documento, folio y fecha.</p>
+                    <p class="tarjeta-mini-titulo">Trazabilidad</p>
+                    <p>Cualquier folio, UUID o folio del sistema anterior dibuja la cadena de documentos que
+                        exista, aunque esté incompleta.</p>
                 </div>
                 <div class="tarjeta-mini">
-                    <p class="tarjeta-mini-titulo">Generador documental</p>
-                    <p>Las cinco plantillas del Excel, replicadas celda por celda con el branding de cada empresa y
-                        sin el límite de ítems de la macro.</p>
+                    <p class="tarjeta-mini-titulo">Generación de documentos</p>
+                    <p>Cada factura de material produce su cotización, orden y remisión, en PDF con la marca de
+                        cada empresa.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Captura con saldo en vivo</p>
+                    <p>Órdenes, remisiones con varios vehículos, pagos y transportes. No se despacha más de lo
+                        ordenado.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Recepción en obra</p>
+                    <p>Desde el teléfono: el residente confirma lo que llegó, reporta diferencias, sube fotos y
+                        firma en pantalla.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Documentación legal y accesos</p>
+                    <p>Semáforo de vencimientos con avisos por correo, usuarios por invitación y perfiles que solo
+                        ven lo suyo.</p>
                 </div>
             </div>
         </section>
@@ -283,9 +349,9 @@
         <section id="interfaz" class="caso-seccion">
             <h2>Cómo se ve</h2>
             <p>
-                Antes de programar la segunda versión diseñé la interfaz en Figma, pantalla por pantalla. Estas son
-                capturas de ese prototipo; los nombres de empresas, obras y personas, los folios y los montos aparecen
-                desenfocados.
+                Antes de programar la segunda versión diseñé la interfaz en Figma, pantalla por pantalla, para
+                validarla con el cliente. Estas son capturas de ese prototipo, que es el diseño de la versión publicada; los
+                nombres de empresas, obras y personas, los folios y los montos aparecen desenfocados.
             </p>
 
             <figure class="captura">
@@ -376,9 +442,9 @@
                     <p>La extensión la controla quien sube el archivo; los primeros bytes, no.</p>
                 </div>
                 <div class="tarjeta-mini">
-                    <p class="tarjeta-mini-titulo">Nombre de archivo derivado del RFC</p>
-                    <p>El nombre original nunca toca el disco: sin <em>path traversal</em> ni choques entre
-                        empresas.</p>
+                    <p class="tarjeta-mini-titulo">Bloqueo de fila al validar saldos</p>
+                    <p>Dos remisiones simultáneas no pueden despachar más de lo ordenado, ni dos pagos aplicarse
+                        de más a una factura.</p>
                 </div>
                 <div class="tarjeta-mini">
                     <p class="tarjeta-mini-titulo">Sesión por cookie</p>
@@ -389,15 +455,94 @@
                     <p>En un dominio fiscal quiero leer y auditar la consulta exacta que se ejecuta.</p>
                 </div>
                 <div class="tarjeta-mini">
-                    <p class="tarjeta-mini-titulo">Entorno reproducible</p>
-                    <p><code>docker-compose</code>, devcontainer y scripts para Windows y Linux desde el primer día.
-                    </p>
+                    <p class="tarjeta-mini-titulo">Acceso negado por omisión</p>
+                    <p>Un endpoint nuevo nace cerrado para el perfil restringido, y una prueba recorre todas las
+                        rutas para comprobarlo.</p>
                 </div>
                 <div class="tarjeta-mini">
                     <p class="tarjeta-mini-titulo">El porqué, por escrito</p>
-                    <p>15 especificaciones por módulo y una bitácora de decisiones dentro del repositorio.</p>
+                    <p>24 especificaciones por módulo y una bitácora de decisiones dentro del repositorio.</p>
                 </div>
             </div>
+        </section>
+
+        <section id="desarrollo" class="caso-seccion">
+            <h2>Cómo se desarrolló</h2>
+            <p>
+                Trabajé solo, con el cliente como única fuente de las reglas. El orden fue siempre el mismo: primero
+                entender y escribir, después construir.
+            </p>
+            <ol class="pasos pasos-cinco">
+                <li>
+                    <span class="paso-titulo">Análisis del legado</span>
+                    <span class="paso-texto">Lectura del VBA y de las hojas, y preguntas al cliente sobre cada regla
+                        dudosa.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Especificación</span>
+                    <span class="paso-texto">Un documento por módulo, con reglas numeradas y criterios de
+                        aceptación.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Prototipo</span>
+                    <span class="paso-texto">Las pantallas en Figma, para validar con el cliente cómo iba a
+                        trabajar.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Construcción con pruebas</span>
+                    <span class="paso-texto">315 pruebas contra una base PostgreSQL real, no contra
+                        simulaciones.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Publicación</span>
+                    <span class="paso-texto">Ensayo de la migración con un respaldo, y después la versión
+                        etiquetada.</span>
+                </li>
+            </ol>
+
+            <h3 class="caso-subtitulo">Versiones publicadas</h3>
+            <ol class="versiones">
+                <li><span class="version-num">v1.0</span><span class="version-fecha">20 oct 2026</span>
+                    <span class="version-txt">Primera versión completa: ingesta, cadenas, trazabilidad y
+                        documentos.</span></li>
+                <li class="version-hito"><span class="version-num">v2.0</span><span class="version-fecha">10 nov
+                        2026</span>
+                    <span class="version-txt">En producción, con la interfaz rediseñada, captura, recepción en obra
+                        y perfiles.</span></li>
+                <li><span class="version-num">v2.1</span><span class="version-fecha">11 nov 2026</span>
+                    <span class="version-txt">Ajustes del PDF y avisos de vencimiento por correo ya en
+                        producción.</span></li>
+                <li><span class="version-num">v2.2</span><span class="version-fecha">16 nov 2026</span>
+                    <span class="version-txt">Lo que pidió el equipo usuario en la reunión de noviembre: descargas
+                        por factura y por periodo.</span></li>
+                <li><span class="version-num">v2.3</span><span class="version-fecha">17 nov 2026</span>
+                    <span class="version-txt">Errores internos visibles para quien administra y ajustes de
+                        captura.</span></li>
+            </ol>
+
+            <div class="tarjetas-mini tarjetas-tres">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Nada se publica sin pruebas</p>
+                    <p>El despliegue es automático con GitHub Actions: corre las pruebas, compila y arma el
+                        paquete. Si una prueba falla, no hay versión.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Una rama por versión</p>
+                    <p>La versión 2 se desarrolló en su propia rama mientras la 1 seguía disponible, y cada
+                        publicación queda etiquetada.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Bitácora y pendientes</p>
+                    <p>Cada decisión y cada pregunta abierta para el cliente quedan escritas en el repositorio, con
+                        su fecha.</p>
+                </div>
+            </div>
+
+            <p class="caso-leccion">
+                <strong>Lo que enseñó el primer día en producción:</strong> un fallo mudo cuesta más que el fallo.
+                Varios errores del arranque no se veían como lo que eran, y encontrarlos tomó más tiempo que
+                corregirlos. Desde entonces cada pantalla dice qué pasó y ofrece reintentar.
+            </p>
         </section>
 
         <section id="proceso" class="caso-seccion">
@@ -432,25 +577,26 @@
             <h2>Resultados</h2>
             <div class="cifras">
                 <div class="cifra">
-                    <span class="cifra-num">0</span>
-                    <span class="cifra-lbl">duplicados: el UUID es la llave natural</span>
-                </div>
-                <div class="cifra">
                     <span class="cifra-num">17</span>
                     <span class="cifra-lbl">empresas sobre un solo sistema</span>
                 </div>
                 <div class="cifra">
-                    <span class="cifra-num">22</span>
-                    <span class="cifra-lbl">tablas en PostgreSQL</span>
+                    <span class="cifra-num">0</span>
+                    <span class="cifra-lbl">duplicados: el UUID es la llave natural</span>
                 </div>
                 <div class="cifra">
-                    <span class="cifra-num">35</span>
-                    <span class="cifra-lbl">endpoints en FastAPI</span>
+                    <span class="cifra-num">315</span>
+                    <span class="cifra-lbl">pruebas automáticas</span>
+                </div>
+                <div class="cifra">
+                    <span class="cifra-num">24</span>
+                    <span class="cifra-lbl">especificaciones por módulo</span>
                 </div>
             </div>
             <p class="caso-pendiente">
-                <strong>Estado actual:</strong> construido y probado con datos reales. La versión 2, diseñada en
-                Figma, está en aprobación con el cliente; todavía no está en producción.
+                <strong>Estado actual:</strong> en producción desde noviembre de 2026 y aprobado por el cliente. La
+                fase de ahora es la adopción: acompañar al equipo que lo va a usar a diario. Queda pendiente el
+                conector de Descarga Masiva del SAT, que está diseñado.
             </p>
         </section>
 

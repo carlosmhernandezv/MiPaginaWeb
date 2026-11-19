@@ -16,6 +16,7 @@
     <meta property="og:title" content="Carlos Manuel Hernández Vivas | Analista funcional técnico">
     <meta property="og:description"
         content="Analista funcional técnico. Levanto requerimientos, modelo procesos y datos, y construyo la solución: facturación electrónica CFDI 4.0 y DIAN, migración de legados y trazabilidad documental.">
+    <link rel="canonical" href="https://carlosmhernandezv.com/">
     <meta property="og:url" content="https://carlosmhernandezv.com/">
     <meta property="og:image" content="https://carlosmhernandezv.com/img/og/portafolio.png">
     <meta property="og:image:width" content="1200">
@@ -56,10 +57,9 @@
                 <p class="hero-kicker hero-rol">Analista funcional técnico</p>
                 <h1 id="hero-titulo">Convierto reglas de negocio complejas en sistemas que funcionan</h1>
                 <p class="hero-sub">
-                    Levanto requerimientos, modelo procesos y datos, y construyo la solución: facturación electrónica
-                    <strong>CFDI 4.0</strong> (México) y <strong>DIAN</strong> (Colombia), migración de sistemas
-                    legados en Excel y VBA, trazabilidad documental, inventario y liquidación de nómina. Trabajo donde
-                    las reglas del negocio son complicadas y el margen de error es cero.
+                    Levanto requerimientos, escribo las reglas y construyo la solución: facturación electrónica
+                    <strong>CFDI 4.0</strong> (México) y <strong>DIAN</strong> (Colombia), migración de legados en
+                    Excel y VBA, y nómina.
                 </p>
                 <p class="hero-disponible">
                     Busco un rol de tiempo completo como analista funcional · remoto o híbrido · Bogotá · inglés B1
@@ -76,12 +76,13 @@
           Resume el estado real de cada proyecto y enlaza a su caso. Mantener la fecha
           de «Actualizado» al día: un estado viejo resta más que no tener tablero.
           CONFIDENCIALIDAD: el cliente de CFDI va anonimizado; no nombrar al proveedor
-          principal de MiComercializadora. Ningún proyecto está «en producción».
+          principal de MiComercializadora. El sistema de CFDI está en producción desde
+          noviembre de 2026; MiComercializadora todavía no.
         -->
         <section id="proyectos" class="seccion tablero" aria-labelledby="proy-titulo">
             <div class="tablero-cabecera">
                 <h2 id="proy-titulo">Proyectos</h2>
-                <p class="tablero-fecha">Actualizado: octubre de 2026</p>
+                <p class="tablero-fecha">Actualizado: noviembre de 2026</p>
             </div>
 
             <div class="cifras" aria-label="Cifras de los proyectos">
@@ -98,7 +99,7 @@
                     <span class="cifra-lbl">empresas sobre un solo modelo de datos</span>
                 </div>
                 <div class="cifra">
-                    <span class="cifra-num">470+</span>
+                    <span class="cifra-num">780+</span>
                     <span class="cifra-lbl">pruebas automáticas</span>
                 </div>
             </div>
@@ -121,12 +122,12 @@
                             <span class="tablero-rol">Analista funcional y desarrollador freelance · México · ene 2025
                                 – hoy</span>
                         </th>
-                        <td data-etiqueta="Estado"><span class="estado estado-despliegue">En aprobación</span></td>
+                        <td data-etiqueta="Estado"><span class="estado estado-vivo">En producción</span></td>
                         <td data-etiqueta="Resultado">
-                            Reemplaza un Excel con cerca de 7.000 líneas de VBA para 17 empresas, con trazabilidad
-                            de cada factura hasta su cotización de origen.
+                            En uso desde noviembre de 2026. Reemplaza un Excel con cerca de 7.000 líneas de VBA para
+                            17 empresas, con trazabilidad de cada factura hasta su cotización de origen.
                             <span class="tablero-stack">Python · FastAPI · PostgreSQL · SQLAlchemy · Next.js ·
-                                Docker</span>
+                                pytest · GitHub Actions</span>
                         </td>
                         <td class="tablero-accion"><a class="cap-link" href="caso-cfdi.html">Leer el caso</a></td>
                     </tr>
@@ -181,19 +182,15 @@
             <div class="cap-grid">
 
                 <article class="cap-card cap-destacada">
-                    <h3>Análisis de negocio y levantamiento</h3>
+                    <h3>Análisis funcional y especificación</h3>
                     <p>
-                        Modelado, junto con el cliente, de dos cadenas de compraventa (proveedor → materialista →
-                        constructora) a partir de sus datos reales. Esa parte no es programar: es entender el negocio
-                        antes de escribir código.
+                        Levanto el proceso con quien lo opera y lo dejo por escrito antes del código: historias de
+                        usuario, reglas de negocio numeradas y criterios de aceptación. El sistema de CFDI tiene 24
+                        especificaciones, una por módulo, y cada criterio está ligado a una prueba.
                     </p>
-                    <p>
-                        En mi propia comercializadora levanté primero el recorrido del dinero y el de la mercancía, y
-                        de ahí salieron 8 módulos y las reglas escritas en lenguaje del negocio antes que las 15
-                        pantallas.
-                    </p>
-                    <p class="cap-stack">Entrevistas · modelado de procesos · documentación funcional · Figma</p>
-                    <a class="cap-link" href="caso-cfdi.html#cadenas">Ver la evidencia: CFDI</a>
+                    <p class="cap-stack">Levantamiento · historias de usuario · reglas de negocio · criterios de
+                        aceptación · modelado de procesos</p>
+                    <a class="cap-link" href="caso-cfdi.html#entregables">Ver una especificación real</a>
                     <a class="cap-link" href="caso-micomercializadora.html#requerimientos">Ver la evidencia:
                         MiComercializadora</a>
                 </article>
@@ -212,13 +209,12 @@
                 <article class="cap-card">
                     <h3>Facturación electrónica CFDI 4.0 y DIAN</h3>
                     <p>
-                        En México, ingestión de comprobantes con idempotencia por UUID, lectura del Timbre Fiscal
-                        Digital y clasificación automática según los catálogos del SAT, con conector de Descarga Masiva
-                        diseñado. En Colombia, facturación DIAN funcionando de punta a punta contra un proveedor
-                        simulado, aislada para conectarse a Alegra.
+                        En México, ingesta de comprobantes CFDI 3.3 y 4.0 sin duplicados y clasificación según los
+                        catálogos del SAT. En Colombia, facturación DIAN de punta a punta contra un proveedor
+                        simulado, lista para conectarse a Alegra.
                     </p>
                     <p class="cap-stack">XML · catálogos <code>c_ClaveProdServ</code> y <code>c_ClaveUnidad</code> ·
-                        e.firma · DIAN</p>
+                        DIAN</p>
                     <a class="cap-link" href="caso-cfdi.html#que-construi">Ver la evidencia: CFDI</a>
                     <a class="cap-link" href="caso-micomercializadora.html#que-construi">Ver la evidencia: DIAN</a>
                 </article>
@@ -226,10 +222,9 @@
                 <article class="cap-card">
                     <h3>Migración de legados y modelado de datos</h3>
                     <p>
-                        Ingeniería inversa de un archivo <code>.xlsm</code> en operación —24 módulos VBA, cerca de
-                        7.000 líneas y 23 hojas— convertido en un modelo explícito de 22 tablas que preserva la
-                        integridad del comprobante: folios con secuencia real en vez de <code>MAX+1</code> y consulta
-                        recursiva de trazabilidad.
+                        Ingeniería inversa de un <code>.xlsm</code> en operación —24 módulos VBA, cerca de 7.000
+                        líneas y 23 hojas— convertido en un modelo de 26 tablas: folios con secuencia real en vez de
+                        <code>MAX+1</code> y trazabilidad con una consulta recursiva.
                     </p>
                     <p class="cap-stack">VBA · Excel · PostgreSQL · CTE recursivos · triggers · Alembic</p>
                     <a class="cap-link" href="caso-cfdi.html#modelo">Ver la evidencia</a>
@@ -238,10 +233,9 @@
                 <article class="cap-card">
                     <h3>Construcción de sistemas</h3>
                     <p>
-                        Del análisis al sistema funcionando: 35 endpoints sobre SQL explícito y 15 pantallas en el
-                        sistema de CFDI, y 8 módulos en la plataforma de mi comercializadora. Incluye generación de
-                        documentos en PDF y seguridad aplicada: validación de archivos por números mágicos, enlaces
-                        privados firmados y entornos reproducibles con Docker.
+                        Del análisis al sistema en uso: 94 endpoints y 32 pantallas en el sistema de CFDI, y 8
+                        módulos en la plataforma de mi comercializadora. Con generación de documentos en PDF,
+                        perfiles con acceso negado por omisión y entornos reproducibles con Docker.
                     </p>
                     <p class="cap-stack">Python · FastAPI · SQLAlchemy Core · TypeScript · Next.js 16 · React · Prisma
                         · Tailwind · Docker</p>
@@ -251,29 +245,30 @@
                 </article>
 
                 <article class="cap-card">
-                    <h3>Calidad y pruebas automatizadas</h3>
+                    <h3>Calidad, versiones y despliegue</h3>
                     <p>
-                        471 pruebas automáticas en la plataforma de mi comercializadora: 377 unitarias y 94 de punta a
-                        punta sobre los recorridos completos del usuario, más revisión de accesibilidad. Las reglas que
-                        mueven dinero viven en funciones puras, para que probarlas sea barato.
+                        Más de 780 pruebas automáticas entre los dos sistemas: 315 en el de CFDI, contra una base
+                        PostgreSQL real, y 471 en MiComercializadora. Nada se publica si no pasan: el despliegue es
+                        automático y cada versión queda etiquetada.
                     </p>
-                    <p class="cap-stack">Vitest · Playwright · axe (accesibilidad)</p>
-                    <a class="cap-link" href="caso-micomercializadora.html#resultados">Ver la evidencia</a>
+                    <p class="cap-stack">pytest · Vitest · Playwright · axe · GitHub Actions · versiones etiquetadas
+                    </p>
+                    <a class="cap-link" href="caso-cfdi.html#desarrollo">Ver cómo se desarrolló: CFDI</a>
+                    <a class="cap-link" href="caso-micomercializadora.html#desarrollo">Ver cómo se desarrolló:
+                        MiComercializadora</a>
                 </article>
 
                 <article class="cap-card cap-destacada cap-ancha">
                     <h3>Desarrollo asistido por IA</h3>
                     <p>
-                        Uso a Claude como herramienta de desarrollo diaria, y es lo que me ha permitido ampliar el
-                        alcance técnico de mi trabajo: entrar a PostgreSQL, FastAPI y Next.js en proyectos reales, y
-                        sostener solo un sistema que de otro modo habría necesitado un equipo.
+                        Uso Claude Code como herramienta de desarrollo diaria. La clave no es pedir código, es
+                        dirigirlo: escribo primero las reglas de negocio y las restricciones legales, reviso cada
+                        decisión y verifico los resultados contra los datos reales y contra las pruebas.
                     </p>
                     <p>
-                        La clave no es pedir código, es dirigirlo: escribo primero un documento de contexto con las
-                        reglas de negocio y las restricciones legales, reviso cada decisión y verifico los resultados
-                        contra los datos reales. Además asigno el modelo según el riesgo de la tarea: el más capaz para
-                        lo que toca dinero, seguridad o integraciones, y uno más ágil para tareas acotadas que se
-                        verifican de un vistazo. La IA acelera la ejecución; el criterio del dominio sigue siendo mío.
+                        Asigno el modelo según el riesgo de la tarea: el más capaz para lo que toca dinero, seguridad
+                        o integraciones, y uno más ágil para tareas acotadas. La IA acelera la ejecución; el criterio
+                        del dominio sigue siendo mío.
                     </p>
                     <p class="cap-stack">Claude Code · documentos de contexto · MCP · asignación de modelo por riesgo
                     </p>
@@ -297,24 +292,27 @@
                         fundador de MiComercializadora, una comercializadora de empaques en Bogotá, y construyo su
                         plataforma: ahí las reglas del negocio las decido yo, y los errores los pago yo.
                     </p>
+                    <p>
+                        Entre 2022 y 2024 administré un local de comidas. Ahí aprendí nómina, legislación laboral,
+                        finanzas y contabilidad haciéndolas, y de esa experiencia sale la calculadora de nómina.
+                    </p>
 
                     <ol class="sobre-principios">
                         <li>
                             <strong>Reglas antes que código.</strong>
-                            En el sistema de CFDI eso significó revertir 24 módulos de VBA; en la calculadora de
-                            nómina, dejar por escrito el marco legal antes de calcular un solo peso. Es más lento al
-                            principio y ahorra el rediseño completo después.
+                            En el sistema de CFDI eso significó leer 24 módulos de VBA y escribir 24 especificaciones;
+                            en la calculadora de nómina, dejar por escrito el marco legal antes de calcular un solo
+                            peso.
                         </li>
                         <li>
-                            <strong>Desconfío de los datos de origen.</strong>
-                            Audité el diagrama del cliente contra la realidad de sus datos, y crucé el histórico contra
-                            los comprobantes reales antes de migrarlo.
+                            <strong>La fuente oficial manda.</strong>
+                            Los datos fiscales salen del comprobante y no se teclean; antes de migrar un histórico lo
+                            valido contra los comprobantes reales.
                         </li>
                         <li>
                             <strong>La IA ejecuta; el criterio es mío.</strong>
-                            Trabajo con Claude como herramienta de desarrollo: me llevó de HTML y CSS a un backend en
-                            FastAPI y un esquema de 22 tablas en PostgreSQL. Las reglas fiscales y laborales las escribo
-                            yo, y los resultados los verifico contra los datos reales.
+                            Trabajo con Claude Code como herramienta de desarrollo. Las reglas fiscales y laborales las
+                            escribo yo, y los resultados los verifico contra los datos reales y contra las pruebas.
                         </li>
                     </ol>
                 </div>
@@ -323,6 +321,9 @@
                     <dl>
                         <dt>Busco</dt>
                         <dd>Rol de analista funcional, tiempo completo</dd>
+                        <dt>Cómo trabajo</dt>
+                        <dd>Historias de usuario, reglas y criterios de aceptación por escrito; hasta ahora, en
+                            proyectos donde trabajo solo</dd>
                         <dt>Modalidad</dt>
                         <dd>Remoto o híbrido, desde Bogotá</dd>
                         <dt>Inglés</dt>

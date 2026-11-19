@@ -1368,24 +1368,43 @@ main .social-icons #Platzi {
         padding: 0 14px 40px;
     }
 
+    /* En el celular la primera pantalla tiene que mostrar el rol, la
+       disponibilidad y los botones sin desplazarse: foto chica y márgenes cortos. */
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 40px 24px;
-        gap: 24px;
+        padding: 24px 20px;
+        margin-top: 14px;
+        gap: 14px;
     }
 
     .hero-foto img {
-        width: 160px;
-        height: 160px;
+        width: 92px;
+        height: 92px;
+        border-width: 3px;
     }
 
     .hero-texto h1 {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-sub {
+        font-size: 0.95rem;
+        margin-bottom: 22px;
+    }
+
+    .hero-disponible {
+        margin-bottom: 18px;
     }
 
     .hero-acciones {
         justify-content: center;
+        gap: 10px;
+    }
+
+    .hero-acciones .btn {
+        padding: 11px 16px;
     }
 
     .seccion,
@@ -1420,5 +1439,157 @@ main .social-icons #Platzi {
 
     * {
         transition: none !important;
+    }
+}
+
+/* =========================================================
+   CASOS: ENTREGABLES Y DESARROLLO
+   Un fragmento de especificación mostrado como documento, y la
+   lista de versiones publicadas.
+   ========================================================= */
+.caso-subtitulo {
+    font-size: 1.05rem;
+    margin: 26px 0 10px;
+}
+
+.espec {
+    margin-top: 18px;
+    padding: 22px 24px;
+    background: #17181b;
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--azul);
+    border-radius: 8px;
+}
+
+.espec-cab {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.82rem;
+    color: #8b8b93 !important;
+    padding-bottom: 12px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.espec h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--acento-texto);
+    margin: 18px 0 8px;
+}
+
+.espec-reglas {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 14px;
+}
+
+.espec-reglas dt {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.85rem;
+    color: #7cc4fa;
+    white-space: nowrap;
+    padding-top: 2px;
+}
+
+.espec-reglas dd,
+.espec-criterios li {
+    color: var(--tenue);
+}
+
+.espec-reglas dd strong {
+    color: var(--texto);
+}
+
+.espec-criterios {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+}
+
+.espec-criterios li {
+    position: relative;
+    padding-left: 26px;
+}
+
+.espec-criterios li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: #6fdc8c;
+    font-weight: bold;
+}
+
+.espec-pie {
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: #8b8b93 !important;
+}
+
+.versiones {
+    list-style: none;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 22px;
+}
+
+.versiones li {
+    display: grid;
+    grid-template-columns: 56px 104px 1fr;
+    gap: 6px 14px;
+    align-items: baseline;
+    padding: 11px 16px;
+    background: rgba(42, 42, 42, 0.94);
+    border-bottom: 1px solid var(--borde);
+}
+
+.versiones li:last-child {
+    border-bottom: none;
+}
+
+.version-num {
+    font-family: Consolas, "Courier New", monospace;
+    font-weight: bold;
+    color: var(--texto);
+}
+
+.version-fecha {
+    color: #8b8b93;
+    font-size: 0.88rem;
+}
+
+.version-txt {
+    color: var(--tenue);
+}
+
+.version-hito {
+    box-shadow: inset 3px 0 0 #6fdc8c;
+}
+
+.version-hito .version-num {
+    color: #6fdc8c;
+}
+
+@media (max-width: 600px) {
+    .espec {
+        padding: 18px 16px;
+    }
+
+    .espec-reglas {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .espec-reglas dd {
+        margin-bottom: 10px;
+    }
+
+    .versiones li {
+        grid-template-columns: 56px 1fr;
+    }
+
+    .version-txt {
+        grid-column: 1 / -1;
     }
 }

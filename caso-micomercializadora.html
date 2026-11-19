@@ -14,6 +14,7 @@
     <meta property="og:title" content="Caso: MiComercializadora, plataforma B2B de empaques">
     <meta property="og:description"
         content="8 módulos, 15 pantallas diseñadas en Figma y 471 pruebas automáticas. Las reglas del negocio las decidí como dueño.">
+    <link rel="canonical" href="https://carlosmhernandezv.com/caso-micomercializadora.html">
     <meta property="og:url" content="https://carlosmhernandezv.com/caso-micomercializadora.html">
     <meta property="og:image" content="https://carlosmhernandezv.com/img/og/micomercializadora.png">
     <meta property="og:image:width" content="1200">
@@ -280,8 +281,8 @@
         <section id="que-construi" class="caso-seccion">
             <h2>Qué construí</h2>
             <p>
-                <strong>8 módulos y 15 pantallas</strong> en unas dos semanas de desarrollo intensivo: Next.js 16 con
-                App Router y TypeScript, sobre PostgreSQL con Prisma y Supabase, con Tailwind y Docker.
+                <strong>8 módulos y 15 pantallas</strong>: Next.js 16 con App Router y TypeScript, sobre PostgreSQL con
+                Prisma y Supabase, con Tailwind y Docker.
             </p>
             <div class="tarjetas-mini tarjetas-tres">
                 <div class="tarjeta-mini">
@@ -377,6 +378,52 @@
                 <div class="tarjeta-mini">
                     <p class="tarjeta-mini-titulo">Enlaces firmados y límites de uso</p>
                     <p>Solo funciona el enlace que el sistema emitió.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="desarrollo" class="caso-seccion">
+            <h2>Cómo se desarrolló</h2>
+            <p>
+                Trabajé solo y por incrementos: cada uno con un objetivo, una definición de terminado y su estado
+                escrito en el plan del repositorio.
+            </p>
+            <ol class="pasos pasos-cuatro">
+                <li>
+                    <span class="paso-titulo">Reglas y diseño</span>
+                    <span class="paso-texto">Los dos recorridos, las reglas del negocio y las 15 pantallas en
+                        Figma.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Plan por incrementos</span>
+                    <span class="paso-texto">Catálogo, cotización, pedidos e inventario, entrega,
+                        facturación y caja, en ese orden.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Construcción con pruebas</span>
+                    <span class="paso-texto">Cada regla de dinero nace con sus casos límite.</span>
+                </li>
+                <li>
+                    <span class="paso-titulo">Revisión del recorrido</span>
+                    <span class="paso-texto">Uso completo como cliente, administrador y conductor, y corrección de
+                        lo que estorbaba.</span>
+                </li>
+            </ol>
+            <div class="tarjetas-mini tarjetas-tres">
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Cinco controles en cada cambio</p>
+                    <p>Formato, lint, tipos, pruebas y compilación corren solos en GitHub Actions. Si uno falla, el
+                        cambio no pasa.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Pirámide de pruebas</p>
+                    <p>377 pruebas unitarias sobre las reglas y 94 de punta a punta sobre los recorridos completos
+                        del usuario.</p>
+                </div>
+                <div class="tarjeta-mini">
+                    <p class="tarjeta-mini-titulo">Rápido porque ya estaba decidido</p>
+                    <p>La construcción tomó unas dos semanas intensivas: las reglas y las pantallas estaban
+                        escritas antes de la primera línea de código.</p>
                 </div>
             </div>
         </section>

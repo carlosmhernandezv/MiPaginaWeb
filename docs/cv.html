@@ -233,9 +233,9 @@
         <h2>Perfil</h2>
         <p class="perfil">
             Analista funcional con perfil técnico en dominios donde las reglas no las inventa el programador:
-            facturación electrónica, nómina, inventario y trazabilidad documental. Escribo las reglas de negocio y las
-            restricciones legales antes del código, valido los datos de origen en vez de confiar en ellos y documento
-            por qué se toma cada decisión.
+            facturación electrónica, nómina, inventario y trazabilidad documental. Levanto los requerimientos y los
+            dejo por escrito —historias de usuario, reglas de negocio y criterios de aceptación— antes del código, y
+            llevo el sistema hasta producción.
         </p>
     </section>
 
@@ -244,56 +244,54 @@
 
         <div class="puesto">
             <div class="cab">
+                <span class="cargo">Analista funcional y desarrollador freelance</span>
+                <span class="fecha">Ene 2025 – Actualidad</span>
+            </div>
+            <p class="org">Sistema de trazabilidad documental y CFDI · grupo empresarial de construcción, México · en
+                producción</p>
+            <p class="stack"><b>Stack:</b> Python · FastAPI · SQLAlchemy Core · PostgreSQL · Alembic · Next.js ·
+                React · Docker · pytest · GitHub Actions · VBA · XML / CFDI 4.0</p>
+            <ul>
+                <li>Levanté las reglas de negocio de un grupo de empresas que operaba desde un único
+                    <span class="cifra">Excel con macros</span>, mediante ingeniería inversa de su
+                    <span class="cifra">VBA</span> y sesiones con el cliente.</li>
+                <li>Escribí la <span class="cifra">especificación funcional</span> de cada módulo: reglas numeradas y
+                    <span class="cifra">criterios de aceptación</span> ligados a pruebas automáticas.</li>
+                <li>Diseñé el prototipo en <span class="cifra">Figma</span> y el modelo de datos en
+                    <span class="cifra">PostgreSQL</span>, con trazabilidad de cada factura hasta su cotización.</li>
+                <li>Lo llevé a <span class="cifra">producción</span> con despliegue automático y versiones etiquetadas; hoy
+                    acompaño la adopción del equipo usuario.</li>
+            </ul>
+        </div>
+
+        <div class="puesto">
+            <div class="cab">
                 <span class="cargo">Fundador, analista funcional y desarrollador — MiComercializadora</span>
                 <span class="fecha">2026 – Actualidad</span>
             </div>
             <p class="org">Plataforma B2B de mi comercializadora de empaques · Bogotá · en preparación para piloto</p>
             <p class="stack"><b>Stack:</b> Next.js · TypeScript · PostgreSQL · Prisma · Supabase · Tailwind · Vitest
-                · Playwright · Docker</p>
+                · Playwright · GitHub Actions · Docker</p>
             <ul>
-                <li>Definí como dueño las reglas del negocio —cambios, crédito, saldo a favor, cancelaciones— y las
-                    escribí antes del código, a partir del recorrido del dinero y la mercancía.</li>
-                <li>Un solo sistema para tienda con catálogo técnico, pedidos con crédito, inventario con kardex,
-                    rutas con app del conductor sin señal, caja del punto físico, cartera y facturación
-                    <span class="cifra">DIAN</span>.</li>
-                <li>Diseño en <span class="cifra">Figma</span> antes de programar; pruebas unitarias y de punta a
-                    punta con <span class="cifra">Vitest</span> y <span class="cifra">Playwright</span>.</li>
+                <li>Definí como dueño las reglas del negocio y las escribí antes del código, a partir del recorrido del
+                    dinero y la mercancía.</li>
+                <li>Tienda, pedidos con crédito, inventario con kardex, rutas sin señal, caja y facturación
+                    <span class="cifra">DIAN</span> en un solo sistema.</li>
+                <li>Desarrollo por incrementos con <span class="cifra">integración continua</span>: lint, tipos y pruebas
+                    unitarias y de punta a punta en cada cambio.</li>
             </ul>
         </div>
 
         <div class="puesto">
             <div class="cab">
-                <span class="cargo">Analista funcional y desarrollador freelance</span>
-                <span class="fecha">Ene 2025 – Actualidad</span>
-            </div>
-            <p class="org">Sistema de trazabilidad documental y CFDI · grupo empresarial de construcción, México</p>
-            <p class="stack"><b>Stack:</b> Python · FastAPI · SQLAlchemy Core · PostgreSQL · Alembic · Next.js ·
-                React · Docker · VBA · XML / CFDI 4.0</p>
-            <ul>
-                <li>Levanté las reglas de negocio de un grupo de empresas que operaba desde un único
-                    <span class="cifra">Excel con macros</span>, mediante ingeniería inversa de su
-                    <span class="cifra">VBA</span> y sus hojas de cálculo.</li>
-                <li>Modelé con el cliente sus dos cadenas de compraventa a partir de los datos reales y validé el
-                    histórico contra los comprobantes fiscales antes de migrarlo.</li>
-                <li>Diseñé en <span class="cifra">Figma</span> el prototipo de la versión 2, en aprobación con el
-                    cliente: escritorio, tableta y recepción en obra desde el teléfono.</li>
-                <li>Diseñé el modelo de datos en <span class="cifra">PostgreSQL</span> con trazabilidad de cada factura
-                    hasta su cotización por consulta recursiva, y folios por secuencias en lugar de <em>MAX+1</em>.
-                </li>
-            </ul>
-        </div>
-
-        <div class="puesto">
-            <div class="cab">
-                <span class="cargo">Calculadora de liquidación de nómina — Colombia 2026</span>
+                <span class="cargo">Calculadora de nómina quincenal — Colombia</span>
                 <span class="fecha">2026</span>
             </div>
-            <p class="org">Proyecto propio · Demo pública en carlosmhernandezv.com</p>
-            <p class="stack"><b>Stack:</b> JavaScript ES6+ · HTML5 · CSS3 · localStorage · jsPDF · Node test runner</p>
+            <p class="org">Proyecto propio · Demo y código públicos en carlosmhernandezv.com</p>
             <ul>
-                <li>Modelé el marco legal (Leyes 2101 de 2021 y 2466 de 2025) como reglas fechadas con su norma: cada
-                    hora se liquida con la jornada y el recargo vigentes el día trabajado; festivos calculados y
-                    desprendible en PDF.</li>
+                <li>Marco legal (Leyes 2101 de 2021 y 2466 de 2025) modelado como reglas fechadas: cada hora se liquida
+                    con la regla vigente el día trabajado. <span class="cifra">JavaScript</span>, con pruebas
+                    automáticas.</li>
             </ul>
         </div>
     </section>
@@ -301,21 +299,29 @@
     <section>
         <h2>Competencias</h2>
         <div class="comp">
-            <p><b>Análisis funcional:</b> levantamiento de requisitos · modelado de procesos · ingeniería inversa ·
-                especificaciones funcionales</p>
-            <p><b>Datos:</b> modelado relacional · PostgreSQL (CTE recursivos, triggers) · SQL · auditoría y
-                conciliación · Alembic</p>
+            <p><b>Análisis funcional:</b> levantamiento de requisitos · historias de usuario · reglas de negocio ·
+                criterios de aceptación · especificaciones funcionales · modelado de procesos · ingeniería inversa</p>
+            <p><b>Datos:</b> modelado relacional · PostgreSQL (CTE recursivos, triggers) · SQL · migración y
+                conciliación de datos · Alembic</p>
             <p><b>Dominio:</b> CFDI 4.0 y catálogos del SAT · facturación electrónica DIAN · inventario y kardex ·
-                legislación laboral colombiana</p>
+                nómina y legislación laboral colombiana</p>
             <p><b>Desarrollo:</b> Python · FastAPI · SQLAlchemy Core · TypeScript · JavaScript ES6+ · React · Next.js ·
                 Prisma · Tailwind · HTML5 · CSS3 · VBA</p>
-            <p><b>Calidad y herramientas:</b> Vitest · Playwright · axe · Figma · Git · Docker · Supabase · Claude Code
-                (modelo según riesgo)</p>
+            <p><b>Calidad y entrega:</b> pytest · Vitest · Playwright · axe · GitHub Actions (CI/CD) · Git · Docker ·
+                Figma · Claude Code (modelo según riesgo)</p>
         </div>
     </section>
 
     <section>
         <h2>Experiencia previa</h2>
+        <div class="breve">
+            <div class="cab">
+                <span class="breve-t">Administrador de un local de comidas <span
+                        style="font-weight:400;color:var(--tenue)">· nómina, legislación laboral, finanzas y
+                        contabilidad</span></span>
+                <span class="fecha">2022 – 2024</span>
+            </div>
+        </div>
         <div class="breve">
             <div class="cab">
                 <span class="breve-t">Coordinador de contenidos en plataformas virtuales — LAE Latino Australia
